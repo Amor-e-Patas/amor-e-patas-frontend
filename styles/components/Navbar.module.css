@@ -1,0 +1,16 @@
+.navBarContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    background-color: #1BE7FF;
+    padding: 30px;
+    margin: 0;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+  
+  .navBarContainer li{
+    padding:0 50px 0 50px;
+  }
