@@ -1,8 +1,14 @@
 import Navbar from "../components/Navbar"
 import Head from "next/head";
 import { InputLabel, FormLabel  } from '@material-ui/core';
+import api from "../services/services";
+import React, { useState, useEffect } from "react";
+
 
 export default function Usuario() {
+    api.get("telefone/1").then((response) => {
+        console.log(response.data);
+    });
   return (
     <div>
     <Navbar />
