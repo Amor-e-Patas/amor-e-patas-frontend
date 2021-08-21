@@ -1,9 +1,9 @@
 
 import axios from "../services/services";
-export async function criarUsuario(nome: string,
+export async function criarUsuario(nome_usu: string,
     cpf: string,
     genero: string,
-    datanasc: string,
+    data_nasc: string,
     celular: string,
     email: string,
     senha: string,
@@ -16,10 +16,10 @@ export async function criarUsuario(nome: string,
     referencia : string) {
     try {
         await axios.post("/user", {
-            nome,
+            nome_usu,
             cpf,
             genero,
-            datanasc,
+            data_nasc,
             telefone: {
                 num_telefone: celular
             },

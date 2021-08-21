@@ -11,16 +11,28 @@ export default function Navbar() {
             <a>Home</a>
           </Link>
         </li>
-        <li>Shopping</li>
-        <li>Forum</li>
-        <li>
-          <Link href="/about">
+        <li>Blog</li>
+        <li>Desaparecidos</li>
+
+        {/* <li> 
+         <Link href="/about">
               <a>Sobre</a>
           </Link>
+        
+         </li> */}
+         <li>
+          <Link href="/#" passHref>
+            <button >Entrar</button>
+          </Link>
         </li>
-      <Button color="primary">Hello World</Button>
+        <li>
+          <Link href="/cadastrousuario" passHref>
+            <button >Cadastre-se</button>
+          </Link>
+        </li>
+
       </ul>
-      
+
     </nav>
   )
 }

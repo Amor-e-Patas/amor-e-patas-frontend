@@ -2,8 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #F6F2F2;
 }
 
 a {
@@ -13,4 +12,25 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+:root {
+  --white: #fff;
+  --background: #F6F2F2;
+  --gray-line: #dcdde0;
+  --text: #666666;
+  --text-highlight: #b3b9ff;
+  --title: #2e384d;
+  --red: #e83f5b;
+  --green: #4cd62b;
+  --blue: #5965e0;
+  --blue-dark: #4953b8;
+  --blue-twitter: #2aa9e0;
+  --laranja: #FFB800;
+  --azul: #1BE7FF;
+}
+
+button {
+  font-family: 'Raleway', sans-serif;
+  cursor: pointer;
 }
