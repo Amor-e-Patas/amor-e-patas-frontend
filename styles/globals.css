@@ -22,7 +22,7 @@ a {
   --text-highlight: #b3b9ff;
   --title: #2e384d;
   --red: #e83f5b;
-  --green: #4cd62b;
+  --green: #B7E394;;
   --blue: #5965e0;
   --blue-dark: #4953b8;
   --blue-twitter: #2aa9e0;
@@ -34,3 +34,69 @@ button {
   font-family: 'Raleway', sans-serif;
   cursor: pointer;
 }
+
+
+footer {
+  width: 100%;
+  height: 100%;
+  background-color:var(--green) ;
+
+}
+#amor{
+  color: #FFB800 ;
+  font-family: Raleway;
+  text-align: center; 
+  position: relative;
+  margin: 10px;
+  top: 75px;
+  left: 10%; 
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  width: 218px;
+  
+}
+
+h3{
+  font-family: Raleway;
+}
+
+#adote{
+  
+  text-align: left; 
+  position: relative; 
+  top: 10%;
+  left: 55%; 
+  transform: translate(-50%, -50%);
+  width: 10%;
+  
+}
+
+#blog{
+  text-align: left; 
+  position: relative; 
+  left: 65%; 
+  transform: translate(-50%, -50%);
+  top: -130px;
+  width: 5%;
+  height: 0px;
+
+}
+
+#quem{
+  text-align: left; 
+  position: relative; 
+  left: 79%; 
+  transform: translate(-50%, -50%);
+  width: 10%;
+  top: -148px;
+  height: 0px;
+ 
+}
+
+#copy{
+  text-align: left;
+  font-family: Raleway;
+  padding: auto;
+  font-size: 10pt;
+}
+

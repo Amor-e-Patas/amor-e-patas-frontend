@@ -1,5 +1,7 @@
 import Navbar from "../components/Navbar"
+import Footer from "../components/Footer";
 import { InputLabel, FormLabel } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
 import api from "../services/services";
 import React, { useState, useEffect } from "react";
 import { criarUsuario } from "../services/user";
@@ -121,6 +123,19 @@ export default function Usuario() {
                 }} />
 
             </form>
+
+            <div>
+                <Footer />
+            </div>
         </div>
+
     )
+
+
+
+
+
+
+
 }
+
