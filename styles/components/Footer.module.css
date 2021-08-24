@@ -10,7 +10,7 @@
   display: grid;
   grid-template-rows: 70%;
   grid-template-columns: 2fr 0fr 0fr 0.9fr;
-  grid-gap: 10%;
+  grid-gap: 5%;
 }
 
 .container > div{
@@ -36,9 +36,9 @@
 }
 
 .adote{
-  
   text-align: left; 
-  width: 70%;
+  width: 95px;
+
   
 }
 
