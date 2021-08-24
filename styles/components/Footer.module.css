@@ -1,0 +1,77 @@
+
+.footer {
+  width: 100%;
+  height: 100%;
+  background-color:var(--green) ;
+
+}
+
+.container{
+  display: grid;
+  grid-template-rows: 70%;
+  grid-template-columns: 2fr 0fr 0fr 0.9fr;
+  grid-gap: 10%;
+}
+
+.container > div{
+  padding: 10px;
+
+}
+
+.amor{
+  color: #FFB800 ;
+  font-family: Raleway;
+  text-align: left; 
+  margin-top: 10%;
+   
+}
+
+.h2{
+  text-align: left;
+  margin-left: 15%;
+}
+
+.titulo{
+  font-family: Raleway;
+}
+
+.adote{
+  
+  text-align: left; 
+  width: 70%;
+  
+}
+
+.blog{
+  text-align: left; 
+  width: 70%;
+
+
+}
+
+.quem{
+  text-align: left; 
+  width: 70%; 
+ 
+
+}
+
+.copy{
+  text-align: left;
+  font-family: Raleway;
+  padding: auto;
+  font-size: 10pt;
+}
+
+.img{
+  display: -moz-grid-line;
+  padding: 5px;
+  width: 8%;
+  left: 15px;
+
+}
+
+.imgs{
+  margin-left: 15%;
+}
+

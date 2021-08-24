@@ -1,10 +1,13 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer";
-import { InputLabel, FormLabel } from '@material-ui/core';
+import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import api from "../services/services";
 import React, { useState, useEffect } from "react";
 import { criarUsuario } from "../services/user";
+import styles from "../styles/components/FormUsuario.module.css";
+import Button from 'react-bootstrap';
+
 
 
 export default function Usuario() {
@@ -39,95 +42,114 @@ export default function Usuario() {
             referencia)
     }
     return (
-        <div>
-            <Navbar />
-            <form>
-                <label>
-                    Nome:
-                    <input type="text" name="name" onChange={(e) => setNome(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    Cpf:
-                    <input type="text" name="cpf" onChange={(e) => setCpf(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    Gênero:
-                    <input type="text" name="genero" onChange={(e) => setGenero(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    Data de nascimento:
-                    <input type="date" name="datanasc" onChange={(e) => setDatanasc(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    Celular:
-                    <input type="text" name="celular" onChange={(e) => setCelular(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    E-mail:
-                    <input type="text" name="email" onChange={(e) => setEmail(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    Senha:
-                    <input type="password" name="senha" onChange={(e) => setSenha(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    Confirmar senha:
-                    <input type="password" name="confirsenha" />
-                </label>
-                <br />
-                <label>
-                    Endereço:
-                    <input type="text" name="email" onChange={(e) => setEndereco(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    Número:
-                    <input type="text" name="numero" onChange={(e) => setNumero(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    Bairro:
-                    <input type="text" name="bairro" onChange={(e) => setBairro(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    CEP:
-                    <input type="text" name="cep" onChange={(e) => setCep(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    Cidade:
-                    <input type="text" name="cidade" onChange={(e) => setCidade(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    Estado:
-                    <input type="text" name="estado" onChange={(e) => setEstado(e.currentTarget.value)} />
-                </label>
-                <br />
-                <label>
-                    Referência:
-                    <input type="text" name="referencia" onChange={(e) => setReferencia(e.currentTarget.value)} />
-                </label>
-                <br />
-                <input type="submit" value="Enviar" onClick={(e) => {
-                    e.preventDefault()
-                    eventoCriarUsuario()
-                }} />
+        <div><Navbar />
+            <body className={styles.body}>
 
-            </form>
 
+                <form>
+
+                    <div className={styles.container}>
+                        <h3 className={styles.titulo}>Cadastro de Usuário</h3>
+                        <div>
+                            <label>
+                                <input type="text" name="name" className={styles.nome} placeholder="Nome:" onChange={(e) => setNome(e.currentTarget.value)} />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+
+                                <input type="text" name="cpf" className={styles.cpf} placeholder=" CPF:" onChange={(e) => setCpf(e.currentTarget.value)} />
+                            </label>
+
+                            <label>
+
+                                <input type="text" name="genero" className={styles.cpf} placeholder="Gênero:" onChange={(e) => setGenero(e.currentTarget.value)} />
+                            </label>
+                        </div>
+
+                        <div>
+                            <label>
+                                <input type="date" name="datanasc" className={styles.data} placeholder="Data de nascimento:" onChange={(e) => setDatanasc(e.currentTarget.value)} />
+                            </label>
+
+                            <label>
+                                <input type="text" name="celular" className={styles.celular} placeholder="Celular:" onChange={(e) => setCelular(e.currentTarget.value)} />
+                            </label>
+
+                        </div>
+
+                        <h3 className={styles.titulo}>Login</h3>
+                        <div>
+                            <label>
+                                <input type="text" name="email" className={styles.email} placeholder=" E-mail:" onChange={(e) => setEmail(e.currentTarget.value)} />
+                            </label>
+                        </div>
+
+                        <div >
+                            <label>
+                                <input type="password" name="senha" className={styles.senha} placeholder="Senha:" onChange={(e) => setSenha(e.currentTarget.value)} />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+
+                                <input type="password" className={styles.senha} placeholder="Confirmar senha:" name="confirsenha" />
+                            </label>
+                        </div>
+                        <h3 className={styles.titulo}>Endereço</h3>
+                        <div>
+                            <label>
+
+                                <input type="text" name="endereco" className={styles.endereco} placeholder="Endereço:" onChange={(e) => setEndereco(e.currentTarget.value)} />
+                            </label>
+                            <label>
+
+                                <input type="text" name="numero" className={styles.endereco} placeholder="Número:" onChange={(e) => setNumero(e.currentTarget.value)} />
+                            </label>
+                        </div>
+
+                        <div>
+                            <label>
+
+                                <input type="text" name="bairro" className={styles.bairro} placeholder="Bairro:" onChange={(e) => setBairro(e.currentTarget.value)} />
+                            </label>
+
+                            <label>
+
+                                <input type="text" name="cep" className={styles.bairro} placeholder="CEP:" onChange={(e) => setCep(e.currentTarget.value)} />
+                            </label>
+                        </div>
+
+                        <div>
+                            <label>
+
+                                <input type="text" name="cidade" className={styles.cidade} placeholder="Cidade:" onChange={(e) => setCidade(e.currentTarget.value)} />
+                            </label>
+
+                            <label>
+
+                                <input type="text" name="estado" className={styles.cidade} placeholder="Estado:" onChange={(e) => setEstado(e.currentTarget.value)} />
+                            </label>
+                        </div>
+
+                        <div>
+                            <label>
+
+                                <input type="text" name="referencia" className={styles.referencia} placeholder="Referência:" onChange={(e) => setReferencia(e.currentTarget.value)} />
+                            </label>
+                        </div>
+                        <input type="submit" value="Enviar" onClick={(e) => {
+                            e.preventDefault()
+                            eventoCriarUsuario()
+                        }} />
+                    </div>
+                </form>
+            </body>
             <div>
                 <Footer />
             </div>
         </div>
+
 
     )
 

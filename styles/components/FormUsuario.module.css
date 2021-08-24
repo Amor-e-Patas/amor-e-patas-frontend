@@ -1,0 +1,117 @@
+
+.body{
+  background-color: #F6F2F2;
+}
+
+.titulo{
+  font: normal normal;
+  font-family: Raleway;
+  text-align: center;
+}
+
+.container{
+  display: grid;
+  background-color: white;
+  margin: 5% 10% 20%;
+}
+
+.nome{
+  width: 100%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: -ms-inline-grid;
+  border-radius: 4px;
+ 
+}
+
+.cpf{
+  width: 50%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: -ms-inline-grid;
+  border-radius: 4px;
+  right: 2%;
+  
+}
+
+.data{
+  width: 50%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: -ms-inline-grid;
+  border-radius: 4px;
+
+}
+
+.celular{
+  width: 50%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: -ms-inline-grid;
+  border-radius: 4px;
+
+}
+
+.email{
+  width: 100%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: -ms-inline-grid;
+  border-radius: 4px;
+
+}
+
+.senha{
+  width: 100%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: -ms-inline-grid;
+  border-radius: 4px;
+
+}
+
+.confirsenha{
+  width: 100%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: -ms-inline-grid;
+  border-radius: 4px;
+
+}
+
+.endereco{
+  width: 100%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: -ms-inline-grid;
+  border-radius: 4px;
+
+}
+
+.bairro{
+  width: 50%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: -ms-inline-grid;
+  border-radius: 4px;
+
+}
+
+.cidade{
+  width: 50%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: -ms-inline-grid;
+  border-radius: 4px;
+
+}
+
+.referencia{
+  width: 100%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: -ms-inline-grid;
+  border-radius: 4px;
+
+}
+
