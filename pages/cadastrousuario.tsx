@@ -43,11 +43,10 @@ export default function Usuario() {
     }
     return (
         <div><Navbar />
-            <body className={styles.body}>
+            
+            <body>
 
-
-                <form>
-
+                <form className={styles.form}>
                     <div className={styles.container}>
                         <h3 className={styles.titulo}>Cadastro de Usuário</h3>
                         <div>
@@ -58,12 +57,12 @@ export default function Usuario() {
                         <div>
                             <label>
 
-                                <input type="text" name="cpf" className={styles.cpf} placeholder=" CPF:" onChange={(e) => setCpf(e.currentTarget.value)} />
+                                <input type="text" name="cpf" className={styles.cpf} id="cpf" placeholder=" CPF:" onChange={(e) => setCpf(e.currentTarget.value)} />
                             </label>
 
                             <label>
 
-                                <input type="text" name="genero" className={styles.cpf} placeholder="Gênero:" onChange={(e) => setGenero(e.currentTarget.value)} />
+                                <input type="text" name="genero" className={styles.genero} placeholder="Gênero:" onChange={(e) => setGenero(e.currentTarget.value)} />
                             </label>
                         </div>
 
@@ -104,7 +103,7 @@ export default function Usuario() {
                             </label>
                             <label>
 
-                                <input type="text" name="numero" className={styles.endereco} placeholder="Número:" onChange={(e) => setNumero(e.currentTarget.value)} />
+                                <input type="text" name="numero" className={styles.numero} placeholder="Número:" onChange={(e) => setNumero(e.currentTarget.value)} />
                             </label>
                         </div>
 
@@ -116,7 +115,7 @@ export default function Usuario() {
 
                             <label>
 
-                                <input type="text" name="cep" className={styles.bairro} placeholder="CEP:" onChange={(e) => setCep(e.currentTarget.value)} />
+                                <input type="text" name="cep" className={styles.cep} placeholder="CEP:" onChange={(e) => setCep(e.currentTarget.value)} />
                             </label>
                         </div>
 
@@ -128,36 +127,55 @@ export default function Usuario() {
 
                             <label>
 
-                                <input type="text" name="estado" className={styles.cidade} placeholder="Estado:" onChange={(e) => setEstado(e.currentTarget.value)} />
+                                <input type="text" name="estado" className={styles.cep} placeholder="Estado:" onChange={(e) => setEstado(e.currentTarget.value)} />
                             </label>
                         </div>
 
                         <div>
                             <label>
 
-                                <input type="text" name="referencia" className={styles.referencia} placeholder="Referência:" onChange={(e) => setReferencia(e.currentTarget.value)} />
+                                <input type="text" name="referencia" className={styles.email} placeholder="Referência:" onChange={(e) => setReferencia(e.currentTarget.value)} />
                             </label>
                         </div>
-                        <input type="submit" value="Enviar" onClick={(e) => {
-                            e.preventDefault()
-                            eventoCriarUsuario()
-                        }} />
+
+
+                        <div className={styles.chec}>
+                            <label>
+                                <input type="checkbox" id="scales" name="scales" />
+                                Li e aceito os termos
+                            </label>
+                        </div>
+
+                        <div className={styles.chec2}>
+                            <label>
+                                <input type="checkbox" id="scales" name="scales" />
+                                Não permitimos a venda de animais através do site.
+                            </label>
+                        </div>
+
+
+                        <div className={styles.botoes}>
+                            <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
+                                e.preventDefault()
+                            }} />
+                            <input type="submit" className={styles.botaoenviar} value="Enviar" onClick={(e) => {
+                                e.preventDefault()
+                                eventoCriarUsuario()
+                            }} />
+                        </div>
+
+
                     </div>
                 </form>
+
             </body>
+
             <div>
                 <Footer />
             </div>
         </div>
 
-
     )
-
-
-
-
-
-
 
 }
 
