@@ -7,6 +7,8 @@ import React, { useState, useEffect } from "react";
 import { criarUsuario } from "../services/user";
 import styles from "../styles/components/FormUsuario.module.css";
 import Button from 'react-bootstrap';
+import Link from 'next/link';
+import { formata_CPF, valida_CPF, valida_email } from '../utils/format_cpf_email';
 
 
 
@@ -26,6 +28,16 @@ export default function Usuario() {
     const [estado, setEstado] = useState("");
     const [referencia, setReferencia] = useState("");
     function eventoCriarUsuario() {
+
+        if (!valida_CPF(cpf)){
+            alert("CPF INVALIDO");
+            return;
+          }
+          if (!valida_email(email)){
+            alert("Email invalido!");
+            return;
+          }
+          alert("Conta criada ;)");
         criarUsuario(nome,
             cpf,
             genero,
@@ -57,7 +69,9 @@ export default function Usuario() {
                         <div>
                             <label>
 
-                                <input type="text" name="cpf" className={styles.cpf} id="cpf" placeholder=" CPF:" onChange={(e) => setCpf(e.currentTarget.value)} />
+                                <input type="text" name="cpf" value={cpf} className={styles.cpf} id="cpf" placeholder=" CPF:" 
+                                onInput={(e) =>{ const cpfFormatado = formata_CPF(e.currentTarget.value, cpf);
+                                setCpf(cpfFormatado);}} />
                             </label>
 
                             <label>
@@ -159,7 +173,6 @@ export default function Usuario() {
                                 e.preventDefault()
                             }} />
                             <input type="submit" className={styles.botaoenviar} value="Enviar" onClick={(e) => {
-                                e.preventDefault()
                                 eventoCriarUsuario()
                             }} />
                         </div>
