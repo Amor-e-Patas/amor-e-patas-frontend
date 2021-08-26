@@ -8,7 +8,7 @@ import { criarUsuario } from "../services/user";
 import styles from "../styles/components/FormUsuario.module.css";
 import Button from 'react-bootstrap';
 import Link from 'next/link';
-import { formata_CPF, valida_CPF, valida_email } from '../utils/format_cpf_email';
+import { formata_CPF, valida_CPF, valida_email, formata_telefone } from '../utils/format_cpf_email';
 
 
 
@@ -29,15 +29,15 @@ export default function Usuario() {
     const [referencia, setReferencia] = useState("");
     function eventoCriarUsuario() {
 
-        if (!valida_CPF(cpf)){
+        if (!valida_CPF(cpf)) {
             alert("CPF INVALIDO");
             return;
-          }
-          if (!valida_email(email)){
+        }
+        if (!valida_email(email)) {
             alert("Email invalido!");
             return;
-          }
-          alert("Conta criada ;)");
+        }
+
         criarUsuario(nome,
             cpf,
             genero,
@@ -52,10 +52,11 @@ export default function Usuario() {
             cidade,
             estado,
             referencia)
+        alert("Conta criada ;)");
     }
     return (
         <div><Navbar />
-            
+
             <body>
 
                 <form className={styles.form}>
@@ -68,10 +69,12 @@ export default function Usuario() {
                         </div>
                         <div>
                             <label>
-
-                                <input type="text" name="cpf" value={cpf} className={styles.cpf} id="cpf" placeholder=" CPF:" 
-                                onInput={(e) =>{ const cpfFormatado = formata_CPF(e.currentTarget.value, cpf);
-                                setCpf(cpfFormatado);}} />
+                            <input type="text" className={styles.cpf} value={cpf}
+                                    onInput={(e) => {
+                                        const cpfFormatado = formata_CPF(e.currentTarget.value, cpf);
+                                        setCpf(cpfFormatado);
+                                    }}
+                                    placeholder="088.843.091-09" />
                             </label>
 
                             <label>
@@ -86,7 +89,11 @@ export default function Usuario() {
                             </label>
 
                             <label>
-                                <input type="text" name="celular" className={styles.celular} placeholder="Celular:" onChange={(e) => setCelular(e.currentTarget.value)} />
+                                <input type="text" name="celular" className={styles.celular} value={celular}
+                                    onInput={(e) => {
+                                        const celularFormatado = formata_telefone(e.currentTarget.value, celular);
+                                        setCelular(celularFormatado);
+                                    }} placeholder="Celular:" />
                             </label>
 
                         </div>
@@ -94,7 +101,7 @@ export default function Usuario() {
                         <h3 className={styles.titulo}>Login</h3>
                         <div>
                             <label>
-                                <input type="text" name="email" className={styles.email} placeholder=" E-mail:" onChange={(e) => setEmail(e.currentTarget.value)} />
+                                <input type="text" name="email" className={styles.email} placeholder=" E-mail:" value={email} onInput={(e) => setEmail(e.currentTarget.value)} />
                             </label>
                         </div>
 
@@ -174,6 +181,7 @@ export default function Usuario() {
                             }} />
                             <input type="submit" className={styles.botaoenviar} value="Enviar" onClick={(e) => {
                                 eventoCriarUsuario()
+                                e.preventDefault()
                             }} />
                         </div>
 
