@@ -38,6 +38,6 @@ export async function criarUsuario(nome_usu: string,
             }
         })
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 }

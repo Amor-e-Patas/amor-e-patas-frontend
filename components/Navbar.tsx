@@ -21,7 +21,7 @@ export default function Navbar() {
         
          </li> */}
          <li>
-          <Link href="/#" passHref>
+          <Link href="/login" passHref>
             <button >Entrar</button>
           </Link>
         </li>

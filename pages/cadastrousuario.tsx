@@ -27,7 +27,7 @@ export default function Usuario() {
     const [cidade, setCidade] = useState("");
     const [estado, setEstado] = useState("");
     const [referencia, setReferencia] = useState("");
-    function eventoCriarUsuario() {
+    async function eventoCriarUsuario() {
 
         if (!valida_CPF(cpf)) {
             alert("CPF INVALIDO");
@@ -37,28 +37,32 @@ export default function Usuario() {
             alert("Email invalido!");
             return;
         }
+        try {
+            await
+                criarUsuario(nome,
+                    cpf,
+                    genero,
+                    datanasc,
+                    celular,
+                    email,
+                    senha,
+                    endereco,
+                    numero,
+                    bairro,
+                    cep,
+                    cidade,
+                    estado,
+                    referencia)
+            alert("Conta criada ;)");
 
-        criarUsuario(nome,
-            cpf,
-            genero,
-            datanasc,
-            celular,
-            email,
-            senha,
-            endereco,
-            numero,
-            bairro,
-            cep,
-            cidade,
-            estado,
-            referencia)
-        alert("Conta criada ;)");
+        } catch (error) {
+            alert("Erro ao criar conta.")
+        }
+
     }
     return (
         <div><Navbar />
-
             <body>
-
                 <form className={styles.form}>
                     <div className={styles.container}>
                         <h3 className={styles.titulo}>Cadastro de Usuário</h3>
@@ -69,7 +73,7 @@ export default function Usuario() {
                         </div>
                         <div>
                             <label>
-                            <input type="text" className={styles.cpf} value={cpf}
+                                <input type="text" className={styles.cpf} value={cpf}
                                     onInput={(e) => {
                                         const cpfFormatado = formata_CPF(e.currentTarget.value, cpf);
                                         setCpf(cpfFormatado);
