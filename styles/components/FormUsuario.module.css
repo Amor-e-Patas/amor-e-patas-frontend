@@ -2,130 +2,154 @@
   font: normal normal;
   font-family: Raleway;
   text-align: center;
+  padding-top: 1.5%; 
 }
 
 .container{
   display: block;
   background-color: white;
-  margin: 5% 10% ;
+  margin: 5% 10%;
 }
 
 .nome{
-  width: 99.4%;
+  width: 90%;
   height: 45px;
+  margin-left: 5%;
+  margin-right: 5%;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 }
 
 .cpf{ 
-  width: 49%;
+  width: 44.7%;
   height: 45px;
+  margin-left: 5%;
   margin-top: 1%;
   margin-right: 5px;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
   
 }
 .genero{ 
-  width: 50%;
+  width: 44.7%;
   height: 45px;
   margin-top: 1%;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 }
 
 .data{
-  width: 49%;
+  width: 44.7%;
+  margin-left: 5%;
   height: 45px;
   margin-top: 1%;
   margin-right: 5px;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 }
 
 
 .celular{
-  width: 50%;
+  width: 44.7%;
   height: 45px;
   margin-top: 1%;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 
 }
 
 .email{
-  width: 99.4%;
+  width: 90%;
+  margin-left: 5%;
   height: 45px;
   margin-top: 1%;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 
 }
 
 .senha{
-  width: 99.4%;
+  width: 90%;
+  margin-left: 5%;
   height: 45px;
   margin-top: 1%;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 
 }
 
 .confirsenha{
-  width: 99.4%;
+  width: 90%;
+  margin-left: 5%;
   height: 45px;
   margin-top: 1%;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 
 }
 
 .endereco{
-  width: 70%;
+  width: 60%;
+  margin-left: 5%;
   height: 45px;
   margin-top: 1%;
   margin-right: 5px;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 
 }
 
 .numero{
-  width: 29%;
+  width: 29.9%;
   height: 45px;
   margin-top: 1%;
   margin-right: 5px;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 
 }
 
 .bairro{
-  width: 60%;
+  width: 53%;
+  margin-left: 5%;
   height: 45px;
   margin-top: 1%;
   margin-right: 5px;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 }
 
 .cep{
-  width: 39%;
+  width: 37%;
   height: 45px;
   margin-top: 1%;
   margin-right: 5px;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 
 }
 
 .cidade{
-  width: 60%;
+  width: 53%;
+  margin-left: 5%;
   height: 45px;
   margin-top: 1%;
   margin-right: 5px;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
 
 }
 
@@ -136,6 +160,7 @@
   margin: 8px 0;
   display: -ms-inline-grid;
   border-radius: 4px;
+  font: normal normal 600 15px/22px Raleway;
 
 }
 
@@ -147,6 +172,7 @@
   margin-left: 13%;
   background: var(--unnamed-color-b7e394) 0% 0% no-repeat padding-box;
   background: #B7E394 0% 0% no-repeat padding-box;
+  font: normal normal 600 15px/22px Raleway;
   opacity: 1;
 }
 
@@ -156,6 +182,7 @@
   height: 48px;
   background: var(--unnamed-color-b7e394) 0% 0% no-repeat padding-box;
   background: #B7E394 0% 0% no-repeat padding-box;
+  font: normal normal 600 15px/22px Raleway;
   opacity: 1;
 }
 

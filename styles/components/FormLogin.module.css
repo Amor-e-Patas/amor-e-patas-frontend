@@ -5,51 +5,68 @@
 }
 
 .container{
-  
-  grid: 'autoplace';
   background-color: white;
-  margin: 5% 10% ;
-  top: 79px;
-  right: 451px;
+  margin-left: 33%;
+  margin-right: 30%;
+  margin-top: 5%;
   width: 454px;
-  height: 619px;
+  height: 100%;
   background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 4px 6px #00000029;
   border-radius: 9px;
   opacity: 1;
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-}
-
-.h2{
-  text-align: center;
-  
+  position: relative;
 }
 
 .amor{
   color: #FFB800 ;
-  font-family: Raleway;
-  text-align: center; 
+  font: normal normal 600 17px/22px Raleway;
+  text-align: center;
+  padding-top: 5%; 
+  
    
 }
 
 .email{
-  margin-top: 1%;
+  margin-top: 2%;
+  margin-bottom: 3%;
   left: 541px;
-  width: 286px;
+  width: 80%;
   height: 48px;
+  margin-left: 10%;
   background: #EDEDED 0% 0% no-repeat padding-box;
+  font: normal normal 600 15px/22px Raleway;
   opacity: 1;
+  border-radius: 7px;
 
 }
 
-.label{
-  text-align: left;
-  font: normal normal 600 16px/22px Raleway;
+.link{
+  padding-top: 50%;
+  margin-left: 53%;
+  font: normal normal 600 15px/22px Raleway;
   letter-spacing: 0.32px;
   color: #000000;
   opacity: 1;
+}
+
+.novouser{
+  margin-left: 1%;
+  font: normal normal 600 15px/22px Raleway;
+  letter-spacing: 0.32px;
+  color: #890620;
+  opacity: 1;
+}
+
+.new{
+
+  text-align: center;
+  font: normal normal 600 15px/22px Raleway;
+  letter-spacing: 0.32px;
+  color: #000000;
+  opacity: 1;
+  padding-bottom: 5%;
 }
 
 .senha{
@@ -58,27 +75,21 @@
   margin-top: 1%;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
+  border-radius: 7px;
 
-}
-
-.botaovoltar{
-  margin-top: 5%;
-  width: 30%;
-  height: 48px;
-  margin-right: 15%;
-  margin-left: 13%;
-  background: var(--unnamed-color-b7e394) 0% 0% no-repeat padding-box;
-  background: #B7E394 0% 0% no-repeat padding-box;
-  opacity: 1;
 }
 
 .botaoenviar{
   margin-top: 5%;
-  width: 30%;
+  width: 50%;
   height: 48px;
+  margin-left: 25%;
+  margin-bottom: 3%;
   background: var(--unnamed-color-b7e394) 0% 0% no-repeat padding-box;
+  font: normal normal 600 15px/22px Raleway;
   background: #B7E394 0% 0% no-repeat padding-box;
   opacity: 1;
+  border-radius: 7px;
 }
 
 .botoes{
