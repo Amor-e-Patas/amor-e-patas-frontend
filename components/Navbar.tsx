@@ -30,6 +30,11 @@ export default function Navbar() {
             <button >Cadastre-se</button>
           </Link>
         </li>
+        <li>
+          <Link href="/logout" passHref> 
+            <button>logout</button>
+          </Link>
+        </li>
 
       </ul>
 
