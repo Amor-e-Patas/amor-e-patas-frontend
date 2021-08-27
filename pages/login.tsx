@@ -48,6 +48,8 @@ export default function Login() {
                 <label>
                     <input type="email" className={styles.email} name="name" placeholder="E-mail" />
                 </label>
+            </form>
+            <form>
                 <div>
                     <a href="" className={styles.link}>Esqueci minha senha</a>
                 </div>
