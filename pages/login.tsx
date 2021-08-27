@@ -19,7 +19,7 @@ export default function Usuario() {
             </div>
             <form>
                 <label>
-                    <input type="text" className={styles.email} name="name" placeholder="E-mail" />
+                    <input type="email" className={styles.email} name="name" placeholder="E-mail" />
                 </label>
                 <div>
                     <a href="" className={styles.link}>Esqueci minha senha</a>

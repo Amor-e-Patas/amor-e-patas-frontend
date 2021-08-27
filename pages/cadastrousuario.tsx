@@ -105,7 +105,7 @@ export default function Usuario() {
                         <h3 className={styles.titulo}>Login</h3>
                         <div>
                             <label>
-                                <input type="text" name="email" className={styles.email} placeholder=" E-mail:" value={email} onInput={(e) => setEmail(e.currentTarget.value)} />
+                                <input type="email" name="email" className={styles.email} placeholder=" E-mail:" value={email} onInput={(e) => setEmail(e.currentTarget.value)} />
                             </label>
                         </div>
 
