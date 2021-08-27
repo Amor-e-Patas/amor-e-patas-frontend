@@ -1,0 +1,126 @@
+.titulo{
+  font: normal normal;
+  font-family: Raleway;
+  text-align: center;
+}
+
+.container{
+  background-color: white;
+  margin-left: 33%;
+  margin-right: 30%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width: 454px;
+  height: 100%;
+  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 4px 6px #00000029;
+  border-radius: 9px;
+  opacity: 1;
+  position: relative;
+}
+
+.amor{
+  color: #FFB800 ;
+  font: normal normal 600 17px/22px Raleway;
+  text-align: center;
+  padding-top: 5%; 
+  
+   
+}
+
+.email{
+  margin-top: 2%;
+  margin-bottom: 3%;
+  left: 541px;
+  width: 80%;
+  height: 48px;
+  margin-left: 10%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  font: normal normal 600 15px/22px Raleway;
+  opacity: 1;
+  border-radius: 7px;
+
+}
+
+.link{
+  margin-left: 55%;
+  font: normal normal 600 15px/22px Raleway;
+  letter-spacing: 0.32px;
+  color: #000000;
+  opacity: 1;
+}
+
+.novouser{
+  margin-left: 1%;
+  font: normal normal 600 15px/22px Raleway;
+  letter-spacing: 0.32px;
+  color: #890620;
+  opacity: 1;
+}
+
+.new{
+
+  text-align: center;
+  font: normal normal 600 15px/22px Raleway;
+  letter-spacing: 0.32px;
+  color: #000000;
+  opacity: 1;
+  padding-bottom: 5%;
+}
+
+.senha{
+  width: 99.4%;
+  height: 45px;
+  margin-top: 1%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  border-radius: 7px;
+
+}
+
+.botaoenviar{
+  margin-top: 5%;
+  width: 50%;
+  height: 48px;
+  margin-left: 25%;
+  margin-bottom: 5%;
+  background: var(--unnamed-color-b7e394) 0% 0% no-repeat padding-box;
+  font: normal normal 600 15px/22px Raleway;
+  background: #B7E394 0% 0% no-repeat padding-box;
+  opacity: 1;
+  border-radius: 7px;
+}
+
+.botoes{
+  display: -ms-inline-grid;
+
+}
+
+.checkbox{
+  display: -moz-grid-line;
+}
+
+.chec{
+  margin-top: 2%;
+  width: 30%;
+  height: 50%;
+  text-align: left;
+  margin-left: 45%;
+  font: normal normal 600 15px/23px Noto Sans;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
+.chec2{
+  width: 30%;
+  height: 50%;
+  text-align: left;
+  margin-left: 45%;
+  font: normal normal 600 15px/23px Noto Sans;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
