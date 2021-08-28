@@ -1,5 +1,5 @@
 
-import axios from "../services/services";
+import axios, { authenticatedAPI } from "../services/services";
 export async function criarUsuario(nome_usu: string,
     cpf: string,
     genero: string,
@@ -41,3 +41,24 @@ export async function criarUsuario(nome_usu: string,
         throw error;
     }
 }
+
+
+export async function getUser(){
+    try{
+      const response = await authenticatedAPI.get(`/user/10`);
+      return response.data;
+    } catch (err) {
+      throw err;
+    } 
+  }
+
+  /*useEffect(() => {
+    api.get(`prescription/${id}`).then((response) => {
+        const date = new Date(response.data.date);
+        const ddmmyyyyDate = `${String(date.getDate()).padStart(2, "0")}/${String(
+            date.getMonth() + 1
+        ).padStart(2, "0")}/${date.getFullYear()}`;
+        response.data.formatedDate = ddmmyyyyDate;
+        setPrescription(response.data);
+    });
+}, [id]);*/
