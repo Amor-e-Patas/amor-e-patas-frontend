@@ -82,19 +82,22 @@ export default function Usuario() {
             return;
         }
 
-        let termos = (document.getElementById("termos") as HTMLInputElement).value;
+        let termos = (document.getElementById("termos") as HTMLInputElement).checked;
 
-        if (termos != ""){
+        if (termos == false){
             alert("É preciso aceitar os termos.");
             return;
         }
 
-        let vendas = (document.getElementById("vendas") as HTMLInputElement).value;
+        let vendas = (document.getElementById("vendas") as HTMLInputElement).checked;
 
-        if (vendas != ""){
+        if (vendas == false){
             alert("É preciso concordar com a política de não venda de animais.");
             return;
         }
+
+        
+        
         try {
             await
                 criarUsuario(nome,
@@ -229,14 +232,14 @@ export default function Usuario() {
 
                         <div className={styles.chec}>
                             <label>
-                                <input type="checkbox" id="termos" name="termos" />
+                                <input type="checkbox" id="termos" name="termos"/>
                                 Li e aceito os termos
                             </label>
                         </div>
 
                         <div className={styles.chec2}>
                             <label>
-                                <input type="checkbox" id="vendas" name="vendas" />
+                                <input type="checkbox" id="vendas" name="vendas"/>
                                 Não permitimos a venda de animais através do site.
                             </label>
                         </div>
