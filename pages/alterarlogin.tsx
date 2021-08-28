@@ -25,6 +25,7 @@ export default function Login() {
         try {
             const token = await alterarLogin(email, password);
             Cookies.set('user-token', token);
+            alert("Login atualizado");
             window.location.href = "/about";
         } catch (err) {
             alert("Erro ao atualizar login.")

@@ -27,6 +27,8 @@ export default function Usuario() {
     const [cidade, setCidade] = useState("");
     const [estado, setEstado] = useState("");
     const [referencia, setReferencia] = useState("");
+
+
     async function eventoCriarUsuario() {
 
         if (!valida_CPF(cpf)) {
@@ -35,6 +37,62 @@ export default function Usuario() {
         }
         if (!valida_email(email)) {
             alert("Email invalido!");
+            return;
+        }
+
+        if (nome == "") {
+            alert("Preencha o nome.");
+            return;
+        }
+
+        if (cpf == "") {
+            alert("Preencha a data de nascimento.");
+            return;
+        }
+
+        if (datanasc == "") {
+            alert("Preencha a data de nascimento.");
+            return;
+        }
+
+        if (email == "") {
+            alert("Preencha o email.");
+            return;
+        }
+
+        if (senha == "") {
+            alert("Preencha a senha.");
+            return;
+        }
+
+        if (bairro == "") {
+            alert("Preencha o bairro.");
+            return;
+        }
+
+        if (cep == "") {
+            alert("Preencha o CEP.");
+            return;
+        }
+
+        let confirsenha = (document.getElementById("confirsenha") as HTMLInputElement).value;
+
+        if(senha != confirsenha){
+            alert("Senhas não são iguais. Verifique novamente.");
+            return;
+        }
+
+        let termos = (document.getElementById("termos") as HTMLInputElement).value;
+
+        if (termos != ""){
+            alert("É preciso aceitar os termos.");
+            return;
+        }
+
+        let vendas = (document.getElementById("vendas") as HTMLInputElement).value;
+
+        if (vendas != ""){
+            alert("É preciso concordar com a política de não venda de animais.");
             return;
         }
         try {
@@ -54,16 +112,17 @@ export default function Usuario() {
                     estado,
                     referencia)
             alert("Conta criada ;)");
-
+            window.location.href = "/login";
         } catch (error) {
             alert("Erro ao criar conta.")
         }
 
     }
+
     return (
         <div><Navbar />
             <body>
-                <form className={styles.form}>
+                <form className={styles.form} name="form">
                     <div className={styles.container}>
                         <h3 className={styles.titulo}>Cadastro de Usuário</h3>
                         <div>
@@ -82,8 +141,12 @@ export default function Usuario() {
                             </label>
 
                             <label>
-
-                                <input type="text" name="genero" className={styles.genero} placeholder="Gênero:" onChange={(e) => setGenero(e.currentTarget.value)} />
+                                <select name="genero" id="genero" className={styles.genero} onChange={(e) => setGenero(e.currentTarget.value)}>
+                                    <option value="" selected>Selecione o gênero</option>
+                                    <option value="Feminino">Feminino</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Não declarar" >Não declarar</option>
+                                </select>
                             </label>
                         </div>
 
@@ -117,7 +180,7 @@ export default function Usuario() {
                         <div>
                             <label>
 
-                                <input type="password" className={styles.senha} placeholder="Confirmar senha:" name="confirsenha" />
+                                <input type="password" className={styles.senha} placeholder="Confirmar senha:" name="confirsenha" id="confirsenha" />
                             </label>
                         </div>
                         <h3 className={styles.titulo}>Endereço</h3>
@@ -166,14 +229,14 @@ export default function Usuario() {
 
                         <div className={styles.chec}>
                             <label>
-                                <input type="checkbox" id="scales" name="scales" />
+                                <input type="checkbox" id="termos" name="termos" />
                                 Li e aceito os termos
                             </label>
                         </div>
 
                         <div className={styles.chec2}>
                             <label>
-                                <input type="checkbox" id="scales" name="scales" />
+                                <input type="checkbox" id="vendas" name="vendas" />
                                 Não permitimos a venda de animais através do site.
                             </label>
                         </div>
@@ -203,4 +266,3 @@ export default function Usuario() {
     )
 
 }
-
