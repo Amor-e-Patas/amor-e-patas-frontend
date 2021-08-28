@@ -7,7 +7,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { criarUsuario } from "../services/user";
 import styles from "../styles/components/FormAlterarLogin.module.css";
 import Cookies from 'js-cookie';
-import { login } from '../services/login';
+import { alterarLogin } from '../services/login';
 import { AuthContext } from "../contexts/auth";
 import Link from 'next/link';
 
@@ -23,20 +23,20 @@ export default function Login() {
             return;
         }
         try {
-            const token = await login(email, password);
+            const token = await alterarLogin(email, password);
             Cookies.set('user-token', token);
-            window.location.href = "/";
+            window.location.href = "/about";
         } catch (err) {
-            alert("Usuário ou senha incorretos.")
+            alert("Erro ao atualizar login.")
         }
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (isAuthenticated) {
             window.location.href = "/";
 
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated]);*/
 
     return (
         <div >
@@ -47,14 +47,17 @@ export default function Login() {
                     </div>
                     <form>
                         <label>
-                            <input type="email" className={styles.email} name="name" placeholder="E-mail" />
+                            <input type="email" className={styles.email} name="name" placeholder="E-mail" onChange={(e) => setEmail(e.currentTarget.value)} />
                         </label>
                     </form>
                     <form>
                         <label>
-                            <input type="password" className={styles.email} name="senha" placeholder="Senha" />
+                            <input type="password" className={styles.email} name="senha" placeholder="Senha" onChange={(e) => setPassword(e.currentTarget.value)} />
                         </label>
-                        <input type="submit" className={styles.botaoenviar} value="Atualizar" />
+                        
+                        <button className={styles.botaoenviar} value="Enviar" onClick={ (e) => {
+                    (e).preventDefault();
+                    handleLogin();}}>Atualizar</button>
                     </form>
                 </div>
                 <Footer />

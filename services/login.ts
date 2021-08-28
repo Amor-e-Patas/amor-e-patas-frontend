@@ -18,3 +18,14 @@ export async function verifyToken(){
       throw err;
     } 
   }
+
+  export async function alterarLogin(email: string, senha: string){
+    try{
+      const response = await authenticatedAPI.put("/login", {
+        email, senha
+      });
+      return response.data.accessToken;
+    } catch (err) {
+      throw err;
+    } 
+  }

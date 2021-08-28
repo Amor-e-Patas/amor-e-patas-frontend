@@ -25,6 +25,7 @@ export default function Login() {
         try {
             const token = await login(email, password);
             Cookies.set('user-token', token);
+            console.log(token);
             window.location.href = "/";
         } catch (err) {
             alert("Usuário ou senha incorretos.")
@@ -46,7 +47,7 @@ export default function Login() {
             </div>
             <form>
                 <label>
-                    <input type="email" className={styles.email} name="name" placeholder="E-mail" />
+                    <input type="email" className={styles.email} name="email" placeholder="E-mail"  onChange={(e) => setEmail(e.currentTarget.value)}/>
                 </label>
             </form>
             <form>
@@ -54,12 +55,14 @@ export default function Login() {
                     <a href="" className={styles.link}>Esqueci minha senha</a>
                 </div>
                 <label>
-                    <input type="password" className={styles.email} name="senha" placeholder="Senha" />
+                    <input type="password" className={styles.email} name="password" placeholder="Senha" onChange={(e) => setPassword(e.currentTarget.value)}/>
                 </label>
-                <input type="submit" className={styles.botaoenviar} value="Enviar" />
+                <button className={styles.botaoenviar} value="Enviar" onClick={ (e) => {
+                    (e).preventDefault();
+                    handleLogin();}}>Enviar</button>
 
             </form>
-            <p className={styles.new}>Novo Usuário?<a href="/cadastrousuario" className={styles.novouser}>Cadastre-se</a></p>
+            <p className={styles.new}>Novo Usuário?<Link href="/cadastrousuario" ><p className={styles.novouser}>Cadastre-se</p></Link></p>
         </div>
 
     )

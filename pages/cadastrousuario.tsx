@@ -184,8 +184,8 @@ export default function Usuario() {
                                 e.preventDefault()
                             }} />
                             <input type="submit" className={styles.botaoenviar} value="Enviar" onClick={(e) => {
-                                eventoCriarUsuario()
                                 e.preventDefault()
+                                eventoCriarUsuario()
                             }} />
                         </div>
 
