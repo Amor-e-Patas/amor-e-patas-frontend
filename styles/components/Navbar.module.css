@@ -32,3 +32,29 @@
   text-align: center;
   
 }
+
+.dropdown {
+  text-align: center;
+  display: inline-block;
+  background: var(--laranja) 0% 0% no-repeat padding-box;
+  opacity: 1;
+  border: 0;
+  margin-left: 70%;
+
+}
+
+.dropdowncontent {
+  display: none;
+  position: absolute;
+  background: var(--unnamed-color-ffb800) 0% 0% no-repeat padding-box;
+  background: var(--laranja) 0% 0% no-repeat padding-box;
+  max-width: 144px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  
+}
+
+.dropdown:hover .dropdowncontent {
+  display: block;
+  cursor: pointer;
+}

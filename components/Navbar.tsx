@@ -1,43 +1,75 @@
 import styles from "../styles/components/Navbar.module.css";
 import Link from 'next/link';
 import { Button } from '@material-ui/core';
+import { useContext } from "react";
+import { AuthContext } from "../contexts/auth";
 
 export default function Navbar() {
+  const { isAuthenticated } = useContext(AuthContext);
   return (
-    <nav>
-      <ul className={styles.navBarContainer}>
-        <li>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-        </li>
-        <li>Blog</li>
-        <li>Desaparecidos</li>
+    isAuthenticated ? (
+      <div>
+        <nav>
+          <ul className={styles.navBarContainer}>
+            <li>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            <li>Blog</li>
+            <li>Desaparecidos</li>
 
-        {/* <li> 
-         <Link href="/about">
-              <a>Sobre</a>
-          </Link>
-        
-         </li> */}
-         <li>
-          <Link href="/login" passHref>
-            <button >Entrar</button>
-          </Link>
-        </li>
-        <li>
-          <Link href="/cadastrousuario" passHref>
-            <button >Cadastre-se</button>
-          </Link>
-        </li>
-        <li>
-          <Link href="/logout" passHref> 
-            <button>logout</button>
-          </Link>
-        </li>
+            {/* <li> 
+       <Link href="/about">
+            <a>Sobre</a>
+        </Link>
+      
+       </li> */}
+            
+            <li>
+              <div className={styles.dropdown}>
+                <button>Minha Conta</button>
+                <div className={styles.dropdowncontent}>
+                  <Link href="/">Meu Perfil</Link>
+                  <Link href="/alterarlogin"><p>Alterar Senha</p></Link>
+                  <Link href="/logout"><p>Sair</p></Link>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-      </ul>
+    ) : <div>
+      <nav>
+        <ul className={styles.navBarContainer}>
+          <li>
+            <Link href="/">
+              <a>Home</a>
+            </Link>
+          </li>
+          <li>Blog</li>
+          <li>Desaparecidos</li>
 
-    </nav>
+          {/* <li> 
+     <Link href="/about">
+          <a>Sobre</a>
+      </Link>
+    
+     </li> */}
+          <li>
+            <Link href="/login" passHref>
+              <button >Entrar</button>
+            </Link>
+          </li>
+          <li>
+            <Link href="/cadastrousuario" passHref>
+              <button >Cadastre-se</button>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </div>
   )
+
 }
