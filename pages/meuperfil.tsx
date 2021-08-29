@@ -5,6 +5,9 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/auth";
 import { getUser } from "../services/user";
 import moment from 'moment';
+import { alterarUser } from "../services/user";
+import Cookies from "js-cookie";
+import styles from "../styles/components/FormAlterarLogin.module.css";
 
 export default function MeuPerfil() {
   const [nome, setNome] = useState("");
@@ -16,7 +19,6 @@ export default function MeuPerfil() {
     async function fetchAPI() {
       try {
         const user = await getUser();
-        console.log(user);
         setNome(user.nome_usu);
         setCpf(user.cpf);
         setGenero(user.genero);
@@ -33,6 +35,21 @@ export default function MeuPerfil() {
     fetchAPI();
   }, []);
 
+  async function handleUser() {
+    /*if (email == "" || password == "") {
+        alert("Preencha todos os campos.");
+        return;
+    }*/
+    try {
+        const token = await alterarUser(nome, cpf, datanasc, genero);
+        Cookies.set('user-token', token);
+        alert("Usuario atualizado");
+        window.location.href = "/meuperfil";
+    } catch (err) {
+        alert("Erro ao atualizar usuario.")
+    }
+}
+
   //}
   //const { isAuthenticated } = useContext(AuthContext);
 
@@ -47,11 +64,14 @@ export default function MeuPerfil() {
       </Head>
       <Navbar />
       <div>
-        Nome: <input type="text" defaultValue={nome} ></input>
-        CPF: <input type="text" value={cpf} ></input>
-        Gênero: <input type="text" defaultValue={genero} ></input>
-        Data nascimento: <input type="date" value={datanasc}></input>
+        Nome: <input type="text" value={nome} onChange={(e) => setNome(e.currentTarget.value)} ></input>
+        CPF: <input type="text" value={cpf} onChange={(e) => setCpf(e.currentTarget.value)}></input>
+        Gênero: <input type="text" value={genero} onChange={(e) => setGenero(e.currentTarget.value)}></input>
+        Data nascimento: <input type="date" value={datanasc} onChange={(e) => setDatanasc(e.currentTarget.value)}></input>
       </div>
+      <button className={styles.botaoenviar} value="Enviar" onClick={ (e) => {
+                    (e).preventDefault();
+                    handleUser();}}>Atualizar</button>
       <div>
         <Footer />
       </div>

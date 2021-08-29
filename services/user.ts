@@ -52,6 +52,18 @@ export async function getUser(){
     } 
   }
 
+
+  export async function alterarUser(nome_usu: string, cpf: string, data_nasc: string, genero: string){
+    try{
+      const response = await authenticatedAPI.put("/user", {
+        nome_usu, cpf, data_nasc, genero
+      });
+      return response.data.accessToken;
+    } catch (err) {
+      throw err;
+    } 
+  }
+
   /*useEffect(() => {
     api.get(`prescription/${id}`).then((response) => {
         const date = new Date(response.data.date);
