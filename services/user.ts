@@ -45,7 +45,7 @@ export async function criarUsuario(nome_usu: string,
 
 export async function getUser(){
     try{
-      const response = await authenticatedAPI.get(`/user/10`);
+      const response = await authenticatedAPI.get(`/user`);
       return response.data;
     } catch (err) {
       throw err;
@@ -58,7 +58,7 @@ export async function getUser(){
       const response = await authenticatedAPI.put("/user", {
         nome_usu, cpf, data_nasc, genero
       });
-      return response.data.accessToken;
+      return 
     } catch (err) {
       throw err;
     } 

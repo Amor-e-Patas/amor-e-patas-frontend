@@ -42,7 +42,7 @@ export default function MeuPerfil() {
     }*/
     try {
         const token = await alterarUser(nome, cpf, datanasc, genero);
-        Cookies.set('user-token', token);
+        //Cookies.set('user-token', token);
         alert("Usuario atualizado");
         window.location.href = "/meuperfil";
     } catch (err) {
