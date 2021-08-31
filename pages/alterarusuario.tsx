@@ -7,7 +7,6 @@ import { getUser } from "../services/user";
 import moment from 'moment';
 import { alterarUser } from "../services/user";
 import Cookies from "js-cookie";
-//import styles from "../styles/components/FormAlterarLogin.module.css";
 import styles from "../styles/components/FormAlterarUsuario.module.css";
 
 export default function MeuPerfil() {
@@ -15,7 +14,7 @@ export default function MeuPerfil() {
   const [cpf, setCpf] = useState("");
   const [genero, setGenero] = useState("");
   const [datanasc, setDatanasc] = useState("");
-  //function teste() {
+ 
   useEffect(() => {
     async function fetchAPI() {
       try {
@@ -26,7 +25,6 @@ export default function MeuPerfil() {
         var str = user.data_nasc;
         var date = moment(str);
         var dateComponent = date.utc().format('YYYY-MM-DD');
-        //console.log(dateComponent);
         setDatanasc(dateComponent);
       } catch (err) {
         console.log(err);
@@ -37,26 +35,15 @@ export default function MeuPerfil() {
   }, []);
 
   async function handleUser() {
-    /*if (email == "" || password == "") {
-        alert("Preencha todos os campos.");
-        return;
-    }*/
+    
     try {
       const token = await alterarUser(nome, cpf, datanasc, genero);
-      //Cookies.set('user-token', token);
       alert("Usuario atualizado");
       window.location.href = "/meuperfil";
     } catch (err) {
       alert("Erro ao atualizar usuario.")
     }
   }
-
-  //}
-  //const { isAuthenticated } = useContext(AuthContext);
-
-  //var str = '2011-04-11T10:20:30Z';
-  //var date = moment(str);
-  //var dateComponent = date.utc().format('YYYY-MM-DD');
 
   return (
     <div >

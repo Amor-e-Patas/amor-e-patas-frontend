@@ -7,7 +7,6 @@ import { getUser } from "../services/user";
 import moment from 'moment';
 import { alterarUser } from "../services/user";
 import Cookies from "js-cookie";
-//import styles from "../styles/components/FormAlterarLogin.module.css";
 import styles from "../styles/components/FormAlterarUsuario.module.css";
 import VerifyAuth from "../components/verifyAuth";
 import { alterarAddres, getAddres } from "../services/endereco";
@@ -21,7 +20,6 @@ export default function Alterarendereco() {
   const [estado, setEstado] = useState("");
   const [referencia, setReferencia] = useState("");
 
-  //function teste() {
   useEffect(() => {
     async function fetchAPI() {
       try {
@@ -44,26 +42,15 @@ export default function Alterarendereco() {
   }, []);
 
   async function handleAddres() {
-    /*if (email == "" || password == "") {
-        alert("Preencha todos os campos.");
-        return;
-    }*/
+    
     try {
       const token = await alterarAddres(cep, bairro, endereco, numero, referencia, estado, cidade);
-      //Cookies.set('user-token', token);
       alert("Endereço atualizado");
       window.location.href = "/alterarendereco";
     } catch (err) {
       alert("Erro ao atualizar endereco.")
     }
   }
-
-  //}
-  //const { isAuthenticated } = useContext(AuthContext);
-
-  //var str = '2011-04-11T10:20:30Z';
-  //var date = moment(str);
-  //var dateComponent = date.utc().format('YYYY-MM-DD');
 
   return (
     <>

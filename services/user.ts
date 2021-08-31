@@ -63,14 +63,3 @@ export async function getUser(){
       throw err;
     } 
   }
-
-  /*useEffect(() => {
-    api.get(`prescription/${id}`).then((response) => {
-        const date = new Date(response.data.date);
-        const ddmmyyyyDate = `${String(date.getDate()).padStart(2, "0")}/${String(
-            date.getMonth() + 1
-        ).padStart(2, "0")}/${date.getFullYear()}`;
-        response.data.formatedDate = ddmmyyyyDate;
-        setPrescription(response.data);
-    });
-}, [id]);*/

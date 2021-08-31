@@ -18,13 +18,6 @@ export default function Navbar() {
             </li>
             <li>Blog</li>
             <li>Desaparecidos</li>
-
-            {/* <li> 
-       <Link href="/about">
-            <a>Sobre</a>
-        </Link>
-      
-       </li> */}
             
             <li>
               <div className={styles.dropdown}>
@@ -51,12 +44,6 @@ export default function Navbar() {
           <li>Blog</li>
           <li>Desaparecidos</li>
 
-          {/* <li> 
-     <Link href="/about">
-          <a>Sobre</a>
-      </Link>
-    
-     </li> */}
           <li>
             <Link href="/login" passHref>
               <button >Entrar</button>
