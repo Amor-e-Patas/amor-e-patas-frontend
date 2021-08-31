@@ -9,6 +9,7 @@ import { alterarUser } from "../services/user";
 import Cookies from "js-cookie";
 //import styles from "../styles/components/FormAlterarLogin.module.css";
 import styles from "../styles/components/FormAlterarUsuario.module.css";
+import VerifyAuth from "../components/verifyAuth";
 
 export default function MeuPerfil() {
   const [nome, setNome] = useState("");
@@ -59,6 +60,8 @@ export default function MeuPerfil() {
   //var dateComponent = date.utc().format('YYYY-MM-DD');
 
   return (
+  <>
+  <VerifyAuth />
     <div >
       <Head>
         <title>meu perfil</title>
@@ -94,7 +97,7 @@ export default function MeuPerfil() {
         <Footer />
       </div>
     </div>
-
+ </>
   )
 
 }

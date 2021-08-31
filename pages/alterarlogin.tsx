@@ -4,13 +4,12 @@ import { InputLabel, FormLabel } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import api from "../services/services";
 import React, { useState, useEffect, useContext } from "react";
-import { criarUsuario } from "../services/user";
 import styles from "../styles/components/FormAlterarLogin.module.css";
 import Cookies from 'js-cookie';
 import { alterarLogin } from '../services/login';
 import { AuthContext } from "../contexts/auth";
 import Link from 'next/link';
-
+import VerifyAuth from "../components/verifyAuth";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -40,9 +39,11 @@ export default function Login() {
     }, [isAuthenticated]);*/
 
     return (
-        <div >
-            <Navbar />
-            <div className={styles.container} >
+        <>
+            <VerifyAuth />
+            <div >
+                <Navbar />
+                <div className={styles.container} >
                     <div className={styles.amor}>
                         <h2 className={styles.h2}>Atualizar Login</h2>
                     </div>
@@ -55,14 +56,16 @@ export default function Login() {
                         <label>
                             <input type="password" className={styles.email} name="senha" placeholder="Senha" onChange={(e) => setPassword(e.currentTarget.value)} />
                         </label>
-                        
-                        <button className={styles.botaoenviar} value="Enviar" onClick={ (e) => {
-                    (e).preventDefault();
-                    handleLogin();}}>Atualizar</button>
+
+                        <button className={styles.botaoenviar} value="Enviar" onClick={(e) => {
+                            (e).preventDefault();
+                            handleLogin();
+                        }}>Atualizar</button>
                     </form>
                 </div>
                 <Footer />
-        </div>
+            </div>
+        </>
     )
 
 }
