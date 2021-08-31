@@ -7,7 +7,8 @@ import { getUser } from "../services/user";
 import moment from 'moment';
 import { alterarUser } from "../services/user";
 import Cookies from "js-cookie";
-import styles from "../styles/components/FormAlterarLogin.module.css";
+//import styles from "../styles/components/FormAlterarLogin.module.css";
+import styles from "../styles/components/FormAlterarUsuario.module.css";
 
 export default function MeuPerfil() {
   const [nome, setNome] = useState("");
@@ -41,14 +42,14 @@ export default function MeuPerfil() {
         return;
     }*/
     try {
-        const token = await alterarUser(nome, cpf, datanasc, genero);
-        //Cookies.set('user-token', token);
-        alert("Usuario atualizado");
-        window.location.href = "/meuperfil";
+      const token = await alterarUser(nome, cpf, datanasc, genero);
+      //Cookies.set('user-token', token);
+      alert("Usuario atualizado");
+      window.location.href = "/meuperfil";
     } catch (err) {
-        alert("Erro ao atualizar usuario.")
+      alert("Erro ao atualizar usuario.")
     }
-}
+  }
 
   //}
   //const { isAuthenticated } = useContext(AuthContext);
@@ -63,15 +64,32 @@ export default function MeuPerfil() {
         <title>meu perfil</title>
       </Head>
       <Navbar />
-      <div>
-        Nome: <input type="text" value={nome} onChange={(e) => setNome(e.currentTarget.value)} ></input>
-        CPF: <input type="text" value={cpf} onChange={(e) => setCpf(e.currentTarget.value)}></input>
-        Gênero: <input type="text" value={genero} onChange={(e) => setGenero(e.currentTarget.value)}></input>
-        Data nascimento: <input type="date" value={datanasc} onChange={(e) => setDatanasc(e.currentTarget.value)}></input>
-      </div>
-      <button className={styles.botaoenviar} value="Enviar" onClick={ (e) => {
-                    (e).preventDefault();
-                    handleUser();}}>Atualizar</button>
+      <form className={styles.form} name="form">
+        <div className={styles.container}>
+          <h3 className={styles.titulo}>Atualizar Cadastro de Usuário</h3>
+          <div>
+            <div>
+              <input type="text" className={styles.nome} value={nome} onChange={(e) => setNome(e.currentTarget.value)} ></input>
+
+              <input type="text" className={styles.cpf} value={cpf} onChange={(e) => setCpf(e.currentTarget.value)}></input>
+            </div>
+            <div>
+              <select name="genero" id="genero" className={styles.genero} value={genero} onChange={(e) => setGenero(e.currentTarget.value)}>
+                                    <option value="" selected>Selecione o gênero</option>
+                                    <option value="Feminino">Feminino</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Não declarar" >Não declarar</option>
+                                </select>
+              <input type="date" className={styles.data} value={datanasc} onChange={(e) => setDatanasc(e.currentTarget.value)}></input>
+            </div>
+
+            <button className={styles.botaoenviar} value="Enviar" onClick={(e) => {
+              (e).preventDefault();
+              handleUser();
+            }}>Atualizar</button>
+          </div>
+        </div>
+      </form>
       <div>
         <Footer />
       </div>
