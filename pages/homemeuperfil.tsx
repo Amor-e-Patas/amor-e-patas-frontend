@@ -40,7 +40,7 @@ export default function Login() {
                     <div className={styles.amor}>
                         <h2 className={styles.h2}>Meu Perfil</h2>
                     </div>
-                    <body className={styles.quadros}>
+                    <body className={styles.body}>
                         <div className={styles.quadros}>
                             <div className={styles.item}>
                                 <img src="/img/perfil.png" className={styles.imagem} alt="" />
@@ -53,6 +53,10 @@ export default function Login() {
                             <div className={styles.item}>
                                 <img src="/img/celular.png" className={styles.imagem} alt="" />
                                 <p className={styles.p}>Atualizar meu contato</p>
+                            </div>
+                            <div className={styles.item}>
+                                <img src="/img/animal.png" className={styles.imagem} alt="" />
+                                <p className={styles.p}>Meus animais</p>
                             </div>
                             
                         </div>
