@@ -29,3 +29,12 @@ export async function verifyToken(){
       throw err;
     } 
   }
+
+  export async function getLogin(){
+    try{
+      const response = await authenticatedAPI.get(`/login`);
+      return response.data;
+    } catch (err) {
+      throw err;
+    } 
+  }

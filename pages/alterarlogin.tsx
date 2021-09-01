@@ -6,7 +6,7 @@ import api from "../services/services";
 import React, { useState, useEffect, useContext } from "react";
 import styles from "../styles/components/FormAlterarLogin.module.css";
 import Cookies from 'js-cookie';
-import { alterarLogin } from '../services/login';
+import { alterarLogin, getLogin } from '../services/login';
 import { AuthContext } from "../contexts/auth";
 import Link from 'next/link';
 import VerifyAuth from "../components/verifyAuth";
@@ -16,6 +16,21 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
+    useEffect(() => {
+        async function fetchAPI() {
+          try {
+            const login = await getLogin();
+    
+            setEmail(login.email);
+    
+          } catch (err) {
+            console.log(err);
+          }
+        }
+    
+        fetchAPI();
+      }, []);
+
     async function handleLogin() {
         if (email == "" || password == "") {
             alert("Preencha todos os campos.");
@@ -23,9 +38,9 @@ export default function Login() {
         }
         try {
             const token = await alterarLogin(email, password);
-            Cookies.set('user-token', token);
+            //Cookies.set('user-token', token);
             alert("Login atualizado");
-            window.location.href = "/about";
+            window.location.href = "/alterarlogin";
         } catch (err) {
             alert("Erro ao atualizar login.")
         }
@@ -33,7 +48,6 @@ export default function Login() {
 
     return (
         <>
-            <VerifyAuth />
             <div >
                 <Navbar />
                 <div className={styles.container} >
@@ -42,7 +56,7 @@ export default function Login() {
                     </div>
                     <form>
                         <label>
-                            <input type="email" className={styles.email} name="name" placeholder="E-mail" onChange={(e) => setEmail(e.currentTarget.value)} />
+                            <input type="email" className={styles.email} name="name" placeholder="E-mail" value={email} readOnly onChange={(e) => setEmail(e.currentTarget.value)} />
                         </label>
                     </form>
                     <form>
