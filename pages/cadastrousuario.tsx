@@ -9,6 +9,7 @@ import styles from "../styles/components/FormUsuario.module.css";
 import Button from 'react-bootstrap';
 import Link from 'next/link';
 import { formata_CPF, valida_CPF, valida_email, formata_telefone } from '../utils/format_cpf_email';
+import axios from "axios";
 
 
 
@@ -28,7 +29,22 @@ export default function Usuario() {
     const [estado, setEstado] = useState("");
     const [referencia, setReferencia] = useState("");
 
+    useEffect(() => {
+        async function buscarEndereco() {
+            if(cep.length > 7){
+            const API = axios.create();
+            const res = await API.get(`https://viacep.com.br/ws/${cep}/json/?callback=`);
+            setEndereco(res.data.logradouro);
+            setBairro(res.data.bairro);
+            setCidade(res.data.localidade);
+            setEstado(res.data.uf);
+            console.log(res.data);
+            }
+       }
+       buscarEndereco();
+      }, [cep]);
 
+    
     async function eventoCriarUsuario() {
 
         if (!valida_CPF(cpf)) {
@@ -65,16 +81,6 @@ export default function Usuario() {
             return;
         }
 
-        if (bairro == "") {
-            alert("Preencha o bairro.");
-            return;
-        }
-
-        if (cep == "") {
-            alert("Preencha o CEP.");
-            return;
-        }
-
         let confirsenha = (document.getElementById("confirsenha") as HTMLInputElement).value;
 
         if(senha != confirsenha){
@@ -96,7 +102,40 @@ export default function Usuario() {
             return;
         }
 
-        
+        if (bairro == "") {
+            alert("Preencha o bairro.");
+            return;
+        }
+
+        if (cep == "") {
+            alert("Preencha o CEP.");
+            return;
+        }
+
+        if (endereco == "") {
+            alert("Preencha o endereço.");
+            return;
+        }
+
+        if (numero == "") {
+            alert("Preencha o número do endereço.");
+            return;
+        }
+
+        if (endereco == "") {
+            alert("Preencha o endereço.");
+            return;
+        }
+
+        if (cidade == "") {
+            alert("Preencha a cidade.");
+            return;
+        }
+
+        if (estado == "") {
+            alert("Preencha o estado.");
+            return;
+        }        
         
         try {
             await
@@ -190,7 +229,7 @@ export default function Usuario() {
                         <div>
                             <label>
 
-                                <input type="text" name="endereco" className={styles.endereco} placeholder="Endereço:" onChange={(e) => setEndereco(e.currentTarget.value)} />
+                                <input type="text" name="endereco" className={styles.endereco} value={endereco} placeholder="Endereço:" onChange={(e) => setEndereco(e.currentTarget.value)} />
                             </label>
                             <label>
 
@@ -201,7 +240,7 @@ export default function Usuario() {
                         <div>
                             <label>
 
-                                <input type="text" name="bairro" className={styles.bairro} placeholder="Bairro:" onChange={(e) => setBairro(e.currentTarget.value)} />
+                                <input type="text" name="bairro" className={styles.bairro} value={bairro} placeholder="Bairro:" onChange={(e) => setBairro(e.currentTarget.value)} />
                             </label>
 
                             <label>
@@ -213,12 +252,12 @@ export default function Usuario() {
                         <div>
                             <label>
 
-                                <input type="text" name="cidade" className={styles.cidade} placeholder="Cidade:" onChange={(e) => setCidade(e.currentTarget.value)} />
+                                <input type="text" name="cidade" value={cidade} className={styles.cidade} placeholder="Cidade:" onChange={(e) => setCidade(e.currentTarget.value)} />
                             </label>
 
                             <label>
 
-                                <input type="text" name="estado" className={styles.cep} placeholder="Estado:" onChange={(e) => setEstado(e.currentTarget.value)} />
+                                <input type="text" name="estado" className={styles.cep} value={estado} placeholder="Estado:" onChange={(e) => setEstado(e.currentTarget.value)} />
                             </label>
                         </div>
 
