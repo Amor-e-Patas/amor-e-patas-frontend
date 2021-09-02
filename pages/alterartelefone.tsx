@@ -8,9 +8,11 @@ import { alterarPhone, getPhone } from "../services/telefone";
 import Cookies from "js-cookie";
 import styles from "../styles/components/FormAlterarUsuario.module.css";
 import VerifyAuth from "../components/verifyAuth";
+import { useRouter } from 'next/router';
 
 export default function AlterarTelefone() {
   const [telefone, setTelefone] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchAPI() {
@@ -28,11 +30,15 @@ export default function AlterarTelefone() {
   }, []);
 
   async function handleAddres() {
-    
+    if (telefone == "" ) {
+      alert("Preencha o telefone.");
+      return;
+  }
     try {
       const token = await alterarPhone(telefone);
       alert("Telefone atualizado");
-      window.location.href = "/alterartelefone";
+      router.push("/alterartelefone");
+      //window.location.href = "/alterartelefone";
     } catch (err) {
       alert("Erro ao atualizar telefone.")
     }

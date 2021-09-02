@@ -8,12 +8,14 @@ import moment from 'moment';
 import { alterarUser } from "../services/user";
 import Cookies from "js-cookie";
 import styles from "../styles/components/FormAlterarUsuario.module.css";
+import { useRouter } from 'next/router';
 
 export default function MeuPerfil() {
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
   const [genero, setGenero] = useState("");
   const [datanasc, setDatanasc] = useState("");
+  const router = useRouter();
  
   useEffect(() => {
     async function fetchAPI() {
@@ -35,11 +37,25 @@ export default function MeuPerfil() {
   }, []);
 
   async function handleUser() {
+    if (nome == "") {
+      alert("Preencha o nome.");
+      return;
+  }
+
+  if (cpf == "") {
+      alert("Preencha a data de nascimento.");
+      return;
+  }
+
+  if (datanasc == "") {
+      alert("Preencha a data de nascimento.");
+      return;
+  }
     
     try {
       const token = await alterarUser(nome, cpf, datanasc, genero);
       alert("Usuario atualizado");
-      window.location.href = "/meuperfil";
+      router.push("/meuperfil");
     } catch (err) {
       alert("Erro ao atualizar usuario.")
     }
@@ -58,7 +74,7 @@ export default function MeuPerfil() {
             <div>
               <input type="text" className={styles.nome} value={nome} onChange={(e) => setNome(e.currentTarget.value)} ></input>
 
-              <input type="text" className={styles.cpf} value={cpf} onChange={(e) => setCpf(e.currentTarget.value)}></input>
+              <input type="text" className={styles.cpf} value={cpf} readOnly onChange={(e) => setCpf(e.currentTarget.value)}></input>
             </div>
             <div>
               <select name="genero" id="genero" className={styles.genero} value={genero} onChange={(e) => setGenero(e.currentTarget.value)}>

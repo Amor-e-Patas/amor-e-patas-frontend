@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 import styles from "../styles/components/FormAlterarUsuario.module.css";
 import VerifyAuth from "../components/verifyAuth";
 import { alterarAddres, getAddres } from "../services/endereco";
+import { useRouter } from 'next/router';
 
 export default function Alterarendereco() {
   const [endereco, setEndereco] = useState("");
@@ -19,6 +20,7 @@ export default function Alterarendereco() {
   const [cidade, setCidade] = useState("");
   const [estado, setEstado] = useState("");
   const [referencia, setReferencia] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchAPI() {
@@ -41,12 +43,47 @@ export default function Alterarendereco() {
     fetchAPI();
   }, []);
 
+  if (bairro == "") {
+    alert("Preencha o bairro.");
+    return;
+  }
+
+  if (cep == "") {
+    alert("Preencha o CEP.");
+    return;
+  }
+
+  if (endereco == "") {
+    alert("Preencha o endereço.");
+    return;
+  }
+
+  if (numero == "") {
+    alert("Preencha o número do endereço.");
+    return;
+  }
+
+  if (endereco == "") {
+    alert("Preencha o endereço.");
+    return;
+  }
+
+  if (cidade == "") {
+    alert("Preencha a cidade.");
+    return;
+  }
+
+  if (estado == "") {
+    alert("Preencha o estado.");
+    return;
+  }
+
   async function handleAddres() {
-    
+
     try {
       const token = await alterarAddres(cep, bairro, endereco, numero, referencia, estado, cidade);
       alert("Endereço atualizado");
-      window.location.href = "/alterarendereco";
+      router.push("/alterarendereco");
     } catch (err) {
       alert("Erro ao atualizar endereco.")
     }
