@@ -1,0 +1,223 @@
+.titulo{
+  font: normal normal;
+  font-family: Raleway;
+  text-align: center;
+  padding-top: 1.5%; 
+}
+
+.container{
+  display: block;
+  background-color: white;
+  margin: 5% 10%;
+}
+
+.nome{
+  width: 55%;
+  height: 45px;
+  margin-left: 5%;
+  margin-right: 1%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
+}
+
+.idade{ 
+  width: 33.6%;
+  height: 45px;
+  /*margin-left: 2%;*/
+  margin-top: 1%;
+  margin-right: 5px;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
+  
+}
+.genero{ 
+  width: 44.7%;
+  height: 45px;
+  margin-left: 5%;
+  margin-right: 1%;
+  margin-top: 1%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
+}
+
+.data{
+  width: 44%;
+  height: 45px;
+  margin-top: 1%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
+}
+
+
+.especie{
+  width: 44.7%;
+  height: 45px;
+  margin-left: 5%;
+  margin-right: 1%;
+  margin-top: 1%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
+
+}
+
+.raca{
+  width: 44%;
+  height: 45px;
+  margin-top: 1%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
+
+}
+
+.porte{
+  width: 44.7%;
+  height: 45px;
+  margin-right: 1%;
+  margin-top: 1%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
+
+}
+
+.cor{
+  width: 90.4%;
+  height: 45px;
+  margin-left: 5%;
+  margin-top: 1%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
+
+}
+
+.caracteristica{
+  width: 44%;
+  height: 150px;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 1%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
+  text-align: left;
+  resize: none;
+
+
+}
+
+.temperamento{
+  width: 44.7%;
+  margin-right: 4%;
+  margin-top: -14.5%;
+  text-align: left;
+  font: normal normal 600 15px/23px Noto Sans;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin-left: 52%;
+  
+}
+
+.sociavel{
+  width: 44.7%;
+  margin-right: 4%;
+  margin-top: -20.2%;
+  text-align: left;
+  font: normal normal 600 15px/23px Noto Sans;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin-left: 65%;
+}
+
+.vive{
+  width: 44.7%;
+  margin-right: 4%;
+  margin-top: -11.8%;
+  text-align: left;
+  font: normal normal 600 15px/23px Noto Sans;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin-left: 78%;
+}
+
+
+.fotos{
+  width: 44%;
+  height: 45px;
+  margin-top: 7.5%;
+  margin-left: 5%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
+}
+
+.p{
+  font: normal normal 600 15px/5px Raleway;
+
+}
+
+
+.botaovoltar{
+  margin-top: 5%;
+  width: 30%;
+  height: 48px;
+  margin-right: 15%;
+  margin-left: 13%;
+  background: var(--unnamed-color-b7e394) 0% 0% no-repeat padding-box;
+  background: #B7E394 0% 0% no-repeat padding-box;
+  font: normal normal 600 15px/22px Raleway;
+  opacity: 1;
+}
+
+.botaoenviar{
+  margin-top: 5%;
+  width: 30%;
+  height: 48px;
+  margin-bottom: 5%;
+  background: var(--unnamed-color-b7e394) 0% 0% no-repeat padding-box;
+  background: #B7E394 0% 0% no-repeat padding-box;
+  font: normal normal 600 15px/22px Raleway;
+  opacity: 1;
+}
+
+.botoes{
+  display: -ms-inline-grid;
+
+}
+
+.checkbox{
+  display: -moz-grid-line;
+}
+
+.chec{
+  margin-top: 2%;
+  width: 30%;
+  height: 50%;
+  text-align: left;
+  margin-left: 5%;
+  font: normal normal 600 15px/23px Noto Sans;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
+.chec2{
+  width: 30%;
+  height: 50%;
+  text-align: left;
+  margin-left: 5%;
+  font: normal normal 600 15px/23px Noto Sans;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
