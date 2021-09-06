@@ -111,49 +111,54 @@
 
 
 }
+.containertemp{
+  display: grid;
+  margin-left: 50%;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  margin-top: -15%;
+}
 
 .temperamento{
-  width: 44.7%;
-  margin-right: 4%;
-  margin-top: -14.5%;
+ /* margin-right: 4%;*/
   text-align: left;
   font: normal normal 600 15px/23px Noto Sans;
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
-  margin-left: 52%;
+  /*margin-left: 52%;*/
   
 }
 
 .sociavel{
-  width: 44.7%;
+  /*width: 44.7%;
   margin-right: 4%;
-  margin-top: -20.2%;
+  /*margin-top: -20.2%;*/
   text-align: left;
   font: normal normal 600 15px/23px Noto Sans;
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
-  margin-left: 65%;
+  /*margin-left: 65%;*/
 }
 
 .vive{
-  width: 15%;
+  /*width: 15%;
   margin-right: 4%;
-  margin-top: -11.8%;
+  margin-top: -11.8%;*/
   text-align: left;
   font: normal normal 600 15px/23px Noto Sans;
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
-  margin-left: 78%;
+ /* margin-left: 78%;*/
 }
 
 
 .fotos{
   width: 44%;
   height: 45px;
-  margin-top: 7.5%;
+  margin-top: 2%;
   margin-left: 5%;
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;

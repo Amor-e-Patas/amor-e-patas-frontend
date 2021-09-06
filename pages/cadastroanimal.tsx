@@ -172,98 +172,99 @@ export default function Usuario() {
                             <label>
                                 <textarea name="endereco" className={styles.caracteristica} placeholder="Característica animal" onChange={(e) => setEndereco(e.currentTarget.value)}></textarea>
                             </label>
-
-                            <div className={styles.temperamento}>
-                                <div className={styles.temp}>
-                                    <p className={styles.p}>Temperamento</p>
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Docil
-                                    </label>
+                            <div className={styles.containertemp}>
+                                <div className={styles.temperamento}>
+                                    <div className={styles.temp}>
+                                        <p className={styles.p}>Temperamento</p>
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Docil
+                                        </label>
+                                    </div>
+                                    <div className={styles.temp}>
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Agressivo
+                                        </label>
+                                    </div>
+                                    <div >
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Calmo
+                                        </label>
+                                    </div>
+                                    <div >
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Brincalhão
+                                        </label>
+                                    </div>
+                                    <div >
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Sociável
+                                        </label>
+                                    </div>
+                                    <div >
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Arisco
+                                        </label>
+                                    </div>
+                                    <div >
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Independente
+                                        </label>
+                                    </div>
+                                    <div >
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Carente
+                                        </label>
+                                    </div>
                                 </div>
-                                <div className={styles.temp}>
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Agressivo
-                                    </label>
+                                <div className={styles.sociavel}>
+                                    <div className={styles.temp}>
+                                        <p className={styles.p}>Sociável com</p>
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Gatos
+                                        </label>
+                                    </div>
+                                    <div className={styles.temp}>
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Desconhecidos
+                                        </label>
+                                    </div>
+                                    <div >
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Cachorros
+                                        </label>
+                                    </div>
+                                    <div >
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Brincalhão
+                                        </label>
+                                    </div>
                                 </div>
-                                <div >
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Calmo
-                                    </label>
-                                </div>
-                                <div >
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Brincalhão
-                                    </label>
-                                </div>
-                                <div >
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Sociável
-                                    </label>
-                                </div>
-                                <div >
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Arisco
-                                    </label>
-                                </div>
-                                <div >
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Independente
-                                    </label>
-                                </div>
-                                <div >
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Carente
-                                    </label>
-                                </div>
-                            </div>
-                            <div className={styles.sociavel}>
-                                <div className={styles.temp}>
-                                    <p className={styles.p}>Sociável com</p>
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Gatos
-                                    </label>
-                                </div>
-                                <div className={styles.temp}>
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Desconhecidos
-                                    </label>
-                                </div>
-                                <div >
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Cachorros
-                                    </label>
-                                </div>
-                                <div >
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Brincalhão
-                                    </label>
-                                </div>
-                            </div>
-                            <div className={styles.vive}>
-                                <div className={styles.temp}>
-                                    <p className={styles.p}>Vive bem em</p>
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Casa com quintal
-                                    </label>
-                                </div>
-                                <div className={styles.temp}>
-                                    <label>
-                                        <input type="checkbox" id="vendas" name="vendas" />
-                                        Apartamento
-                                    </label>
+                                <div className={styles.vive}>
+                                    <div className={styles.temp}>
+                                        <p className={styles.p}>Vive bem em</p>
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Casa com quintal
+                                        </label>
+                                    </div>
+                                    <div className={styles.temp}>
+                                        <label>
+                                            <input type="checkbox" id="vendas" name="vendas" />
+                                            Apartamento
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div>
