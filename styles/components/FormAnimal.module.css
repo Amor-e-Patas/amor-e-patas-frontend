@@ -116,7 +116,7 @@
   margin-left: 50%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
-  margin-top: -15%;
+  margin-top: -10%;
 }
 
 .temperamento{
@@ -226,3 +226,33 @@
   opacity: 1;
 }
 
+.imagesContainer{
+  display: flex;
+  /*grid-template-columns: repeat(1, 1fr);*/
+ /* grid-gap: 16px;*/
+ flex-wrap: wrap ;
+
+
+}
+
+.imagesContainer img{
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-right: 6px;
+  margin-bottom: 7px;
+}
+
+
+.imagesContainer .new-image {
+  height: 96px;
+  background: #F5F8FA;
+  border: 1px dashed #96D2F0;
+  border-radius: 20px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

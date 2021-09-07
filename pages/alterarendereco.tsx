@@ -11,6 +11,7 @@ import styles from "../styles/components/FormAlterarUsuario.module.css";
 import VerifyAuth from "../components/verifyAuth";
 import { alterarAddres, getAddres } from "../services/endereco";
 import { useRouter } from 'next/router';
+import axios from "axios";
 
 export default function Alterarendereco() {
   const [endereco, setEndereco] = useState("");
@@ -43,42 +44,47 @@ export default function Alterarendereco() {
     fetchAPI();
   }, []);
 
-  if (bairro == "") {
-    alert("Preencha o bairro.");
-    return;
-  }
-
-  if (cep == "") {
-    alert("Preencha o CEP.");
-    return;
-  }
-
-  if (endereco == "") {
-    alert("Preencha o endereço.");
-    return;
-  }
-
-  if (numero == "") {
-    alert("Preencha o número do endereço.");
-    return;
-  }
-
-  if (endereco == "") {
-    alert("Preencha o endereço.");
-    return;
-  }
-
-  if (cidade == "") {
-    alert("Preencha a cidade.");
-    return;
-  }
-
-  if (estado == "") {
-    alert("Preencha o estado.");
-    return;
-  }
+  useEffect(() => {
+    async function buscarEndereco() {
+        if(cep.length > 7){
+        const API = axios.create();
+        const res = await API.get(`https://viacep.com.br/ws/${cep}/json/?callback=`);
+        setEndereco(res.data.logradouro);
+        setBairro(res.data.bairro);
+        setCidade(res.data.localidade);
+        setEstado(res.data.uf);
+        console.log(res.data);
+        }
+   }
+   buscarEndereco();
+  }, [cep]);
 
   async function handleAddres() {
+
+    if (bairro == "") {
+      alert("Preencha o bairro.");
+      return;
+    }
+  
+    if (cep == "") {
+      alert("Preencha o CEP.");
+      return;
+    }
+  
+    if (endereco == "") {
+      alert("Preencha o endereço.");
+      return;
+    }
+  
+    if (cidade == "") {
+      alert("Preencha a cidade.");
+      return;
+    }
+  
+    if (estado == "") {
+      alert("Preencha o estado.");
+      return;
+    }
 
     try {
       const token = await alterarAddres(cep, bairro, endereco, numero, referencia, estado, cidade);
@@ -110,7 +116,7 @@ export default function Alterarendereco() {
               <div>
                 <input type="text" name="bairro" className={styles.bairro} placeholder="Bairro:" value={bairro} onChange={(e) => setBairro(e.currentTarget.value)} />
 
-                <input type="text" name="cep" className={styles.cep} placeholder="CEP:" value={cep} onChange={(e) => setCep(e.currentTarget.value)} />
+                <input type="text" name="cep" className={styles.cep} placeholder="CEP:" value={cep}  onChange={(e) => setCep(e.currentTarget.value)} />
               </div>
 
               <div>
