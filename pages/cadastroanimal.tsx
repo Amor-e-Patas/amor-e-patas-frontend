@@ -10,9 +10,15 @@ import Button from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from "next/router";
 import { getTemperamento } from "../services/temperamento";
+import { getSociavel } from "../services/sociavel"
 
 interface Temp {
     id_temperamento: number,
+    descricao: string
+}
+
+interface Soci {
+    id_sociavel: number,
     descricao: string
 }
 
@@ -30,6 +36,8 @@ export default function Usuario() {
     const router = useRouter();
     const [temperamentos, setTemperamentos] = useState(Array<Temp>());
     const [selectTemp, setSelectTemp] = useState(Array<Number>());
+    const [sociaveis, setSociavel] = useState(Array<Soci>());
+    const [selectSoci, setSelectSoci] = useState(Array<Number>());
     const [images, setImages] = useState<File[]>([]);
     const [previwImages, setPreviewImages] = useState<string[]>([]);
 
@@ -37,9 +45,11 @@ export default function Usuario() {
         async function fetchAPI() {
             try {
                 const temperamento = await getTemperamento();
+                const sociavel = await getSociavel();
                 console.log(temperamento);
 
                 setTemperamentos(temperamento);
+                setSociavel(sociavel);
 
             } catch (err) {
                 console.log(err);
@@ -48,6 +58,7 @@ export default function Usuario() {
 
         fetchAPI();
     }, []);
+
 
     function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
         if (!event.target.files) {
@@ -146,7 +157,8 @@ export default function Usuario() {
                     parseInt(id_porte),
                     parseInt(id_especie),
                     parseInt(id_sexo),
-                    selectTemp)
+                    selectTemp,
+                    selectSoci)
             alert("Animal criado ;)");
             router.push("/cadastroanimal");
         } catch (error) {
@@ -236,28 +248,27 @@ export default function Usuario() {
                                 <div className={styles.sociavel}>
                                     <div className={styles.temp}>
                                         <p className={styles.p}>Sociável com</p>
-                                        <label>
-                                            <input type="checkbox" id="vendas" name="vendas" />
-                                            Gatos
-                                        </label>
-                                    </div>
-                                    <div className={styles.temp}>
-                                        <label>
-                                            <input type="checkbox" id="vendas" name="vendas" />
-                                            Desconhecidos
-                                        </label>
-                                    </div>
-                                    <div >
-                                        <label>
-                                            <input type="checkbox" id="vendas" name="vendas" />
-                                            Cachorros
-                                        </label>
-                                    </div>
-                                    <div >
-                                        <label>
-                                            <input type="checkbox" id="vendas" name="vendas" />
-                                            Brincalhão
-                                        </label>
+                                        {
+                                            sociaveis.map((sociavel) =>
+                                                <div className={styles.temp}>
+                                                    <label>
+                                                        <input type="checkbox" id="docil" value={sociavel.id_sociavel} onChange={(e) => {
+                                                            if (e.target.checked) {
+                                                                const aux = [...selectSoci]
+                                                                aux.push(parseInt(e.target.value))
+                                                                setSelectSoci(aux);
+                                                                console.log(selectSoci);
+                                                            } else {
+                                                                const aux = [...selectSoci.filter(item => item != parseInt(e.target.value))]
+                                                                setSelectSoci(aux);
+                                                                console.log(selectSoci);
+                                                            }
+                                                        }} name="sociavel" />
+                                                        {sociavel.descricao}
+                                                    </label>
+                                                </div>
+                                            )
+                                        }
                                     </div>
                                 </div>
                                 <div className={styles.vive}>
@@ -277,13 +288,13 @@ export default function Usuario() {
                                 </div>
                             </div>
                             <div>
-                            <div className={styles.imagesContainer}>
-                                {previwImages.map(image => {
-                                    return (
-                                        <img key={image} src={image} />
-                                    );
-                                })}
-                            </div>
+                                <div className={styles.imagesContainer}>
+                                    {previwImages.map(image => {
+                                        return (
+                                            <img key={image} src={image} />
+                                        );
+                                    })}
+                                </div>
                                 <label>
                                     {/*} <input multiple type="file" name="fotos" className={styles.fotos} placeholder="Referência:" />*/}
                                     <input multiple onChange={handleSelectImages} type="file" id="image[]" />
