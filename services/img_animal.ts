@@ -1,42 +1,24 @@
 
 import axios, { authenticatedAPI } from "../services/services";
-export async function criarAnimal(nome_ani: string,
-    idade: string,
-    cor: string,
-    caracteristica_animal: string,
-    data_nasc: string,
-    desaparecido: string,
-    id_usuario: number,
-    id_porte: number,
-    id_especie: number,
-    id_sexo: number,
-    temperamentos: Array<Number>,
-    sociaveis: Array<Number>) {
+export async function criarImgAnimal(
+    imagens: Array<File>,
+    id_animal: string) {
     try {
-        const res = await authenticatedAPI.post("/animal", {
-            nome_ani,
-            idade,
-            cor,
-            caracteristica_animal,
-            data_nasc,
-            desaparecido,
-            id_usuario,
-            id_porte,
-            id_especie,
-            id_sexo,
-            temperamentos,
-            sociaveis
-        })
-        return res.data.id_animal;
+        const data = new FormData();
+        data.append('id_animal', id_animal);
+        imagens.forEach(image => {
+            data.append('image', image);
+          });
+        await authenticatedAPI.post("/imagem", data);
 } catch (error) {
     throw error;
 }
 }
 
 
-export async function getAnimal() {
+export async function getImgAnimal() {
     try {
-        const response = await authenticatedAPI.get(`/animais`);
+        const response = await authenticatedAPI.get(`/imagens`);
         return response.data;
     } catch (err) {
         throw err;

@@ -10,7 +10,8 @@ import Button from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from "next/router";
 import { getTemperamento } from "../services/temperamento";
-import { getSociavel } from "../services/sociavel"
+import { getSociavel } from "../services/sociavel";
+import { criarImgAnimal } from "../services/img_animal";
 
 interface Temp {
     id_temperamento: number,
@@ -79,74 +80,8 @@ export default function Usuario() {
 
     async function eventoCriarAnimal() {
 
-        /*if (!valida_CPF(cpf)) {
-            alert("CPF INVALIDO");
-            return;
-        }
-        if (!valida_email(email)) {
-            alert("Email invalido!");
-            return;
-        }
-
-        if (nome == "") {
-            alert("Preencha o nome.");
-            return;
-        }
-
-        if (cpf == "") {
-            alert("Preencha a data de nascimento.");
-            return;
-        }
-
-        if (datanasc == "") {
-            alert("Preencha a data de nascimento.");
-            return;
-        }
-
-        if (email == "") {
-            alert("Preencha o email.");
-            return;
-        }
-
-        if (senha == "") {
-            alert("Preencha a senha.");
-            return;
-        }
-
-        if (bairro == "") {
-            alert("Preencha o bairro.");
-            return;
-        }
-
-        if (cep == "") {
-            alert("Preencha o CEP.");
-            return;
-        }
-
-        let confirsenha = (document.getElementById("confirsenha") as HTMLInputElement).value;
-
-        if (senha != confirsenha) {
-            alert("Senhas não são iguais. Verifique novamente.");
-            return;
-        }
-
-        let termos = (document.getElementById("termos") as HTMLInputElement).checked;
-
-        if (termos == false) {
-            alert("É preciso aceitar os termos.");
-            return;
-        }
-
-        let vendas = (document.getElementById("vendas") as HTMLInputElement).checked;
-
-        if (vendas == false) {
-            alert("É preciso concordar com a política de não venda de animais.");
-            return;
-        }*/
-
-
         try {
-            await
+            const id_animal = await
                 criarAnimal(nome_ani,
                     idade,
                     cor,
@@ -159,6 +94,11 @@ export default function Usuario() {
                     parseInt(id_sexo),
                     selectTemp,
                     selectSoci)
+            await
+                criarImgAnimal(
+                    images,
+                    id_animal
+                )
             alert("Animal criado ;)");
             router.push("/cadastroanimal");
         } catch (error) {
@@ -300,7 +240,6 @@ export default function Usuario() {
                                     <input multiple onChange={handleSelectImages} type="file" id="image[]" />
                                 </label>
                             </div>
-
 
                             <div className={styles.chec}>
                                 <label>
