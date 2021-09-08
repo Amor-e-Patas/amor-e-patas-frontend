@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { useRouter } from "next/router";
 import { getTemperamento } from "../services/temperamento";
 import { getSociavel } from "../services/sociavel";
+import { getVivencia } from "../services/vivencia";
 import { criarImgAnimal } from "../services/img_animal";
 
 interface Temp {
@@ -20,6 +21,11 @@ interface Temp {
 
 interface Soci {
     id_sociavel: number,
+    descricao: string
+}
+
+interface Vive {
+    id_vivencia: number,
     descricao: string
 }
 
@@ -39,6 +45,8 @@ export default function Usuario() {
     const [selectTemp, setSelectTemp] = useState(Array<Number>());
     const [sociaveis, setSociavel] = useState(Array<Soci>());
     const [selectSoci, setSelectSoci] = useState(Array<Number>());
+    const [vivencias, setVivencia] = useState(Array<Vive>());
+    const [selectVive, setSelectVive] = useState(Array<Number>());
     const [images, setImages] = useState<File[]>([]);
     const [previwImages, setPreviewImages] = useState<string[]>([]);
 
@@ -47,10 +55,12 @@ export default function Usuario() {
             try {
                 const temperamento = await getTemperamento();
                 const sociavel = await getSociavel();
+                const vivencia = await getVivencia();
                 console.log(temperamento);
 
                 setTemperamentos(temperamento);
                 setSociavel(sociavel);
+                setVivencia(vivencia);
 
             } catch (err) {
                 console.log(err);
@@ -93,7 +103,8 @@ export default function Usuario() {
                     parseInt(id_especie),
                     parseInt(id_sexo),
                     selectTemp,
-                    selectSoci)
+                    selectSoci,
+                    selectVive)
             await
                 criarImgAnimal(
                     images,
@@ -214,16 +225,27 @@ export default function Usuario() {
                                 <div className={styles.vive}>
                                     <div className={styles.temp}>
                                         <p className={styles.p}>Vive bem em</p>
-                                        <label>
-                                            <input type="checkbox" id="vendas" name="vendas" />
-                                            Casa com quintal
-                                        </label>
-                                    </div>
-                                    <div className={styles.temp}>
-                                        <label>
-                                            <input type="checkbox" id="vendas" name="vendas" />
-                                            Apartamento
-                                        </label>
+                                        {
+                                            vivencias.map((vivencia) =>
+                                                <div className={styles.temp}>
+                                                    <label>
+                                                        <input type="checkbox" id="casa" value={vivencia.id_vivencia} onChange={(e) => {
+                                                            if (e.target.checked) {
+                                                                const aux = [...selectVive]
+                                                                aux.push(parseInt(e.target.value))
+                                                                setSelectVive(aux);
+                                                                console.log(selectVive);
+                                                            } else {
+                                                                const aux = [...selectVive.filter(item => item != parseInt(e.target.value))]
+                                                                setSelectVive(aux);
+                                                                console.log(selectVive);
+                                                            }
+                                                        }} name="vivencia" />
+                                                        {vivencia.descricao}
+                                                    </label>
+                                                </div>
+                                            )
+                                        }
                                     </div>
                                 </div>
                             </div>

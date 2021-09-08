@@ -11,7 +11,8 @@ export async function criarAnimal(nome_ani: string,
     id_especie: number,
     id_sexo: number,
     temperamentos: Array<Number>,
-    sociaveis: Array<Number>) {
+    sociaveis: Array<Number>,
+    vivencias: Array<Number>,) {
     try {
         const res = await authenticatedAPI.post("/animal", {
             nome_ani,
@@ -25,7 +26,8 @@ export async function criarAnimal(nome_ani: string,
             id_especie,
             id_sexo,
             temperamentos,
-            sociaveis
+            sociaveis,
+            vivencias
         })
         return res.data.id_animal;
 } catch (error) {
