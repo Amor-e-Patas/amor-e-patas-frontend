@@ -13,6 +13,7 @@ import { getTemperamento } from "../services/temperamento";
 import { getSociavel } from "../services/sociavel";
 import { getVivencia } from "../services/vivencia";
 import { criarImgAnimal } from "../services/img_animal";
+import VerifyAuth from "../components/verifyAuth";
 
 interface Temp {
     id_temperamento: number,
@@ -120,6 +121,8 @@ export default function Usuario() {
     }
 
     return (
+    <>
+    <VerifyAuth />
         <div><Navbar />
             <body>
                 <form className={styles.form} name="form">
@@ -148,7 +151,11 @@ export default function Usuario() {
 
                         <div>
                             <label>
-                                <input type="text" name="especie" className={styles.especie} placeholder="Especie" onChange={(e) => setEspecie(e.currentTarget.value)} />
+                                <select name="especie" id="especie" className={styles.especie} onChange={(e) => setEspecie(e.currentTarget.value)}>
+                                    <option value="" selected>Selecione a espécie</option>
+                                    <option value="1">Gato</option>
+                                    <option value="2">Cachorro</option>
+                                </select>
                             </label>
                             <label>
                                 <select name="porte" id="porte" className={styles.porte} onChange={(e) => setPorte(e.currentTarget.value)}>
@@ -298,7 +305,7 @@ export default function Usuario() {
                 <Footer />
             </div>
         </div>
-
+    </>
     )
 
 }
