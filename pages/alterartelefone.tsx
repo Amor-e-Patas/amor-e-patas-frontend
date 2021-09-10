@@ -30,10 +30,10 @@ export default function AlterarTelefone() {
   }, []);
 
   async function handleAddres() {
-    if (telefone == "" ) {
+    if (telefone == "") {
       alert("Preencha o telefone.");
       return;
-  }
+    }
     try {
       const token = await alterarPhone(telefone);
       alert("Telefone atualizado");
@@ -46,7 +46,7 @@ export default function AlterarTelefone() {
 
   return (
     <>
-
+      <VerifyAuth />
       <div >
         <Head>
           <title>Telefone</title>
