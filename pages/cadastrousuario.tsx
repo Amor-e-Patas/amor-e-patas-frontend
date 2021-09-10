@@ -31,20 +31,20 @@ export default function Usuario() {
 
     useEffect(() => {
         async function buscarEndereco() {
-            if(cep.length > 7){
-            const API = axios.create();
-            const res = await API.get(`https://viacep.com.br/ws/${cep}/json/?callback=`);
-            setEndereco(res.data.logradouro);
-            setBairro(res.data.bairro);
-            setCidade(res.data.localidade);
-            setEstado(res.data.uf);
-            console.log(res.data);
+            if (cep.length > 7) {
+                const API = axios.create();
+                const res = await API.get(`https://viacep.com.br/ws/${cep}/json/?callback=`);
+                setEndereco(res.data.logradouro);
+                setBairro(res.data.bairro);
+                setCidade(res.data.localidade);
+                setEstado(res.data.uf);
+                console.log(res.data);
             }
-       }
-       buscarEndereco();
-      }, [cep]);
+        }
+        buscarEndereco();
+    }, [cep]);
 
-    
+
     async function eventoCriarUsuario() {
 
         if (!valida_CPF(cpf)) {
@@ -83,21 +83,21 @@ export default function Usuario() {
 
         let confirsenha = (document.getElementById("confirsenha") as HTMLInputElement).value;
 
-        if(senha != confirsenha){
+        if (senha != confirsenha) {
             alert("Senhas não são iguais. Verifique novamente.");
             return;
         }
 
         let termos = (document.getElementById("termos") as HTMLInputElement).checked;
 
-        if (termos == false){
+        if (termos == false) {
             alert("É preciso aceitar os termos.");
             return;
         }
 
         let vendas = (document.getElementById("vendas") as HTMLInputElement).checked;
 
-        if (vendas == false){
+        if (vendas == false) {
             alert("É preciso concordar com a política de não venda de animais.");
             return;
         }
@@ -135,8 +135,8 @@ export default function Usuario() {
         if (estado == "") {
             alert("Preencha o estado.");
             return;
-        }        
-        
+        }
+
         try {
             await
                 criarUsuario(nome,
@@ -228,11 +228,21 @@ export default function Usuario() {
                         <h3 className={styles.titulo}>Endereço</h3>
                         <div>
                             <label>
-
-                                <input type="text" name="endereco" className={styles.endereco} value={endereco} placeholder="Endereço:" onChange={(e) => setEndereco(e.currentTarget.value)} />
+                                <input type="text" name="cep" className={styles.cep} placeholder="CEP:" onChange={(e) => setCep(e.currentTarget.value)} />
                             </label>
-                            <label>
 
+                            <label>
+                                <input type="text" name="endereco" className={styles.endereco} value={endereco} placeholder="Endereço:" onChange={(e) => setEndereco(e.currentTarget.value)} readOnly />
+                            </label>
+
+                        </div>
+
+                        <div>
+                            <label>
+                                <input type="text" name="bairro" className={styles.bairro} value={bairro} placeholder="Bairro:" onChange={(e) => setBairro(e.currentTarget.value)} readOnly />
+                            </label>
+
+                            <label>
                                 <input type="text" name="numero" className={styles.numero} placeholder="Número:" onChange={(e) => setNumero(e.currentTarget.value)} />
                             </label>
                         </div>
@@ -240,24 +250,12 @@ export default function Usuario() {
                         <div>
                             <label>
 
-                                <input type="text" name="bairro" className={styles.bairro} value={bairro} placeholder="Bairro:" onChange={(e) => setBairro(e.currentTarget.value)} />
+                                <input type="text" name="cidade" value={cidade} className={styles.cidade} placeholder="Cidade:" onChange={(e) => setCidade(e.currentTarget.value)} readOnly />
                             </label>
 
                             <label>
 
-                                <input type="text" name="cep" className={styles.cep} placeholder="CEP:" onChange={(e) => setCep(e.currentTarget.value)} />
-                            </label>
-                        </div>
-
-                        <div>
-                            <label>
-
-                                <input type="text" name="cidade" value={cidade} className={styles.cidade} placeholder="Cidade:" onChange={(e) => setCidade(e.currentTarget.value)} />
-                            </label>
-
-                            <label>
-
-                                <input type="text" name="estado" className={styles.cep} value={estado} placeholder="Estado:" onChange={(e) => setEstado(e.currentTarget.value)} />
+                                <input type="text" name="estado" className={styles.estado} value={estado} placeholder="Estado:" onChange={(e) => setEstado(e.currentTarget.value)} readOnly />
                             </label>
                         </div>
 
@@ -271,14 +269,14 @@ export default function Usuario() {
 
                         <div className={styles.chec}>
                             <label>
-                                <input type="checkbox" id="termos" name="termos"/>
+                                <input type="checkbox" id="termos" name="termos" />
                                 Li e aceito os termos
                             </label>
                         </div>
 
                         <div className={styles.chec2}>
                             <label>
-                                <input type="checkbox" id="vendas" name="vendas"/>
+                                <input type="checkbox" id="vendas" name="vendas" />
                                 Não permitimos a venda de animais através do site.
                             </label>
                         </div>

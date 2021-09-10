@@ -108,34 +108,29 @@ export default function Alterarendereco() {
             <h3 className={styles.titulo}>Atualizar Endereço</h3>
             <div>
               <div>
-                <input type="text" name="endereco" className={styles.endereco} value={endereco} placeholder="Endereço:" onChange={(e) => setEndereco(e.currentTarget.value)} />
+                <input type="text" name="endereco" className={styles.endereco} value={endereco} placeholder="Endereço:" onChange={(e) => setEndereco(e.currentTarget.value)} readOnly />
 
                 <input type="text" name="numero" className={styles.numero} placeholder="Número:" value={numero} onChange={(e) => setNumero(e.currentTarget.value)} />
               </div>
 
               <div>
-                <input type="text" name="bairro" className={styles.bairro} placeholder="Bairro:" value={bairro} onChange={(e) => setBairro(e.currentTarget.value)} />
+                <input type="text" name="bairro" className={styles.bairro} placeholder="Bairro:" value={bairro} onChange={(e) => setBairro(e.currentTarget.value)} readOnly/>
 
                 <input type="text" name="cep" className={styles.cep} placeholder="CEP:" value={cep}  onChange={(e) => setCep(e.currentTarget.value)} />
               </div>
 
               <div>
                 <label>
-
-                  <input type="text" name="cidade" className={styles.cidade} placeholder="Cidade:" value={cidade} onChange={(e) => setCidade(e.currentTarget.value)} />
-
+                  <input type="text" name="cidade" className={styles.cidade} placeholder="Cidade:" value={cidade} onChange={(e) => setCidade(e.currentTarget.value)} readOnly/>
                 </label>
 
                 <label>
-
-                  <input type="text" name="estado" className={styles.cep} placeholder="Estado:" value={estado} onChange={(e) => setEstado(e.currentTarget.value)} />
-
+                  <input type="text" name="estado" className={styles.cep} placeholder="Estado:" value={estado} onChange={(e) => setEstado(e.currentTarget.value)} readOnly />
                 </label>
               </div>
 
               <div>
                 <label>
-
                   <input type="text" name="referencia" className={styles.email} value={referencia} placeholder="Referência:" onChange={(e) => setReferencia(e.currentTarget.value)} />
                 </label>
               </div>
