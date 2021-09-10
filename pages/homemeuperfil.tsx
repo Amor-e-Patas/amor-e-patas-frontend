@@ -56,7 +56,7 @@ export default function Login() {
                             </div>
                             <div className={styles.item}>
                                 <img src="/img/animal.png" className={styles.imagem} alt="" />
-                                <p className={styles.p}><Link href="/">Meus animais</Link></p>
+                                <p className={styles.p}><Link href="/alteraranimal">Meus animais</Link></p>
                             </div>
                             
                         </div>

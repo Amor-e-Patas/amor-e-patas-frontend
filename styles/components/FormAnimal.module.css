@@ -170,6 +170,14 @@
 
 }
 
+.arquivos{
+  height: 45px;
+  margin-top: 1%;
+  margin-left: 5%;
+  margin-right: 1%;
+  font: normal normal 600 15px/22px Raleway;
+}
+
 
 .botaovoltar{
   margin-top: 5%;

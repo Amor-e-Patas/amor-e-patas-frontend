@@ -124,7 +124,7 @@ export default function Usuario() {
             <body>
                 <form className={styles.form} name="form">
                     <div className={styles.container}>
-                        <h3 className={styles.titulo}>Cadastro de Animal</h3>
+                        <h3 className={styles.titulo}>Atualizar Cadastro de Animal</h3>
                         <div>
                             <label>
                                 <input type="text" name="name" className={styles.nome} placeholder="Nome" onChange={(e) => setNome(e.currentTarget.value)} />
@@ -265,29 +265,20 @@ export default function Usuario() {
                                 </div>
                             </div>
 
-                            <div className={styles.chec}>
-                                <label>
-                                    <input type="checkbox" id="termos" name="termos" />
-                                    Li e aceito os termos
-                                </label>
-                            </div>
 
-                            <div className={styles.chec2}>
-                                <label>
-                                    <input type="checkbox" id="vendas" name="vendas" />
-                                    Não permitimos a venda de animais através do site.
-                                </label>
-                            </div>
 
 
                             <div className={styles.botoes}>
                                 <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
                                     e.preventDefault()
                                 }} />
-                                <input type="submit" className={styles.botaoenviar} value="Enviar" onClick={(e) => {
-                                    e.preventDefault()
-                                    eventoCriarAnimal()
-                                }} />
+
+                                <button className={styles.botaoenviar} value="Enviar" onClick={(e) => {
+                                    (e).preventDefault();
+                                    //handleAddres();
+                                }}>Atualizar</button>
+
+
                             </div>
                         </div>
                     </div>
