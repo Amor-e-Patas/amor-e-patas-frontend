@@ -32,12 +32,12 @@ export default function Login() {
         }
     }
     
-    useEffect(() => {
+   /* useEffect(() => {
         if (isAuthenticated) {
             window.location.href = "/";
     
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated]);*/
 
     return (
 
