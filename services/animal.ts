@@ -36,7 +36,7 @@ export async function criarAnimal(nome_ani: string,
 }
 
 
-export async function getAnimal() {
+export async function getAnimais() {
     try {
         const response = await authenticatedAPI.get(`/animais`);
         return response.data;

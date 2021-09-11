@@ -4,7 +4,7 @@ import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/c
 import FormControl from '@material-ui/core/FormControl';
 import api from "../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { criarAnimal, getAnimal } from "../services/animal";
+import { criarAnimal } from "../services/animal";
 import styles from "../styles/components/FormAnimal.module.css";
 import Button from 'react-bootstrap';
 import Link from 'next/link';
@@ -112,7 +112,7 @@ export default function Usuario() {
                     id_animal
                 )
             alert("Animal criado ;)");
-            router.push("/cadastroanimal");
+            router.push("/meusanimais");
         } catch (error) {
             console.log(error);
             alert("Erro ao criar animal.")

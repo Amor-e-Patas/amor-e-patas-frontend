@@ -4,7 +4,7 @@ import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/c
 import FormControl from '@material-ui/core/FormControl';
 import api from "../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { criarAnimal, getAnimal } from "../services/animal";
+import { criarAnimal, getAnimais } from "../services/animal";
 import styles from "../styles/components/FormMeusAnimais.module.css";
 import Button from 'react-bootstrap';
 import Link from 'next/link';
@@ -29,6 +29,13 @@ interface Vive {
     descricao: string
 }
 
+interface Animal {
+    nome_ani: string
+    images: Array<{
+        filepath: string;
+      }>;
+}
+
 export default function Usuario() {
     const [nome_ani, setNome] = useState("");
     const [idade, setIdade] = useState("");
@@ -49,6 +56,7 @@ export default function Usuario() {
     const [selectVive, setSelectVive] = useState(Array<Number>());
     const [images, setImages] = useState<File[]>([]);
     const [previwImages, setPreviewImages] = useState<string[]>([]);
+    const [animais, setAnimais] = useState(Array<Animal>());
 
     useEffect(() => {
         async function fetchAPI() {
@@ -56,11 +64,14 @@ export default function Usuario() {
                 const temperamento = await getTemperamento();
                 const sociavel = await getSociavel();
                 const vivencia = await getVivencia();
-                console.log(temperamento);
+                const animais = await getAnimais();
+                console.log(animais);
 
-                setTemperamentos(temperamento);
-                setSociavel(sociavel);
-                setVivencia(vivencia);
+                //setTemperamentos(temperamento);
+                //setSociavel(sociavel);
+                //setVivencia(vivencia);
+                setAnimais(animais);
+                console.log(nome_ani);
 
             } catch (err) {
                 console.log(err);
@@ -130,12 +141,22 @@ export default function Usuario() {
 
                     <body className={styles.body}>
                         <div className={styles.quadros}>
+                        {
+                                animais.map((animal) =>
+                                    <div className={styles.item}>
+                                        <p></p>
+                                        <img src={`http://localhost:3333/${animal.images[0].filepath}`} className={styles.imagem} alt="" />
+                                        <hr className={styles.hr} />
+                                        <p className={styles.pnome}><Link href="/meuanimal">{animal.nome_ani}</Link></p>
+                                    </div>
 
-                            <div className={styles.item}>
+                                )
+                            }
+                           {/* <div className={styles.item}>
                                 <p>amiga, pensei em fazer aqui igual no checkbox de inserir animal, sabe? aquele if</p>
                                 <img src="/img/colocar imagem.png" className={styles.imagem} alt="" />
                                 <hr className={styles.hr} />
-                                <p className={styles.pnome}><Link href="/meuanimal">PUXAR NOME DO BANCO</Link></p>
+                                <p className={styles.pnome}><Link href="/meuanimal">dsadsdas</Link></p>
                             </div>
                             <div className={styles.item}>
                                 <p>amiga, pensei em fazer aqui igual no checkbox de inserir animal, sabe? aquele if</p>
@@ -160,9 +181,9 @@ export default function Usuario() {
                                 <img src="/img/colocar imagem.png" className={styles.imagem} alt="" />
                                 <hr className={styles.hr} />
                                 <p className={styles.pnome}><Link href="/meuanimal">PUXAR NOME DO BANCO</Link></p>
-                            </div>
-                            
-                            
+                        </div>*/}
+
+
                         </div>
                     </body>
                 </div>
