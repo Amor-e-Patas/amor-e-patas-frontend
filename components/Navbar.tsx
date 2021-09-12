@@ -25,6 +25,7 @@ export default function Navbar() {
                 <div className={styles.dropdowncontent}>
                   <Link href="/homemeuperfil">Meu Perfil</Link>
                   <Link href="/cadastroanimal"><p>Cadastrar animal</p></Link>
+                  <Link href="/meusanimais"><p>Meus animais</p></Link>
                   <Link href="/alterarlogin"><p>Alterar Senha</p></Link>
                   <Link href="/logout"><p>Sair</p></Link>
                 </div>

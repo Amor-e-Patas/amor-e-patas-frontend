@@ -4,7 +4,7 @@ import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/c
 import FormControl from '@material-ui/core/FormControl';
 import api from "../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { criarAnimal, getAnimal } from "../services/animal";
+import { alterarAnimal, getAnimal } from "../services/animal";
 import styles from "../styles/components/FormAnimal.module.css";
 import Button from 'react-bootstrap';
 import Link from 'next/link';
@@ -13,6 +13,7 @@ import { getTemperamento } from "../services/temperamento";
 import { getSociavel } from "../services/sociavel";
 import { getVivencia } from "../services/vivencia";
 import { criarImgAnimal } from "../services/img_animal";
+import moment from "moment";
 
 interface Temp {
     id_temperamento: number,
@@ -27,6 +28,22 @@ interface Soci {
 interface Vive {
     id_vivencia: number,
     descricao: string
+}
+
+interface Animal {
+    nome_ani: string,
+    idade: string,
+    cor: string,
+    caracteristica_animal: string,
+    data_nasc: string,
+    desaparecido: string,
+    id_usuario: number,
+    id_porte: number,
+    id_especie: number,
+    id_sexo: number
+    images: Array<{
+        filepath: string;
+    }>;
 }
 
 export default function Usuario() {
@@ -49,6 +66,7 @@ export default function Usuario() {
     const [selectVive, setSelectVive] = useState(Array<Number>());
     const [images, setImages] = useState<File[]>([]);
     const [previwImages, setPreviewImages] = useState<string[]>([]);
+    const [animais, setAnimais] = useState(Array<Animal>());
 
     useEffect(() => {
         async function fetchAPI() {
@@ -56,7 +74,19 @@ export default function Usuario() {
                 const temperamento = await getTemperamento();
                 const sociavel = await getSociavel();
                 const vivencia = await getVivencia();
-                console.log(temperamento);
+                const animais = await getAnimal();
+
+                setNome(animais.nome_ani);
+                setIdade(animais.idade);
+                setSexo(animais.id_sexo);
+                setEspecie(animais.id_especie);
+                var str = animais.data_nasc;
+                var date = moment(str);
+                var dateComponent = date.utc().format('YYYY-MM-DD');
+                setData(dateComponent);
+                setPorte(animais.id_porte);
+                setCor(animais.cor);
+                setCaracteristica(animais.caracteristica_animal);
 
                 setTemperamentos(temperamento);
                 setSociavel(sociavel);
@@ -88,11 +118,11 @@ export default function Usuario() {
         setPreviewImages(selectedImagesPreview);
     }
 
-    async function eventoCriarAnimal() {
+    async function eventoAlterarAnimal() {
 
         try {
             const id_animal = await
-                criarAnimal(nome_ani,
+                alterarAnimal(nome_ani,
                     idade,
                     cor,
                     caracteristica_animal,
@@ -101,20 +131,20 @@ export default function Usuario() {
                     parseInt(id_usuario),
                     parseInt(id_porte),
                     parseInt(id_especie),
-                    parseInt(id_sexo),
+                    parseInt(id_sexo)/*,
                     selectTemp,
                     selectSoci,
-                    selectVive)
-            await
-                criarImgAnimal(
-                    images,
-                    id_animal
-                )
-            alert("Animal criado ;)");
-            router.push("/cadastroanimal");
+                    selectVive*/)
+            /* await
+                 criarImgAnimal(
+                     images,
+                     id_animal
+                 )*/
+            alert("Animal atualizado ;)");
+            router.push("/alteraranimal");
         } catch (error) {
             console.log(error);
-            alert("Erro ao criar animal.")
+            alert("Erro ao criar atualizar animal.")
         }
 
     }
@@ -127,31 +157,35 @@ export default function Usuario() {
                         <h3 className={styles.titulo}>Atualizar Cadastro de Animal</h3>
                         <div>
                             <label>
-                                <input type="text" name="name" className={styles.nome} placeholder="Nome" onChange={(e) => setNome(e.currentTarget.value)} />
+                                <input type="text" name="name" className={styles.nome} value={nome_ani} placeholder="Nome" onChange={(e) => setNome(e.currentTarget.value)} />
                             </label>
                             <label>
-                                <input type="text" className={styles.idade} placeholder="Idade" onChange={(e) => setIdade(e.currentTarget.value)}></input>
+                                <input type="text" className={styles.idade} value={idade} placeholder="Idade" onChange={(e) => setIdade(e.currentTarget.value)}></input>
                             </label>
                         </div>
                         <div>
                             <label>
-                                <select name="genero" id="genero" className={styles.genero} onChange={(e) => setSexo(e.currentTarget.value)}>
+                                <select name="genero" id="genero" value={id_sexo} className={styles.genero} onChange={(e) => setSexo(e.currentTarget.value)}>
                                     <option value="" selected>Selecione o sexo</option>
                                     <option value="1">Fêmea</option>
                                     <option value="2">Macho</option>
                                 </select>
                             </label>
                             <label>
-                                <input type="date" name="datanasc" className={styles.data} placeholder="Data de nascimento" onChange={(e) => setData(e.currentTarget.value)} />
+                                <input type="date" name="datanasc" className={styles.data} value={data_nasc} placeholder="Data de nascimento" onChange={(e) => setData(e.currentTarget.value)} />
                             </label>
                         </div>
 
                         <div>
                             <label>
-                                <input type="text" name="especie" className={styles.especie} placeholder="Especie" onChange={(e) => setEspecie(e.currentTarget.value)} />
+                                <select name="especie" id="especie" className={styles.especie} value={id_especie} onChange={(e) => setEspecie(e.currentTarget.value)}>
+                                    <option value="" selected>Selecione a espécie</option>
+                                    <option value="1">Gato</option>
+                                    <option value="2">Cachorro</option>
+                                </select>
                             </label>
                             <label>
-                                <select name="porte" id="porte" className={styles.porte} onChange={(e) => setPorte(e.currentTarget.value)}>
+                                <select name="porte" id="porte" className={styles.porte} value={id_porte} onChange={(e) => setPorte(e.currentTarget.value)}>
                                     <option value="" selected>Selecione o porte</option>
                                     <option value="1">Pequeno</option>
                                     <option value="2">Médio</option>
@@ -162,12 +196,12 @@ export default function Usuario() {
 
                         <div >
                             <label>
-                                <input type="text" className={styles.cor} placeholder="Cor" name="confirsenha" id="confirsenha" onChange={(e) => setCor(e.currentTarget.value)} />
+                                <input type="text" className={styles.cor} placeholder="Cor" value={cor} name="confirsenha" id="confirsenha" onChange={(e) => setCor(e.currentTarget.value)} />
                             </label>
                         </div>
                         <div>
                             <label>
-                                <textarea name="caracteristica" className={styles.caracteristica} placeholder="Característica animal" onChange={(e) => setCaracteristica(e.currentTarget.value)}></textarea>
+                                <textarea name="caracteristica" className={styles.caracteristica} value={caracteristica_animal} placeholder="Característica animal" onChange={(e) => setCaracteristica(e.currentTarget.value)}></textarea>
                             </label>
                             <div className={styles.containertemp}>
                                 <div className={styles.temperamento}>
@@ -275,7 +309,7 @@ export default function Usuario() {
 
                                 <button className={styles.botaoenviar} value="Enviar" onClick={(e) => {
                                     (e).preventDefault();
-                                    //handleAddres();
+                                    eventoAlterarAnimal();
                                 }}>Atualizar</button>
 
 

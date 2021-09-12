@@ -45,6 +45,14 @@ export async function getAnimais() {
     }
 }
 
+export async function getAnimal() {
+    try {
+        const response = await authenticatedAPI.get(`/animal/11`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
 
 export async function alterarAnimal(nome_ani: string,
     idade: string,
@@ -57,7 +65,7 @@ export async function alterarAnimal(nome_ani: string,
     id_especie: number,
     id_sexo: number) {
     try {
-        const response = await authenticatedAPI.put("/animal", {
+        const response = await authenticatedAPI.put("/animal/11", {
             nome_ani,
             idade,
             cor,
