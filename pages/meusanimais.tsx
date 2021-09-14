@@ -33,7 +33,7 @@ interface Animal {
     nome_ani: string
     images: Array<{
         filepath: string;
-      }>;
+    }>;
 }
 
 export default function Usuario() {
@@ -135,13 +135,18 @@ export default function Usuario() {
             <div >
                 <Navbar />
                 <div>
-                    <div className={styles.amor}>
-                        <h2 className={styles.h2}>Meus Animais</h2>
+                    <div className={styles.titulos}>
+                        <div className={styles.amor}>
+                            <h2>Meus Animais</h2>
+                        </div>
+                        <div>
+                        <Link href="/cadastroanimal"><img src="/img/cadastraranimal.png" className={styles.imagemcadastrar} alt="Cadastrar"/></Link>
+                        </div>
                     </div>
 
                     <body className={styles.body}>
                         <div className={styles.quadros}>
-                        {
+                            {
                                 animais.map((animal) =>
                                     <div className={styles.item}>
                                         <p></p>
@@ -152,37 +157,6 @@ export default function Usuario() {
 
                                 )
                             }
-                           {/* <div className={styles.item}>
-                                <p>amiga, pensei em fazer aqui igual no checkbox de inserir animal, sabe? aquele if</p>
-                                <img src="/img/colocar imagem.png" className={styles.imagem} alt="" />
-                                <hr className={styles.hr} />
-                                <p className={styles.pnome}><Link href="/meuanimal">dsadsdas</Link></p>
-                            </div>
-                            <div className={styles.item}>
-                                <p>amiga, pensei em fazer aqui igual no checkbox de inserir animal, sabe? aquele if</p>
-                                <img src="/img/colocar imagem.png" className={styles.imagem} alt="" />
-                                <hr className={styles.hr} />
-                                <p className={styles.pnome}><Link href="/meuanimal">PUXAR NOME DO BANCO</Link></p>
-                            </div>
-                            <div className={styles.item}>
-                                <p>amiga, pensei em fazer aqui igual no checkbox de inserir animal, sabe? aquele if</p>
-                                <img src="/img/colocar imagem.png" className={styles.imagem} alt="" />
-                                <hr className={styles.hr} />
-                                <p className={styles.pnome}><Link href="/meuanimal">PUXAR NOME DO BANCO</Link></p>
-                            </div>
-                            <div className={styles.item}>
-                                <p>amiga, pensei em fazer aqui igual no checkbox de inserir animal, sabe? aquele if</p>
-                                <img src="/img/colocar imagem.png" className={styles.imagem} alt="" />
-                                <hr className={styles.hr} />
-                                <p className={styles.pnome}><Link href="/meuanimal">PUXAR NOME DO BANCO</Link></p>
-                            </div>
-                            <div className={styles.item}>
-                                <p>amiga, pensei em fazer aqui igual no checkbox de inserir animal, sabe? aquele if</p>
-                                <img src="/img/colocar imagem.png" className={styles.imagem} alt="" />
-                                <hr className={styles.hr} />
-                                <p className={styles.pnome}><Link href="/meuanimal">PUXAR NOME DO BANCO</Link></p>
-                        </div>*/}
-
 
                         </div>
                     </body>
