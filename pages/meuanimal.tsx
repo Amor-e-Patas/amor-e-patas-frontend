@@ -4,15 +4,15 @@ import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/c
 import FormControl from '@material-ui/core/FormControl';
 import api from "../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { criarAnimal, getAnimal } from "../services/animal";
-import styles from "../styles/components/FormAnimal.module.css";
+import { criarAnimal, getAnimais } from "../services/animal";
+import styles from "../styles/components/FormMeuAnimal.module.css";
 import Button from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from "next/router";
 import { getTemperamento } from "../services/temperamento";
 import { getSociavel } from "../services/sociavel";
 import { getVivencia } from "../services/vivencia";
-import { criarImgAnimal } from "../services/img_animal";
+import { getAnimal } from "../services/animal";
 
 interface Temp {
     id_temperamento: number,
@@ -27,6 +27,13 @@ interface Soci {
 interface Vive {
     id_vivencia: number,
     descricao: string
+}
+
+interface Animal {
+    nome_ani: string
+    images: Array<{
+        filepath: string;
+    }>;
 }
 
 export default function Usuario() {
@@ -49,6 +56,7 @@ export default function Usuario() {
     const [selectVive, setSelectVive] = useState(Array<Number>());
     const [images, setImages] = useState<File[]>([]);
     const [previwImages, setPreviewImages] = useState<string[]>([]);
+    const [animais, setAnimais] = useState(Array<Animal>());
 
     useEffect(() => {
         async function fetchAPI() {
@@ -56,11 +64,14 @@ export default function Usuario() {
                 const temperamento = await getTemperamento();
                 const sociavel = await getSociavel();
                 const vivencia = await getVivencia();
-                console.log(temperamento);
+                const animais = await getAnimais();
+                console.log(animais);
 
-                setTemperamentos(temperamento);
-                setSociavel(sociavel);
-                setVivencia(vivencia);
+                //setTemperamentos(temperamento);
+                //setSociavel(sociavel);
+                //setVivencia(vivencia);
+                setAnimais(animais);
+                console.log(nome_ani);
 
             } catch (err) {
                 console.log(err);
@@ -87,209 +98,86 @@ export default function Usuario() {
 
         setPreviewImages(selectedImagesPreview);
     }
-
-    async function eventoCriarAnimal() {
-
-        try {
-            const id_animal = await
-                criarAnimal(nome_ani,
-                    idade,
-                    cor,
-                    caracteristica_animal,
-                    data_nasc,
-                    desaparecido,
-                    parseInt(id_usuario),
-                    parseInt(id_porte),
-                    parseInt(id_especie),
-                    parseInt(id_sexo),
-                    selectTemp,
-                    selectSoci,
-                    selectVive)
-            await
-                criarImgAnimal(
-                    images,
-                    id_animal
-                )
-            alert("Animal criado ;)");
-            router.push("/cadastroanimal");
-        } catch (error) {
-            console.log(error);
-            alert("Erro ao criar animal.")
+    /*
+        async function eventoCriarAnimal() {
+    
+            try {
+                const id_animal = await
+                    criarAnimal(nome_ani,
+                        idade,
+                        cor,
+                        caracteristica_animal,
+                        data_nasc,
+                        desaparecido,
+                        parseInt(id_usuario),
+                        parseInt(id_porte),
+                        parseInt(id_especie),
+                        parseInt(id_sexo),
+                        selectTemp,
+                        selectSoci,
+                        selectVive)
+                await
+                    criarImgAnimal(
+                        images,
+                        id_animal
+                    )
+                alert("Animal criado ;)");
+                router.push("/cadastroanimal");
+            } catch (error) {
+                console.log(error);
+                alert("Erro ao criar animal.")
+            }
+    
         }
-
-    }
-
+    */
     return (
-        <div><Navbar />
-            <body>
-                <form className={styles.form} name="form">
-                    <div className={styles.container}>
-                        <h3 className={styles.titulo}>Atualizar Cadastro de Animal</h3>
-                        <div>
-                            <label>
-                                <input type="text" name="name" className={styles.nome} placeholder="Nome" onChange={(e) => setNome(e.currentTarget.value)} />
-                            </label>
-                            <label>
-                                <input type="text" className={styles.idade} placeholder="Idade" onChange={(e) => setIdade(e.currentTarget.value)}></input>
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <select name="genero" id="genero" className={styles.genero} onChange={(e) => setSexo(e.currentTarget.value)}>
-                                    <option value="" selected>Selecione o sexo</option>
-                                    <option value="1">Fêmea</option>
-                                    <option value="2">Macho</option>
-                                </select>
-                            </label>
-                            <label>
-                                <input type="date" name="datanasc" className={styles.data} placeholder="Data de nascimento" onChange={(e) => setData(e.currentTarget.value)} />
-                            </label>
+        <>
+            <div >
+                <Navbar />
+                <div>
+                    <div className={styles.quadros}>
+                        <div className={styles.item}>
+                            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
                         </div>
 
-                        <div>
-                            <label>
-                                <input type="text" name="especie" className={styles.especie} placeholder="Especie" onChange={(e) => setEspecie(e.currentTarget.value)} />
-                            </label>
-                            <label>
-                                <select name="porte" id="porte" className={styles.porte} onChange={(e) => setPorte(e.currentTarget.value)}>
-                                    <option value="" selected>Selecione o porte</option>
-                                    <option value="1">Pequeno</option>
-                                    <option value="2">Médio</option>
-                                    <option value="3">Grande</option>
-                                </select>
-                            </label>
-                        </div>
+                        <div className={styles.item2}>
+                            <p className={styles.pnome}>Amora</p>
 
-                        <div >
-                            <label>
-                                <input type="text" className={styles.cor} placeholder="Cor" name="confirsenha" id="confirsenha" onChange={(e) => setCor(e.currentTarget.value)} />
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <textarea name="caracteristica" className={styles.caracteristica} placeholder="Característica animal" onChange={(e) => setCaracteristica(e.currentTarget.value)}></textarea>
-                            </label>
-                            <div className={styles.containertemp}>
-                                <div className={styles.temperamento}>
-                                    <div className={styles.temp}>
-                                        <p className={styles.p}>Temperamento</p>
-                                        {
-                                            temperamentos.map((temperamento) =>
-                                                <div className={styles.temp}>
-                                                    <label>
-                                                        <input type="checkbox" id="docil" value={temperamento.id_temperamento} onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                const aux = [...selectTemp]
-                                                                aux.push(parseInt(e.target.value))
-                                                                setSelectTemp(aux);
-                                                                console.log(selectTemp);
-                                                            } else {
-                                                                const aux = [...selectTemp.filter(item => item != parseInt(e.target.value))]
-                                                                setSelectTemp(aux);
-                                                                console.log(selectTemp);
-                                                            }
-                                                        }} name="docil" />
-                                                        {temperamento.descricao}
-                                                    </label>
-                                                </div>
-                                            )
-                                        }
-                                    </div>
-                                </div>
-                                <div className={styles.sociavel}>
-                                    <div className={styles.temp}>
-                                        <p className={styles.p}>Sociável com</p>
-                                        {
-                                            sociaveis.map((sociavel) =>
-                                                <div className={styles.temp}>
-                                                    <label>
-                                                        <input type="checkbox" id="docil" value={sociavel.id_sociavel} onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                const aux = [...selectSoci]
-                                                                aux.push(parseInt(e.target.value))
-                                                                setSelectSoci(aux);
-                                                                console.log(selectSoci);
-                                                            } else {
-                                                                const aux = [...selectSoci.filter(item => item != parseInt(e.target.value))]
-                                                                setSelectSoci(aux);
-                                                                console.log(selectSoci);
-                                                            }
-                                                        }} name="sociavel" />
-                                                        {sociavel.descricao}
-                                                    </label>
-                                                </div>
-                                            )
-                                        }
-                                    </div>
-                                </div>
-                                <div className={styles.vive}>
-                                    <div className={styles.temp}>
-                                        <p className={styles.p}>Vive bem em</p>
-                                        {
-                                            vivencias.map((vivencia) =>
-                                                <div className={styles.temp}>
-                                                    <label>
-                                                        <input type="checkbox" id="casa" value={vivencia.id_vivencia} onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                const aux = [...selectVive]
-                                                                aux.push(parseInt(e.target.value))
-                                                                setSelectVive(aux);
-                                                                console.log(selectVive);
-                                                            } else {
-                                                                const aux = [...selectVive.filter(item => item != parseInt(e.target.value))]
-                                                                setSelectVive(aux);
-                                                                console.log(selectVive);
-                                                            }
-                                                        }} name="vivencia" />
-                                                        {vivencia.descricao}
-                                                    </label>
-                                                </div>
-                                            )
-                                        }
-                                    </div>
-                                </div>
+                            <div className={styles.infos}>
+                                <ul>
+                                    <li>Cachorro</li>
+                                    <li>Fêmea</li>
+                                    <li>Adulta</li>
+                                </ul>
                             </div>
-                            <div>
-                                <div className={styles.imagesContainer}>
-                                    {previwImages.map(image => {
-                                        return (
-                                            <img key={image} src={image} />
-                                        );
-                                    })}
-                                </div>
-                                <div className={styles.arquivos}>
-                                    <label>
-                                        {/*} <input multiple type="file" name="fotos" className={styles.fotos} placeholder="Referência:" />*/}
-                                        <input multiple onChange={handleSelectImages} type="file" id="image[]" />
-                                    </label>
-                                </div>
+                            <div className={styles.infos}>
+                                <p><img className={styles.endereco} src="/img/endereco.png" alt="" /> Pegar localização</p>
                             </div>
+                            <button className={styles.botaoenviar} value="editar">Editar</button>
+                            <button className={styles.botaoexcluir} value="editar">Excluir</button>
+                            <p className={styles.amor}>Caracteristicas</p>
+                            <ul>
+                                <li>Docil e atentada</li>
+                            </ul>
 
-
-
-
-                            <div className={styles.botoes}>
-                                <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
-                                    e.preventDefault()
-                                }} />
-
-                                <button className={styles.botaoenviar} value="Enviar" onClick={(e) => {
-                                    (e).preventDefault();
-                                    //handleAddres();
-                                }}>Atualizar</button>
-
-
-                            </div>
+                            <p className={styles.amor}>Mais Detalhes(pegar temperamento)</p>
+                            <ul>
+                                <li>Docil</li>
+                                <li>Rabugenta</li>
+                                <li>Carente</li>
+                                <li>Atentada</li>
+                            </ul>
                         </div>
+
                     </div>
-                </form>
-            </body>
 
-            <div>
+                    <div className={styles.quadros}>
+
+                    </div>
+
+                </div>
                 <Footer />
             </div>
-        </div>
-
+        </>
     )
-
 }

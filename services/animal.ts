@@ -47,7 +47,7 @@ export async function getAnimais() {
 
 export async function getAnimal() {
     try {
-        const response = await authenticatedAPI.get(`/animal/11`);
+        const response = await authenticatedAPI.get(`/animal/1`);
         return response.data;
     } catch (err) {
         throw err;

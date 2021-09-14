@@ -1,0 +1,156 @@
+.titulo{
+  font: normal normal;
+  font-family: Raleway;
+  text-align: center;
+  padding-top: 1.5%; 
+}
+
+
+
+.quadros{
+  display: grid;
+  margin-top: 5%;
+  grid-column-gap: 1px;
+  grid-template-columns: auto auto ;
+  border-radius: 15px;
+  padding-bottom: 3.5%;
+  border-radius: 9px;
+  
+}
+
+.endereco{
+  height: 20px;
+  width: 20px;
+  
+}
+
+.item{
+  font: normal normal 600 15px Raleway;
+  border-radius: 9px;
+  
+}
+
+.item2{
+  font: normal normal 600 15px Raleway;
+  border-radius: 9px;
+  margin-left: -40%;
+  margin-top: -3%;
+  
+}
+
+.containertemp{
+  display: grid;
+  margin-left: 50%;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  margin-top: -10%;
+}
+
+
+.p{
+  font: normal normal 600 25px/25px Raleway;
+  padding-top: 15%;
+}
+
+.pnome{
+  
+  color: #67127c ;
+  font: normal normal 600 25px/25px Raleway;
+  font-weight: bolder;
+
+}
+
+.botaovoltar{
+  margin-top: 5%;
+  width: 30%;
+  height: 48px;
+  margin-right: 15%;
+  margin-left: 13%;
+  background: var(--unnamed-color-b7e394) 0% 0% no-repeat padding-box;
+  background: #B7E394 0% 0% no-repeat padding-box;
+  font: normal normal 600 15px/22px Raleway;
+  opacity: 1;
+}
+
+.botaoenviar{
+  width: 10%;
+  height: 48px;
+  background: #B7E394 0% 0% no-repeat padding-box;
+  font: normal normal 600 15px/22px Raleway;
+  border-radius: 5px;
+  opacity: 1;
+}
+
+.botaoexcluir{
+  width: 10%;
+  height: 48px;
+  margin-left: 15px;
+  background:#ff6374 0% 0% no-repeat padding-box;
+  font: normal normal 600 15px/22px Raleway;
+  border-radius: 5px;
+  opacity: 1;
+}
+
+.botoes{
+  display: -ms-inline-grid;
+
+}
+
+.checkbox{
+  display: -moz-grid-line;
+}
+
+
+.imagesContainer{
+  display: flex;
+  /*grid-template-columns: repeat(1, 1fr);*/
+ /* grid-gap: 16px;*/
+ flex-wrap: wrap ;
+
+
+}
+
+
+.titulo{
+  font: normal normal;
+  font-family: Raleway;
+  text-align: center;
+}
+
+
+.amor{
+  color: #FFB800 ;
+  margin-top: 2%;
+  font: normal normal 600 17px/22px Raleway;
+  text-align: left;
+
+  /*padding-top: 2%; */
+  
+   
+}
+
+.link{
+  margin-left: 55%;
+  font: normal normal 600 15px/22px Raleway;
+  letter-spacing: 0.32px;
+  color: #000000;
+  opacity: 1;
+}
+
+
+.imagem{
+    /*max-width:50%;
+    max-height:50%;*/
+    width: auto;
+    margin-left: 5%;
+    height: 70%;
+    border-radius: 10px;
+
+      /*idth: 437px;
+    height: 320px;*/
+
+
+}
+
+
+
