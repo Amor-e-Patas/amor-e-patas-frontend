@@ -4,7 +4,7 @@ import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/c
 import FormControl from '@material-ui/core/FormControl';
 import api from "../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { alterarAnimal, getAnimal } from "../services/animal";
+import { alterarAnimal, getAnimal, getAniTemperamentos } from "../services/animal";
 import styles from "../styles/components/FormAnimal.module.css";
 import Button from 'react-bootstrap';
 import Link from 'next/link';
@@ -40,9 +40,12 @@ interface Animal {
     id_usuario: number,
     id_porte: number,
     id_especie: number,
-    id_sexo: number
+    id_sexo: number,
     images: Array<{
         filepath: string;
+    }>,
+    temperamentos: Array<{
+        id_temperamento: number;
     }>;
 }
 
@@ -67,6 +70,7 @@ export default function Usuario() {
     const [images, setImages] = useState<File[]>([]);
     const [previwImages, setPreviewImages] = useState<string[]>([]);
     const [animais, setAnimais] = useState(Array<Animal>());
+    const [anitemps, setAniTemps] = useState(Array<Temp>());
 
     useEffect(() => {
         async function fetchAPI() {
@@ -87,10 +91,12 @@ export default function Usuario() {
                 setPorte(animais.id_porte);
                 setCor(animais.cor);
                 setCaracteristica(animais.caracteristica_animal);
-
                 setTemperamentos(temperamento);
+                setAniTemps(animais.temperamentos);
                 setSociavel(sociavel);
                 setVivencia(vivencia);
+                const contemIdIgualAUm = temperamentos.some(temperamento => temperamento.id_temperamento == 80)
+                console.log(contemIdIgualAUm);
 
             } catch (err) {
                 console.log(err);

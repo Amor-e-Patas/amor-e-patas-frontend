@@ -82,3 +82,12 @@ export async function alterarAnimal(nome_ani: string,
         throw err;
     }
 }
+
+export async function getAniTemperamentos() {
+    try {
+        const response = await authenticatedAPI.get(`/anitemps/11`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
