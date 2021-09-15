@@ -30,9 +30,26 @@ interface Vive {
 }
 
 interface Animal {
-    nome_ani: string
+    nome_ani: string,
+    idade: string,
+    cor: string,
+    caracteristica_animal: string,
+    data_nasc: string,
+    desaparecido: string,
+    id_usuario: number,
+    id_porte: number,
+    id_especie: number,
+    id_sexo: number,
+    nome_usu: string,
+    tipo_porte: string,
+    nome_esp: string,
+    tipo_sexo: string,
     images: Array<{
         filepath: string;
+    }>,
+    temperamentos: Array<{
+        id_temperamento: number,
+        descricao: string;
     }>;
 }
 
@@ -45,8 +62,8 @@ export default function Usuario() {
     const [desaparecido, setDesaparecido] = useState("N");
     const [id_porte, setPorte] = useState("");
     const [id_usuario, setUsuario] = useState("");
-    const [id_especie, setEspecie] = useState("");
-    const [id_sexo, setSexo] = useState("");
+    const [nome_esp, setEspecie] = useState("");
+    const [tipo_sexo, setSexo] = useState("");
     const router = useRouter();
     const [temperamentos, setTemperamentos] = useState(Array<Temp>());
     const [selectTemp, setSelectTemp] = useState(Array<Number>());
@@ -64,14 +81,18 @@ export default function Usuario() {
                 const temperamento = await getTemperamento();
                 const sociavel = await getSociavel();
                 const vivencia = await getVivencia();
-                const animais = await getAnimais();
+                const animais = await getAnimal();
+                setAnimais(animais);
+                setNome(animais.nome_ani);
+                setEspecie(animais.nome_esp);
+                setSexo(animais.tipo_sexo);
+                setCaracteristica(animais.caracteristica_animal);
                 console.log(animais);
 
-                //setTemperamentos(temperamento);
-                //setSociavel(sociavel);
-                //setVivencia(vivencia);
-                setAnimais(animais);
-                console.log(nome_ani);
+                setTemperamentos(animais.temperamentos);
+               
+               
+                
 
             } catch (err) {
                 console.log(err);
@@ -140,13 +161,13 @@ export default function Usuario() {
                             <img src="/img/sol.jpg" className={styles.imagem} alt="" />
                         </div>
 
-                        <div className={styles.item2}>
-                            <p className={styles.pnome}>Amora</p>
+                        <div className={styles.item}>
+                            <p className={styles.pnome}> {nome_ani}</p>
 
                             <div className={styles.infos}>
                                 <ul>
-                                    <li>Cachorro</li>
-                                    <li>Fêmea</li>
+                                    <li>{nome_esp}</li>
+                                    <li>{tipo_sexo}</li>
                                     <li>Adulta</li>
                                 </ul>
                             </div>
@@ -157,15 +178,18 @@ export default function Usuario() {
                             <button className={styles.botaoexcluir} value="editar">Excluir</button>
                             <p className={styles.amor}>Caracteristicas</p>
                             <ul>
-                                <li>Docil e atentada</li>
+                                <li>{caracteristica_animal}</li>
                             </ul>
 
                             <p className={styles.amor}>Mais Detalhes(pegar temperamento)</p>
                             <ul>
-                                <li>Docil</li>
-                                <li>Rabugenta</li>
-                                <li>Carente</li>
-                                <li>Atentada</li>
+                            {
+                                            temperamentos.map((temperamento) =>
+                                                
+                                                    <li>{temperamento.descricao}</li>
+                                               
+                                            )
+                                        }
                             </ul>
                         </div>
 

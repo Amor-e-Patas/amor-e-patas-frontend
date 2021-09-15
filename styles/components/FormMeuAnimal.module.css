@@ -9,12 +9,17 @@
 
 .quadros{
   display: grid;
-  margin-top: 5%;
-  grid-column-gap: 1px;
-  grid-template-columns: auto auto ;
+  margin-top: 3%;
+  grid-template-columns: 0.5fr 1fr;
   border-radius: 15px;
-  padding-bottom: 3.5%;
+  padding-bottom: 2%;
   border-radius: 9px;
+  
+}
+
+
+.item{
+  font: normal normal 600 15px Raleway;  
   
 }
 
@@ -24,19 +29,6 @@
   
 }
 
-.item{
-  font: normal normal 600 15px Raleway;
-  border-radius: 9px;
-  
-}
-
-.item2{
-  font: normal normal 600 15px Raleway;
-  border-radius: 9px;
-  margin-left: -40%;
-  margin-top: -3%;
-  
-}
 
 .containertemp{
   display: grid;
@@ -143,7 +135,7 @@
     max-height:50%;*/
     width: auto;
     margin-left: 5%;
-    height: 70%;
+    height: 80%;
     border-radius: 10px;
 
       /*idth: 437px;
