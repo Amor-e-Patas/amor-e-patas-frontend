@@ -71,9 +71,9 @@ export default function Usuario() {
     const [selectSoci, setSelectSoci] = useState(Array<Number>());
     const [vivencias, setVivencia] = useState(Array<Vive>());
     const [selectVive, setSelectVive] = useState(Array<Number>());
-    const [images, setImages] = useState<File[]>([]);
+    const [filepath, setImages] = useState<File[]>([]);
     const [previwImages, setPreviewImages] = useState<string[]>([]);
-    const [animais, setAnimais] = useState(Array<Animal>());
+    const [animais, setAnimais] = useState<Animal>();
 
     useEffect(() => {
         async function fetchAPI() {
@@ -90,9 +90,9 @@ export default function Usuario() {
                 console.log(animais);
 
                 setTemperamentos(animais.temperamentos);
-               
-               
-                
+
+
+
 
             } catch (err) {
                 console.log(err);
@@ -158,7 +158,14 @@ export default function Usuario() {
                 <div>
                     <div className={styles.quadros}>
                         <div className={styles.item}>
-                            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
+                        
+                                
+                                    <div className={styles.item}>
+                                        <img src={`http://localhost:3333/${animais?.images[0].filepath}`} className={styles.imagem} alt="" />
+                                    </div>
+
+                                
+                            
                         </div>
 
                         <div className={styles.item}>
@@ -172,7 +179,10 @@ export default function Usuario() {
                                 </ul>
                             </div>
                             <div className={styles.infos}>
-                                <p><img className={styles.endereco} src="/img/endereco.png" alt="" /> Pegar localização</p>
+                                <div className={styles.item}>
+                                    <img src="/img/endereco.png" className={styles.endereco} alt="" /> Localizado em
+                                </div>
+
                             </div>
                             <button className={styles.botaoenviar} value="editar">Editar</button>
                             <button className={styles.botaoexcluir} value="editar">Excluir</button>
@@ -183,13 +193,13 @@ export default function Usuario() {
 
                             <p className={styles.amor}>Mais Detalhes(pegar temperamento)</p>
                             <ul>
-                            {
-                                            temperamentos.map((temperamento) =>
-                                                
-                                                    <li>{temperamento.descricao}</li>
-                                               
-                                            )
-                                        }
+                                {
+                                    temperamentos.map((temperamento) =>
+
+                                        <li>{temperamento.descricao}</li>
+
+                                    )
+                                }
                             </ul>
                         </div>
 
