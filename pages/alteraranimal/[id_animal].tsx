@@ -1,18 +1,19 @@
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer";
+import Navbar from "../../components/Navbar"
+import Footer from "../../components/Footer";
 import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
-import api from "../services/services";
+import api from "../../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { alterarAnimal, getAnimal, getAniTemperamentos } from "../services/animal";
-import styles from "../styles/components/FormAnimal.module.css";
+import { alterarAnimal, getAnimal, getAniTemperamentos } from "../../services/animal";
+import styles from "../../styles/components/FormAnimal.module.css";
 import Button from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from "next/router";
-import { getTemperamento } from "../services/temperamento";
-import { getSociavel } from "../services/sociavel";
-import { getVivencia } from "../services/vivencia";
-import { criarImgAnimal } from "../services/img_animal";
+import { getTemperamento } from "../../services/temperamento";
+import { getSociavel } from "../../services/sociavel";
+import { getVivencia } from "../../services/vivencia";
+import { criarImgAnimal } from "../../services/img_animal";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import moment from "moment";
 
 interface Temp {
@@ -33,6 +34,7 @@ interface Vive {
 interface Animal {
     nome_ani: string,
     idade: string,
+    id_animal: number,
     cor: string,
     caracteristica_animal: string,
     data_nasc: string,
@@ -44,32 +46,50 @@ interface Animal {
     images: Array<{
         filepath: string;
     }>,
-    temperamentos: Array<{
-        id_temperamento: number;
-    }>;
+    temperamentos: Array<
+        Temp>;
 }
 
-export default function Usuario() {
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+
+    return {
+        paths: [],
+        fallback: 'blocking'
+    }
+}
+
+export const getStaticProps: GetStaticProps = async (
+    context: GetStaticPropsContext
+) => {
+
+    return {
+        props: {
+            id_animal: context.params?.id_animal
+        },
+    }
+}
+
+export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typeof getStaticProps>) {
     const [nome_ani, setNome] = useState("");
     const [idade, setIdade] = useState("");
     const [cor, setCor] = useState("");
     const [caracteristica_animal, setCaracteristica] = useState("");
     const [data_nasc, setData] = useState("");
     const [desaparecido, setDesaparecido] = useState("N");
-    const [id_porte, setPorte] = useState("");
+    const [id_porte, setPorte] = useState(0);
     const [id_usuario, setUsuario] = useState("");
-    const [id_especie, setEspecie] = useState("");
-    const [id_sexo, setSexo] = useState("");
+    const [id_especie, setEspecie] = useState(0);
+    const [id_sexo, setSexo] = useState(0);
     const router = useRouter();
     const [temperamentos, setTemperamentos] = useState(Array<Temp>());
-    const [selectTemp, setSelectTemp] = useState(Array<Number>());
+    const [selectTemp, setSelectTemp] = useState(Array<number>());
     const [sociaveis, setSociavel] = useState(Array<Soci>());
-    const [selectSoci, setSelectSoci] = useState(Array<Number>());
+    const [selectSoci, setSelectSoci] = useState(Array<number>());
     const [vivencias, setVivencia] = useState(Array<Vive>());
-    const [selectVive, setSelectVive] = useState(Array<Number>());
+    const [selectVive, setSelectVive] = useState(Array<number>());
     const [images, setImages] = useState<File[]>([]);
     const [previwImages, setPreviewImages] = useState<string[]>([]);
-    const [animais, setAnimais] = useState(Array<Animal>());
+    const [animais, setAnimais] = useState({} as Animal);
     const [anitemps, setAniTemps] = useState(Array<Temp>());
 
     useEffect(() => {
@@ -78,25 +98,30 @@ export default function Usuario() {
                 const temperamento = await getTemperamento();
                 const sociavel = await getSociavel();
                 const vivencia = await getVivencia();
-                const animais = await getAnimal();
+                const animaisTemp = await getAnimal(id_animal) as Animal;
+                setAnimais(animaisTemp)
 
-                setNome(animais.nome_ani);
-                setIdade(animais.idade);
-                setSexo(animais.id_sexo);
-                setEspecie(animais.id_especie);
-                var str = animais.data_nasc;
+                setNome(animaisTemp.nome_ani);
+                setIdade(animaisTemp.idade);
+                setSexo(animaisTemp.id_sexo);
+                setEspecie(animaisTemp.id_especie);
+                var str = animaisTemp.data_nasc;
                 var date = moment(str);
                 var dateComponent = date.utc().format('YYYY-MM-DD');
                 setData(dateComponent);
-                setPorte(animais.id_porte);
-                setCor(animais.cor);
-                setCaracteristica(animais.caracteristica_animal);
+                setPorte(animaisTemp.id_porte);
+                setCor(animaisTemp.cor);
+                setCaracteristica(animaisTemp.caracteristica_animal);
                 setTemperamentos(temperamento);
-                setAniTemps(animais.temperamentos);
+                setAniTemps(animaisTemp.temperamentos);
+                const teste = animaisTemp.temperamentos.map(temp => temp.id_temperamento)
+                setSelectTemp(teste);
                 setSociavel(sociavel);
                 setVivencia(vivencia);
                 const contemIdIgualAUm = temperamentos.some(temperamento => temperamento.id_temperamento == 80)
                 console.log(contemIdIgualAUm);
+                console.log(animaisTemp.temperamentos,'Temperamentos')
+                console.log()
 
             } catch (err) {
                 console.log(err);
@@ -127,19 +152,20 @@ export default function Usuario() {
     async function eventoAlterarAnimal() {
 
         try {
-            const id_animal = await
+            await
                 alterarAnimal(nome_ani,
                     idade,
+                    id_animal,
                     cor,
                     caracteristica_animal,
                     data_nasc,
                     desaparecido,
                     parseInt(id_usuario),
-                    parseInt(id_porte),
-                    parseInt(id_especie),
-                    parseInt(id_sexo)/*,
-                    selectTemp,
-                    selectSoci,
+                    id_porte,
+                    id_especie,
+                    id_sexo,
+                    selectTemp
+                    /*selectSoci,
                     selectVive*/)
             /* await
                  criarImgAnimal(
@@ -147,7 +173,7 @@ export default function Usuario() {
                      id_animal
                  )*/
             alert("Animal atualizado ;)");
-            router.push("/alteraranimal");
+            router.push(`/meuanimal/${id_animal}`);
         } catch (error) {
             console.log(error);
             alert("Erro ao criar atualizar animal.")
@@ -171,7 +197,7 @@ export default function Usuario() {
                         </div>
                         <div>
                             <label>
-                                <select name="genero" id="genero" value={id_sexo} className={styles.genero} onChange={(e) => setSexo(e.currentTarget.value)}>
+                                <select name="genero" id="genero" value={id_sexo} className={styles.genero} onChange={(e) => setSexo(parseInt(e.currentTarget.value))}>
                                     <option value="" selected>Selecione o sexo</option>
                                     <option value="1">Fêmea</option>
                                     <option value="2">Macho</option>
@@ -184,14 +210,14 @@ export default function Usuario() {
 
                         <div>
                             <label>
-                                <select name="especie" id="especie" className={styles.especie} value={id_especie} onChange={(e) => setEspecie(e.currentTarget.value)}>
+                                <select name="especie" id="especie" className={styles.especie} value={id_especie} onChange={(e) => setEspecie(parseInt(e.currentTarget.value))}>
                                     <option value="" selected>Selecione a espécie</option>
                                     <option value="1">Gato</option>
                                     <option value="2">Cachorro</option>
                                 </select>
                             </label>
                             <label>
-                                <select name="porte" id="porte" className={styles.porte} value={id_porte} onChange={(e) => setPorte(e.currentTarget.value)}>
+                                <select name="porte" id="porte" className={styles.porte} value={id_porte} onChange={(e) => setPorte(parseInt(e.currentTarget.value))}>
                                     <option value="" selected>Selecione o porte</option>
                                     <option value="1">Pequeno</option>
                                     <option value="2">Médio</option>
@@ -228,8 +254,9 @@ export default function Usuario() {
                                                                 setSelectTemp(aux);
                                                                 console.log(selectTemp);
                                                             }
-                                                        }} name="docil" />
-                                                        {temperamento.descricao}
+                                                        }} name="docil" checked={selectTemp.some(temps => temps == temperamento.id_temperamento)} />
+                                                        
+                                                        {temperamento.descricao} 
                                                     </label>
                                                 </div>
                                             )
@@ -310,7 +337,8 @@ export default function Usuario() {
 
                             <div className={styles.botoes}>
                                 <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
-                                    e.preventDefault()
+                                    e.preventDefault() 
+                                    router.push(`/meuanimal/${id_animal}`);
                                 }} />
 
                                 <button className={styles.botaoenviar} value="Enviar" onClick={(e) => {

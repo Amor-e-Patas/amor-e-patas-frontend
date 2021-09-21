@@ -1,18 +1,19 @@
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer";
+import Navbar from "../../components/Navbar"
+import Footer from "../../components/Footer";
 import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
-import api from "../services/services";
+import api from "../../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { criarAnimal, getAnimais } from "../services/animal";
-import styles from "../styles/components/FormMeuAnimal.module.css";
+import { criarAnimal, getAnimais } from "../../services/animal";
+import styles from "../../styles/components/FormMeuAnimal.module.css";
 import Button from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from "next/router";
-import { getTemperamento } from "../services/temperamento";
-import { getSociavel } from "../services/sociavel";
-import { getVivencia } from "../services/vivencia";
-import { getAnimal } from "../services/animal";
+import { getTemperamento } from "../../services/temperamento";
+import { getSociavel } from "../../services/sociavel";
+import { getVivencia } from "../../services/vivencia";
+import { getAnimal,deleteAnimal } from "../../services/animal";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 
 interface Temp {
     id_temperamento: number,
@@ -53,7 +54,26 @@ interface Animal {
     }>;
 }
 
-export default function Usuario() {
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+
+    return {
+        paths: [],
+        fallback: 'blocking'
+    }
+}
+
+export const getStaticProps: GetStaticProps = async (
+    context: GetStaticPropsContext
+) => {
+
+    return {
+        props: {
+            id_animal: context.params?.id_animal
+        },
+    }
+}
+
+export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof getStaticProps>) {
     const [nome_ani, setNome] = useState("");
     const [idade, setIdade] = useState("");
     const [cor, setCor] = useState("");
@@ -81,18 +101,14 @@ export default function Usuario() {
                 const temperamento = await getTemperamento();
                 const sociavel = await getSociavel();
                 const vivencia = await getVivencia();
-                const animais = await getAnimal();
+                const animais = await getAnimal(id_animal);
                 setAnimais(animais);
                 setNome(animais.nome_ani);
                 setEspecie(animais.nome_esp);
                 setSexo(animais.tipo_sexo);
                 setCaracteristica(animais.caracteristica_animal);
-                console.log(animais);
 
                 setTemperamentos(animais.temperamentos);
-
-
-
 
             } catch (err) {
                 console.log(err);
@@ -158,14 +174,9 @@ export default function Usuario() {
                 <div>
                     <div className={styles.quadros}>
                         <div className={styles.item}>
-                        
-                                
-                                    <div className={styles.item}>
-                                        <img src={`http://localhost:3333/${animais?.images[0].filepath}`} className={styles.imagem} alt="" />
-                                    </div>
-
-                                
-                            
+                            <div className={styles.item}>
+                                <img src={`http://localhost:3333/${animais?.images[0].filepath}`} className={styles.imagem} alt="" />
+                            </div>
                         </div>
 
                         <div className={styles.item}>
@@ -184,8 +195,14 @@ export default function Usuario() {
                                 </div>
 
                             </div>
-                            <button className={styles.botaoenviar} value="editar">Editar</button>
-                            <button className={styles.botaoexcluir} value="editar">Excluir</button>
+                            <Link href={`/alteraranimal/${id_animal}`}><button className={styles.botaoenviar} value="editar">Editar</button></Link>
+                            
+                            <button className={styles.botaoexcluir} value="editar"  onClick={(e) => {
+                                e.preventDefault()
+                                deleteAnimal(id_animal)
+                                router.push("/meusanimais");
+                            }}>Excluir</button>
+
                             <p className={styles.amor}>Caracteristicas</p>
                             <ul>
                                 <li>{caracteristica_animal}</li>

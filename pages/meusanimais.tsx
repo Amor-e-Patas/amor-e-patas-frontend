@@ -6,7 +6,6 @@ import api from "../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { criarAnimal, getAnimais } from "../services/animal";
 import styles from "../styles/components/FormMeusAnimais.module.css";
-import Button from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from "next/router";
 import { getTemperamento } from "../services/temperamento";
@@ -31,6 +30,7 @@ interface Vive {
 
 interface Animal {
     nome_ani: string
+    id_animal: number,
     images: Array<{
         filepath: string;
     }>;
@@ -65,7 +65,7 @@ export default function Usuario() {
                 const sociavel = await getSociavel();
                 const vivencia = await getVivencia();
                 const animais = await getAnimais();
-                console.log(animais);
+                console.log(animais,'teste');
 
                 //setTemperamentos(temperamento);
                 //setSociavel(sociavel);
@@ -152,7 +152,7 @@ export default function Usuario() {
                                         <p></p>
                                         <img src={`http://localhost:3333/${animal.images[0].filepath}`} className={styles.imagem} alt="" />
                                         <hr className={styles.hr} />
-                                        <p className={styles.pnome}><Link href="/meuanimal">{animal.nome_ani}</Link></p>
+                                        <p className={styles.pnome}><Link href={`/meuanimal/${animal.id_animal}`} >{animal.nome_ani}</Link></p>
                                     </div>
 
                                 )

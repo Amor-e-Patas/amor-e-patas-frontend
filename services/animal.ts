@@ -45,9 +45,18 @@ export async function getAnimais() {
     }
 }
 
-export async function getAnimal() {
+export async function getAnimal(id_animal:number) {
     try {
-        const response = await authenticatedAPI.get(`/animal/2`);
+        const response = await authenticatedAPI.get(`/animal/${id_animal}`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function deleteAnimal(id_animal:number) {
+    try {
+        const response = await authenticatedAPI.delete(`/animal/${id_animal}`);
         return response.data;
     } catch (err) {
         throw err;
@@ -56,6 +65,7 @@ export async function getAnimal() {
 
 export async function alterarAnimal(nome_ani: string,
     idade: string,
+    id_animal: number,
     cor: string,
     caracteristica_animal: string,
     data_nasc: string,
@@ -63,9 +73,10 @@ export async function alterarAnimal(nome_ani: string,
     id_usuario: number,
     id_porte: number,
     id_especie: number,
-    id_sexo: number) {
+    id_sexo: number,
+    selectTemps: Array<number>) {
     try {
-        const response = await authenticatedAPI.put("/animal/11", {
+        const response = await authenticatedAPI.put(`/animal/${id_animal}`, {
             nome_ani,
             idade,
             cor,
@@ -75,7 +86,8 @@ export async function alterarAnimal(nome_ani: string,
             id_usuario,
             id_porte,
             id_especie,
-            id_sexo
+            id_sexo,
+            selectTemps
         });
         return
     } catch (err) {
