@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { getTemperamento } from "../../services/temperamento";
 import { getSociavel } from "../../services/sociavel";
 import { getVivencia } from "../../services/vivencia";
-import { getAnimal,deleteAnimal } from "../../services/animal";
+import { getAnimal, deleteAnimal } from "../../services/animal";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 
 interface Temp {
@@ -135,38 +135,7 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
 
         setPreviewImages(selectedImagesPreview);
     }
-    /*
-        async function eventoCriarAnimal() {
-    
-            try {
-                const id_animal = await
-                    criarAnimal(nome_ani,
-                        idade,
-                        cor,
-                        caracteristica_animal,
-                        data_nasc,
-                        desaparecido,
-                        parseInt(id_usuario),
-                        parseInt(id_porte),
-                        parseInt(id_especie),
-                        parseInt(id_sexo),
-                        selectTemp,
-                        selectSoci,
-                        selectVive)
-                await
-                    criarImgAnimal(
-                        images,
-                        id_animal
-                    )
-                alert("Animal criado ;)");
-                router.push("/cadastroanimal");
-            } catch (error) {
-                console.log(error);
-                alert("Erro ao criar animal.")
-            }
-    
-        }
-    */
+  
     return (
         <>
             <div >
@@ -196,8 +165,8 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
 
                             </div>
                             <Link href={`/alteraranimal/${id_animal}`}><button className={styles.botaoenviar} value="editar">Editar</button></Link>
-                            
-                            <button className={styles.botaoexcluir} value="editar"  onClick={(e) => {
+
+                            <button className={styles.botaoexcluir} value="editar" onClick={(e) => {
                                 e.preventDefault()
                                 deleteAnimal(id_animal)
                                 router.push("/meusanimais");
@@ -208,13 +177,11 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
                                 <li>{caracteristica_animal}</li>
                             </ul>
 
-                            <p className={styles.amor}>Mais Detalhes(pegar temperamento)</p>
+                            <p className={styles.amor}>Mais Detalhes</p>
                             <ul>
                                 {
                                     temperamentos.map((temperamento) =>
-
                                         <li>{temperamento.descricao}</li>
-
                                     )
                                 }
                             </ul>

@@ -4,7 +4,7 @@ import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/c
 import FormControl from '@material-ui/core/FormControl';
 import api from "../../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { alterarAnimal, getAnimal, getAniTemperamentos } from "../../services/animal";
+import { alterarAnimal, getAnimal } from "../../services/animal";
 import styles from "../../styles/components/FormAnimal.module.css";
 import Button from 'react-bootstrap';
 import Link from 'next/link';
@@ -46,8 +46,10 @@ interface Animal {
     images: Array<{
         filepath: string;
     }>,
-    temperamentos: Array<
-        Temp>;
+    temperamentos: Array<Temp>,
+    sociaveis: Array<Soci>,
+    vivencias: Array<Vive>;
+
 }
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
@@ -83,14 +85,18 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
     const router = useRouter();
     const [temperamentos, setTemperamentos] = useState(Array<Temp>());
     const [selectTemp, setSelectTemp] = useState(Array<number>());
+    const [selectSocis, setSelectSocis] = useState(Array<number>());
+    const [selectVives, setSelectVives] = useState(Array<number>());
     const [sociaveis, setSociavel] = useState(Array<Soci>());
-    const [selectSoci, setSelectSoci] = useState(Array<number>());
     const [vivencias, setVivencia] = useState(Array<Vive>());
     const [selectVive, setSelectVive] = useState(Array<number>());
     const [images, setImages] = useState<File[]>([]);
-    const [previwImages, setPreviewImages] = useState<string[]>([]);
+    const [preveiwImages, setPreviewImages] = useState<string[]>([]);
     const [animais, setAnimais] = useState({} as Animal);
     const [anitemps, setAniTemps] = useState(Array<Temp>());
+    const [anisocis, setAniSoci] = useState(Array<Soci>());
+    const [anivives, setAniVive] = useState(Array<Vive>());
+
 
     useEffect(() => {
         async function fetchAPI() {
@@ -99,8 +105,12 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                 const sociavel = await getSociavel();
                 const vivencia = await getVivencia();
                 const animaisTemp = await getAnimal(id_animal) as Animal;
-                setAnimais(animaisTemp)
 
+
+                setAnimais(animaisTemp)
+                setSociavel(sociavel)
+                setVivencia(vivencia)
+                setTemperamentos(temperamento);
                 setNome(animaisTemp.nome_ani);
                 setIdade(animaisTemp.idade);
                 setSexo(animaisTemp.id_sexo);
@@ -112,16 +122,34 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                 setPorte(animaisTemp.id_porte);
                 setCor(animaisTemp.cor);
                 setCaracteristica(animaisTemp.caracteristica_animal);
-                setTemperamentos(temperamento);
                 setAniTemps(animaisTemp.temperamentos);
-                const teste = animaisTemp.temperamentos.map(temp => temp.id_temperamento)
-                setSelectTemp(teste);
-                setSociavel(sociavel);
-                setVivencia(vivencia);
+                setAniSoci(animaisTemp.sociaveis);
+                setAniVive(animaisTemp.vivencias)
+                console.log(animaisTemp, 'AnimaisTemp')
+                const temperam = animaisTemp.temperamentos.map(temp => temp.id_temperamento)
+                const socis = animaisTemp.sociaveis.map(soci => soci.id_sociavel)
+                const vives = animaisTemp.vivencias.map(vive => vive.id_vivencia)
+
+                console.log(temperam, socis, vives, 'caract')
+                setSelectTemp(temperam);
+                setSelectSocis(socis);
+                setSelectVives(vives);
                 const contemIdIgualAUm = temperamentos.some(temperamento => temperamento.id_temperamento == 80)
-                console.log(contemIdIgualAUm);
-                console.log(animaisTemp.temperamentos,'Temperamentos')
-                console.log()
+
+                const selectedImagesPreview = Array<string>();
+                for (const image of animaisTemp.images) {
+                    selectedImagesPreview.push(await obterImagem(image.filepath))
+                }
+
+                const imagesTemps = Array<File>();
+                for (const image of animaisTemp.images) {
+                    imagesTemps.push(await obterImagemBlob(image.filepath))
+                }
+                setImages(imagesTemps)
+
+                //console.log(selectedImagesPreview, 'imagens')
+
+                setPreviewImages(selectedImagesPreview);
 
             } catch (err) {
                 console.log(err);
@@ -131,6 +159,36 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
         fetchAPI();
     }, []);
 
+    async function obterImagem(image: string): Promise<string> {
+        const objectURL = await fetch(`http://localhost:3333/${image}`).then(function (response) {
+            return response.blob();
+        })
+        //return URL.createObjectURL(objectURL);
+        return new Promise((resolve, reject) => {
+            resolve(URL.createObjectURL(objectURL));
+        });
+    }
+
+    async function obterImagemBlob(image: string): Promise<File> {
+        const objectBlob = await fetch(`http://localhost:3333/${image}`).then(function (response) {
+            return response.blob();
+        })
+        //return URL.createObjectURL(objectURL);
+        return new Promise((resolve, reject) => {
+            resolve((objectBlob) as File) ;
+        });
+    }
+
+    function removerImagem(index: number) {
+        const imagesTemp = [...images.slice(0,index), ...images.slice(index+1, images.length)]
+        const imagesPreviewTemp = [...preveiwImages.slice(0,index), ...preveiwImages.slice(index+1, preveiwImages.length)]
+        
+        setImages(imagesTemp);
+        setPreviewImages(imagesPreviewTemp);
+        
+        console.log([...preveiwImages.slice(0,index)], [...preveiwImages.slice(index+1, preveiwImages.length)], 'imagem')
+        console.log(imagesPreviewTemp, 'PreviewTemp')
+    }
 
     function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
         if (!event.target.files) {
@@ -138,13 +196,19 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
         };
 
         const selectedImages = Array.from(event.target.files);
+        const imagesTemp = [...images, ...selectedImages];
 
+        setImages(imagesTemp);
+        const selectedImagesPreview = [...preveiwImages];
+        for (const image of selectedImages) {
+            selectedImagesPreview.push(URL.createObjectURL(image))
+        }
+        //console.log(selectedImagesPreview, 'imagens')
 
-        setImages(selectedImages);
-
-        const selectedImagesPreview = selectedImages.map(image => {
-            return URL.createObjectURL(image);
-        });
+        setPreviewImages(selectedImagesPreview);
+        //const selectedImagesPreview = selectedImages.map(image => {
+        //    return URL.createObjectURL(image);
+        //});
 
         setPreviewImages(selectedImagesPreview);
     }
@@ -164,14 +228,15 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                     id_porte,
                     id_especie,
                     id_sexo,
-                    selectTemp
-                    /*selectSoci,
-                    selectVive*/)
-            /* await
-                 criarImgAnimal(
-                     images,
-                     id_animal
-                 )*/
+                    selectTemp,
+                    selectSocis,
+                    selectVives)
+            await
+                criarImgAnimal(
+                    images,
+                    id_animal
+                )
+            console.log(images, 'imagisss')
             alert("Animal atualizado ;)");
             router.push(`/meuanimal/${id_animal}`);
         } catch (error) {
@@ -255,8 +320,8 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                                                                 console.log(selectTemp);
                                                             }
                                                         }} name="docil" checked={selectTemp.some(temps => temps == temperamento.id_temperamento)} />
-                                                        
-                                                        {temperamento.descricao} 
+
+                                                        {temperamento.descricao}
                                                     </label>
                                                 </div>
                                             )
@@ -272,16 +337,16 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                                                     <label>
                                                         <input type="checkbox" id="docil" value={sociavel.id_sociavel} onChange={(e) => {
                                                             if (e.target.checked) {
-                                                                const aux = [...selectSoci]
+                                                                const aux = [...selectSocis]
                                                                 aux.push(parseInt(e.target.value))
-                                                                setSelectSoci(aux);
-                                                                console.log(selectSoci);
+                                                                setSelectSocis(aux);
+                                                                console.log(selectSocis);
                                                             } else {
-                                                                const aux = [...selectSoci.filter(item => item != parseInt(e.target.value))]
-                                                                setSelectSoci(aux);
-                                                                console.log(selectSoci);
+                                                                const aux = [...selectSocis.filter(item => item != parseInt(e.target.value))]
+                                                                setSelectSocis(aux);
+                                                                console.log(selectSocis);
                                                             }
-                                                        }} name="sociavel" />
+                                                        }} name="sociavel" checked={selectSocis.some(socis => socis == sociavel.id_sociavel)} />
                                                         {sociavel.descricao}
                                                     </label>
                                                 </div>
@@ -298,16 +363,16 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                                                     <label>
                                                         <input type="checkbox" id="casa" value={vivencia.id_vivencia} onChange={(e) => {
                                                             if (e.target.checked) {
-                                                                const aux = [...selectVive]
+                                                                const aux = [...selectVives]
                                                                 aux.push(parseInt(e.target.value))
                                                                 setSelectVive(aux);
-                                                                console.log(selectVive);
+                                                                console.log(selectVives);
                                                             } else {
-                                                                const aux = [...selectVive.filter(item => item != parseInt(e.target.value))]
+                                                                const aux = [...selectVives.filter(item => item != parseInt(e.target.value))]
                                                                 setSelectVive(aux);
-                                                                console.log(selectVive);
+                                                                console.log(selectVives);
                                                             }
-                                                        }} name="vivencia" />
+                                                        }} name="sociavel" checked={selectVives.some(vives => vives == vivencia.id_vivencia)} />
                                                         {vivencia.descricao}
                                                     </label>
                                                 </div>
@@ -318,9 +383,14 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                             </div>
                             <div>
                                 <div className={styles.imagesContainer}>
-                                    {previwImages.map(image => {
+                                    {preveiwImages.map((image,index) => {
                                         return (
+                                            <>
                                             <img key={image} src={image} />
+                                            <button onClick = {(e) => {
+                                                (e).preventDefault();
+                                                removerImagem(index);
+                                            }}>Remover</button></>
                                         );
                                     })}
                                 </div>
@@ -337,7 +407,7 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
 
                             <div className={styles.botoes}>
                                 <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
-                                    e.preventDefault() 
+                                    e.preventDefault()
                                     router.push(`/meuanimal/${id_animal}`);
                                 }} />
 

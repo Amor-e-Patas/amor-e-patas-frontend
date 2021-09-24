@@ -74,7 +74,9 @@ export async function alterarAnimal(nome_ani: string,
     id_porte: number,
     id_especie: number,
     id_sexo: number,
-    selectTemps: Array<number>) {
+    selectTemps: Array<number>,
+    selectSocis: Array<number>,
+    selectVives: Array<number>) {
     try {
         const response = await authenticatedAPI.put(`/animal/${id_animal}`, {
             nome_ani,
@@ -87,7 +89,9 @@ export async function alterarAnimal(nome_ani: string,
             id_porte,
             id_especie,
             id_sexo,
-            selectTemps
+            selectTemps,
+            selectSocis,
+            selectVives
         });
         return
     } catch (err) {

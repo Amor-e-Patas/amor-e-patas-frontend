@@ -71,7 +71,7 @@ export default function Usuario() {
                 //setSociavel(sociavel);
                 //setVivencia(vivencia);
                 setAnimais(animais);
-                console.log(nome_ani);
+                console.log(animais);
 
             } catch (err) {
                 console.log(err);
