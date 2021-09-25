@@ -42,7 +42,7 @@ export default function Usuario() {
     const [cor, setCor] = useState("");
     const [caracteristica_animal, setCaracteristica] = useState("");
     const [data_nasc, setData] = useState("");
-    const [desaparecido, setDesaparecido] = useState("N");
+    const [desaparecido, setDesaparecido] = useState("");
     const [id_porte, setPorte] = useState("");
     const [id_usuario, setUsuario] = useState("");
     const [id_especie, setEspecie] = useState("");

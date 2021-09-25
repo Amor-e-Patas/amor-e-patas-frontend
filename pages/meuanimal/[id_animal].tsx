@@ -79,7 +79,7 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
     const [cor, setCor] = useState("");
     const [caracteristica_animal, setCaracteristica] = useState("");
     const [data_nasc, setData] = useState("");
-    const [desaparecido, setDesaparecido] = useState("N");
+    const [desaparecido, setDesaparecido] = useState("");
     const [id_porte, setPorte] = useState("");
     const [id_usuario, setUsuario] = useState("");
     const [nome_esp, setEspecie] = useState("");

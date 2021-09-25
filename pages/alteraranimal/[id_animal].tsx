@@ -77,7 +77,7 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
     const [cor, setCor] = useState("");
     const [caracteristica_animal, setCaracteristica] = useState("");
     const [data_nasc, setData] = useState("");
-    const [desaparecido, setDesaparecido] = useState("N");
+    const [desaparecido, setDesaparecido] = useState("");
     const [id_porte, setPorte] = useState(0);
     const [id_usuario, setUsuario] = useState("");
     const [id_especie, setEspecie] = useState(0);
@@ -107,9 +107,9 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                 const animaisTemp = await getAnimal(id_animal) as Animal;
 
 
-                setAnimais(animaisTemp)
-                setSociavel(sociavel)
-                setVivencia(vivencia)
+                setAnimais(animaisTemp);
+                setSociavel(sociavel);
+                setVivencia(vivencia);
                 setTemperamentos(temperamento);
                 setNome(animaisTemp.nome_ani);
                 setIdade(animaisTemp.idade);
@@ -122,6 +122,7 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                 setPorte(animaisTemp.id_porte);
                 setCor(animaisTemp.cor);
                 setCaracteristica(animaisTemp.caracteristica_animal);
+                setDesaparecido(animaisTemp.desaparecido);
                 setAniTemps(animaisTemp.temperamentos);
                 setAniSoci(animaisTemp.sociaveis);
                 setAniVive(animaisTemp.vivencias)
@@ -289,6 +290,13 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                                     <option value="3">Grande</option>
                                 </select>
                             </label>
+                            <label>
+                                <select name="desaparecido" id="desaparecido" className={styles.especie} onChange={(e) => setDesaparecido(e.currentTarget.value)}>
+                                    <option value="" selected>Animal desaparecido</option>
+                                    <option value="N">Não</option>
+                                    <option value="S">Sim</option>
+                                </select>
+                            </label>
                         </div>
 
                         <div >
@@ -382,15 +390,23 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                                 </div>
                             </div>
                             <div>
-                                <div className={styles.imagesContainer}>
-                                    {preveiwImages.map((image,index) => {
+                            <div className={styles.imagesContainer}>
+                                    {preveiwImages.map((image, index) => {
                                         return (
                                             <>
-                                            <img key={image} src={image} />
-                                            <button onClick = {(e) => {
-                                                (e).preventDefault();
-                                                removerImagem(index);
-                                            }}>Remover</button></>
+                                                <div className={styles.divfoto}>
+                                                    <div>
+                                                        <div>
+                                                            <img key={image} src={image} />
+                                                        </div>
+
+                                                        <button className={styles.remover} onClick={(e) => {
+                                                            (e).preventDefault();
+                                                            removerImagem(index);
+                                                        }}>Remover</button>
+                                                    </div>
+                                                </div>
+                                            </>
                                         );
                                     })}
                                 </div>

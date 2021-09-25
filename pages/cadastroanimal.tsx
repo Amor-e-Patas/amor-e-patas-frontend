@@ -36,7 +36,7 @@ export default function Usuario() {
     const [cor, setCor] = useState("");
     const [caracteristica_animal, setCaracteristica] = useState("");
     const [data_nasc, setData] = useState("");
-    const [desaparecido, setDesaparecido] = useState("N");
+    const [desaparecido, setDesaparecido] = useState("");
     const [id_porte, setPorte] = useState("");
     const [id_usuario, setUsuario] = useState("");
     const [id_especie, setEspecie] = useState("");
@@ -90,7 +90,39 @@ export default function Usuario() {
     }
 
     async function eventoCriarAnimal() {
+        if (nome_ani == "") {
+            alert("Preencha o nome do animal.");
+            return;
+        }
 
+        if (id_sexo == "") {
+            alert("Selecione o sexo.");
+            return;
+        }
+
+        if (id_especie == "") {
+            alert("Selecione a espécie.");
+            return;
+        }
+
+        if (id_porte == "") {
+            alert("Selecione o porte.");
+            return;
+        }
+
+        if (desaparecido == "") {
+            alert("Informe se o animal está desaparecido.");
+            return;
+        }
+
+        let imagens = (document.getElementById("image[]") as HTMLInputElement).value;
+
+        if(imagens == ""){
+            alert("Selecione uma ou mais imagens.");
+            return;
+        }
+
+        
         try {
             const id_animal = await
                 criarAnimal(nome_ani,
@@ -163,6 +195,13 @@ export default function Usuario() {
                                     <option value="1">Pequeno</option>
                                     <option value="2">Médio</option>
                                     <option value="3">Grande</option>
+                                </select>
+                            </label>
+                            <label>
+                                <select name="desaparecido" id="desaparecido" className={styles.especie} onChange={(e) => setDesaparecido(e.currentTarget.value)}>
+                                    <option value="" selected>Animal desaparecido</option>
+                                    <option value="N">Não</option>
+                                    <option value="S">Sim</option>
                                 </select>
                             </label>
                         </div>
