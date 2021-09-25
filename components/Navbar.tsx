@@ -17,8 +17,10 @@ export default function Navbar() {
               </Link>
             </li>
             <li>Blog</li>
-            <li>Desaparecidos</li>
-            
+            <Link href="/desaparecidos">
+              <li>Desaparecidos</li>
+            </Link>
+
             <li>
               <div className={styles.dropdown}>
                 <button>Minha Conta</button>
@@ -26,6 +28,7 @@ export default function Navbar() {
                   <Link href="/homemeuperfil">Meu Perfil</Link>
                   <Link href="/cadastroanimal"><p>Cadastrar animal</p></Link>
                   <Link href="/meusanimais"><p>Meus animais</p></Link>
+                  <Link href="/desaparecidos"><p>Meus animais desaparecidos</p></Link>
                   <Link href="/alterarlogin"><p>Alterar Senha</p></Link>
                   <Link href="/logout"><p>Sair</p></Link>
                 </div>
