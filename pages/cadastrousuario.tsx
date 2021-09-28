@@ -1,12 +1,9 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer";
 import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
-import api from "../services/services";
 import React, { useState, useEffect } from "react";
 import { criarUsuario } from "../services/user";
 import styles from "../styles/components/FormUsuario.module.css";
-import Button from 'react-bootstrap';
 import Link from 'next/link';
 import { formata_CPF, valida_CPF, valida_email, formata_telefone } from '../utils/format_cpf_email';
 import axios from "axios";
@@ -44,47 +41,63 @@ export default function Usuario() {
         buscarEndereco();
     }, [cep]);
 
+    function formata_CEP(campo: string, campoAtual: string) {
+        let valoresPermitidos = "0123456789";
+        let campoFormatado = campo;
+        let ultimoDigito = campoFormatado.charAt(campoFormatado.length - 1);
+        if (!valoresPermitidos.includes(ultimoDigito)) {
+            campoFormatado = campoFormatado.substr(0, campoFormatado.length - 1);
+            console.log(campoFormatado, 'cep valida')
+        }
+        return campoFormatado
+    }
 
     async function eventoCriarUsuario() {
 
         if (!valida_CPF(cpf)) {
-            alert("CPF INVALIDO");
+            alert("CPF inválido! Por favor, insira um CPF válido.");
             return;
         }
         if (!valida_email(email)) {
-            alert("Email invalido!");
+            alert("E-mail inválido! Por favor, insira um e-mail válido.");
             return;
         }
 
         if (nome == "") {
-            alert("Preencha o nome.");
+            alert("Por favor, insira seu nome.");
             return;
         }
 
         if (cpf == "") {
-            alert("Preencha a data de nascimento.");
+            alert("Por favor, insira o CPF.");
             return;
         }
 
         if (datanasc == "") {
-            alert("Preencha a data de nascimento.");
+            alert("Por favor, insira a data de nascimento.");
             return;
         }
 
         if (email == "") {
-            alert("Preencha o email.");
+            alert("Por favor, insira seu e-mail");
             return;
         }
 
         if (senha == "") {
-            alert("Preencha a senha.");
+            alert("Por favor, insira a senha.");
             return;
         }
+
+        if (senha.length < 6 || senha.length > 10) {
+            alert("Senha não atende os requisitos mínimos.");
+            return;
+        }
+
 
         let confirsenha = (document.getElementById("confirsenha") as HTMLInputElement).value;
 
         if (senha != confirsenha) {
-            alert("Senhas não são iguais. Verifique novamente.");
+            alert("Senhas não correspondentes, favor digite novamente.");
             return;
         }
 
@@ -103,37 +116,33 @@ export default function Usuario() {
         }
 
         if (bairro == "") {
-            alert("Preencha o bairro.");
+            alert("Por favor, insira o bairro.");
             return;
         }
 
         if (cep == "") {
-            alert("Preencha o CEP.");
+            alert("Por favor, insira o CEP.");
             return;
         }
 
         if (endereco == "") {
-            alert("Preencha o endereço.");
+            alert("Por favor, insira o endereço.");
             return;
         }
 
         if (numero == "") {
-            alert("Preencha o número do endereço.");
+            alert("Por favor, insira número do endereço.");
             return;
         }
 
-        if (endereco == "") {
-            alert("Preencha o endereço.");
-            return;
-        }
 
         if (cidade == "") {
-            alert("Preencha a cidade.");
+            alert("Por favor, insira a cidade.");
             return;
         }
 
         if (estado == "") {
-            alert("Preencha o estado.");
+            alert("Por favor, insira o estado.");
             return;
         }
 
@@ -153,7 +162,7 @@ export default function Usuario() {
                     cidade,
                     estado,
                     referencia)
-            alert("Conta criada ;)");
+            alert("Usuário criado com sucesso!");
             window.location.href = "/login";
         } catch (error) {
             alert("Erro ao criar conta.")
@@ -169,7 +178,7 @@ export default function Usuario() {
                         <h3 className={styles.titulo}>Cadastro de Usuário</h3>
                         <div>
                             <label>
-                                <input type="text" name="name" className={styles.nome} placeholder="Nome:" onChange={(e) => setNome(e.currentTarget.value)} />
+                                <input type="text" name="name" className={styles.nome} placeholder="Nome" onChange={(e) => setNome(e.currentTarget.value)} />
                             </label>
                         </div>
                         <div>
@@ -179,7 +188,7 @@ export default function Usuario() {
                                         const cpfFormatado = formata_CPF(e.currentTarget.value, cpf);
                                         setCpf(cpfFormatado);
                                     }}
-                                    placeholder="088.843.091-09" />
+                                    placeholder="CPF" />
                             </label>
 
                             <label>
@@ -194,7 +203,7 @@ export default function Usuario() {
 
                         <div>
                             <label>
-                                <input type="date" name="datanasc" className={styles.data} placeholder="Data de nascimento:" onChange={(e) => setDatanasc(e.currentTarget.value)} />
+                                <input type="date" name="datanasc" className={styles.data} placeholder="Data de nascimento" onChange={(e) => setDatanasc(e.currentTarget.value)} />
                             </label>
 
                             <label>
@@ -202,7 +211,7 @@ export default function Usuario() {
                                     onInput={(e) => {
                                         const celularFormatado = formata_telefone(e.currentTarget.value, celular);
                                         setCelular(celularFormatado);
-                                    }} placeholder="Celular:" />
+                                    }} placeholder="Celular" />
                             </label>
 
                         </div>
@@ -210,68 +219,75 @@ export default function Usuario() {
                         <h3 className={styles.titulo}>Login</h3>
                         <div>
                             <label>
-                                <input type="email" name="email" className={styles.email} placeholder=" E-mail:" value={email} onInput={(e) => setEmail(e.currentTarget.value)} />
+                                <input type="email" name="email" className={styles.email} placeholder=" E-mail" value={email} onInput={(e) => setEmail(e.currentTarget.value)} />
                             </label>
                         </div>
 
                         <div >
                             <label>
-                                <input type="password" name="senha" className={styles.senha} placeholder="Senha:" onChange={(e) => setSenha(e.currentTarget.value)} />
+                                <input type="password" name="senha" className={styles.senha} placeholder="Senha" onChange={(e) => setSenha(e.currentTarget.value)} />
                             </label>
                         </div>
                         <div>
                             <label>
 
-                                <input type="password" className={styles.senha} placeholder="Confirmar senha:" name="confirsenha" id="confirsenha" />
+                                <input type="password" className={styles.senha} minLength={6} maxLength={10} placeholder="Confirmar senha" name="confirsenha" id="confirsenha" />
                             </label>
                         </div>
                         <h3 className={styles.titulo}>Endereço</h3>
                         <div>
                             <label>
-                                <input type="text" name="cep" className={styles.cep} placeholder="CEP:" onChange={(e) => setCep(e.currentTarget.value)} />
+                                <input type="text" name="cep" className={styles.cep} placeholder="CEP" value={cep} maxLength={8}
+                                    onInput={(e) => {
+                                        const cepFormatado = formata_CEP(e.currentTarget.value, cep);
+
+                                        setCep(cepFormatado);
+                                    }} />
                             </label>
 
                             <label>
-                                <input type="text" name="endereco" className={styles.endereco} value={endereco} placeholder="Endereço:" onChange={(e) => setEndereco(e.currentTarget.value)} readOnly />
+                                <input type="text" name="endereco" className={styles.endereco} value={endereco} placeholder="Endereço" onChange={(e) => setEndereco(e.currentTarget.value)} readOnly />
                             </label>
 
                         </div>
 
                         <div>
                             <label>
-                                <input type="text" name="bairro" className={styles.bairro} value={bairro} placeholder="Bairro:" onChange={(e) => setBairro(e.currentTarget.value)} readOnly />
+                                <input type="text" name="bairro" className={styles.bairro} value={bairro} placeholder="Bairro" onChange={(e) => setBairro(e.currentTarget.value)} readOnly />
                             </label>
 
                             <label>
-                                <input type="text" name="numero" className={styles.numero} placeholder="Número:" onChange={(e) => setNumero(e.currentTarget.value)} />
-                            </label>
-                        </div>
-
-                        <div>
-                            <label>
-
-                                <input type="text" name="cidade" value={cidade} className={styles.cidade} placeholder="Cidade:" onChange={(e) => setCidade(e.currentTarget.value)} readOnly />
-                            </label>
-
-                            <label>
-
-                                <input type="text" name="estado" className={styles.estado} value={estado} placeholder="Estado:" onChange={(e) => setEstado(e.currentTarget.value)} readOnly />
+                                <input type="text" name="numero" className={styles.numero} placeholder="Número" onChange={(e) => setNumero(e.currentTarget.value)} />
                             </label>
                         </div>
 
                         <div>
                             <label>
 
-                                <input type="text" name="referencia" className={styles.email} placeholder="Referência:" onChange={(e) => setReferencia(e.currentTarget.value)} />
+                                <input type="text" name="cidade" value={cidade} className={styles.cidade} placeholder="Cidade" onChange={(e) => setCidade(e.currentTarget.value)} readOnly />
+                            </label>
+
+                            <label>
+
+                                <input type="text" name="estado" className={styles.estado} value={estado} placeholder="Estado" onChange={(e) => setEstado(e.currentTarget.value)} readOnly />
+                            </label>
+                        </div>
+
+                        <div>
+                            <label>
+
+                                <input type="text" name="referencia" className={styles.email} placeholder="Referência" onChange={(e) => setReferencia(e.currentTarget.value)} />
                             </label>
                         </div>
 
 
                         <div className={styles.chec}>
+
                             <label>
                                 <input type="checkbox" id="termos" name="termos" />
-                                Li e aceito os termos
+                                <Link href="termos">Li e aceito os termos</Link>
                             </label>
+
                         </div>
 
                         <div className={styles.chec2}>

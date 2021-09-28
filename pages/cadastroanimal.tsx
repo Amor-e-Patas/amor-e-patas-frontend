@@ -1,13 +1,8 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer";
-import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
-import api from "../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { criarAnimal } from "../services/animal";
 import styles from "../styles/components/FormAnimal.module.css";
-import Button from 'react-bootstrap';
-import Link from 'next/link';
 import { useRouter } from "next/router";
 import { getTemperamento } from "../services/temperamento";
 import { getSociavel } from "../services/sociavel";
@@ -49,7 +44,7 @@ export default function Usuario() {
     const [vivencias, setVivencia] = useState(Array<Vive>());
     const [selectVive, setSelectVive] = useState(Array<Number>());
     const [images, setImages] = useState<File[]>([]);
-    const [previwImages, setPreviewImages] = useState<string[]>([]);
+    const [previewImages, setPreviewImages] = useState<string[]>([]);
 
     useEffect(() => {
         async function fetchAPI() {
@@ -72,19 +67,34 @@ export default function Usuario() {
     }, []);
 
 
+    function removerImagem(index: number) {
+        const imagesTemp = [...images.slice(0, index), ...images.slice(index + 1, images.length)]
+        const imagesPreviewTemp = [...previewImages.slice(0, index), ...previewImages.slice(index + 1, previewImages.length)]
+
+        setImages(imagesTemp);
+        setPreviewImages(imagesPreviewTemp);
+
+    }
+
     function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
         if (!event.target.files) {
             return;
         };
 
         const selectedImages = Array.from(event.target.files);
+        const imagesTemp = [...images, ...selectedImages];
 
+        setImages(imagesTemp);
+        const selectedImagesPreview = [...previewImages];
+        for (const image of selectedImages) {
+            selectedImagesPreview.push(URL.createObjectURL(image))
+        }
+        //console.log(selectedImagesPreview, 'imagens')
 
-        setImages(selectedImages);
-
-        const selectedImagesPreview = selectedImages.map(image => {
-            return URL.createObjectURL(image);
-        });
+        setPreviewImages(selectedImagesPreview);
+        //const selectedImagesPreview = selectedImages.map(image => {
+        //    return URL.createObjectURL(image);
+        //});
 
         setPreviewImages(selectedImagesPreview);
     }
@@ -117,12 +127,12 @@ export default function Usuario() {
 
         let imagens = (document.getElementById("image[]") as HTMLInputElement).value;
 
-        if(imagens == ""){
+        if (imagens == "") {
             alert("Selecione uma ou mais imagens.");
             return;
         }
 
-        
+
         try {
             const id_animal = await
                 criarAnimal(nome_ani,
@@ -153,198 +163,220 @@ export default function Usuario() {
     }
 
     return (
-    <>
-    <VerifyAuth />
-        <div><Navbar />
-            <body>
-                <form className={styles.form} name="form">
-                    <div className={styles.container}>
-                        <h3 className={styles.titulo}>Cadastro de Animal</h3>
-                        <div>
-                            <label>
-                                <input type="text" name="name" className={styles.nome} placeholder="Nome" onChange={(e) => setNome(e.currentTarget.value)} />
-                            </label>
-                            <label>
-                                <input type="text" className={styles.idade} placeholder="Idade" onChange={(e) => setIdade(e.currentTarget.value)}></input>
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <select name="genero" id="genero" className={styles.genero} onChange={(e) => setSexo(e.currentTarget.value)}>
-                                    <option value="" selected>Selecione o sexo</option>
-                                    <option value="1">Fêmea</option>
-                                    <option value="2">Macho</option>
-                                </select>
-                            </label>
-                            <label>
-                                <input type="date" name="datanasc" className={styles.data} placeholder="Data de nascimento" onChange={(e) => setData(e.currentTarget.value)} />
-                            </label>
-                        </div>
-
-                        <div>
-                            <label>
-                                <select name="especie" id="especie" className={styles.especie} onChange={(e) => setEspecie(e.currentTarget.value)}>
-                                    <option value="" selected>Selecione a espécie</option>
-                                    <option value="1">Gato</option>
-                                    <option value="2">Cachorro</option>
-                                </select>
-                            </label>
-                            <label>
-                                <select name="porte" id="porte" className={styles.porte} onChange={(e) => setPorte(e.currentTarget.value)}>
-                                    <option value="" selected>Selecione o porte</option>
-                                    <option value="1">Pequeno</option>
-                                    <option value="2">Médio</option>
-                                    <option value="3">Grande</option>
-                                </select>
-                            </label>
-                            <label>
-                                <select name="desaparecido" id="desaparecido" className={styles.especie} onChange={(e) => setDesaparecido(e.currentTarget.value)}>
-                                    <option value="" selected>Animal desaparecido</option>
-                                    <option value="N">Não</option>
-                                    <option value="S">Sim</option>
-                                </select>
-                            </label>
-                        </div>
-
-                        <div >
-                            <label>
-                                <input type="text" className={styles.cor} placeholder="Cor" name="confirsenha" id="confirsenha" onChange={(e) => setCor(e.currentTarget.value)} />
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <textarea name="caracteristica" className={styles.caracteristica} placeholder="Característica animal" onChange={(e) => setCaracteristica(e.currentTarget.value)}></textarea>
-                            </label>
-                            <div className={styles.containertemp}>
-                                <div className={styles.temperamento}>
-                                    <div className={styles.temp}>
-                                        <p className={styles.p}>Temperamento</p>
-                                        {
-                                            temperamentos.map((temperamento) =>
-                                                <div className={styles.temp}>
-                                                    <label>
-                                                        <input type="checkbox" id="docil" value={temperamento.id_temperamento} onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                const aux = [...selectTemp]
-                                                                aux.push(parseInt(e.target.value))
-                                                                setSelectTemp(aux);
-                                                                console.log(selectTemp);
-                                                            } else {
-                                                                const aux = [...selectTemp.filter(item => item != parseInt(e.target.value))]
-                                                                setSelectTemp(aux);
-                                                                console.log(selectTemp);
-                                                            }
-                                                        }} name="docil" />
-                                                        {temperamento.descricao}
-                                                    </label>
-                                                </div>
-                                            )
-                                        }
-                                    </div>
-                                </div>
-                                <div className={styles.sociavel}>
-                                    <div className={styles.temp}>
-                                        <p className={styles.p}>Sociável com</p>
-                                        {
-                                            sociaveis.map((sociavel) =>
-                                                <div className={styles.temp}>
-                                                    <label>
-                                                        <input type="checkbox" id="docil" value={sociavel.id_sociavel} onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                const aux = [...selectSoci]
-                                                                aux.push(parseInt(e.target.value))
-                                                                setSelectSoci(aux);
-                                                                console.log(selectSoci);
-                                                            } else {
-                                                                const aux = [...selectSoci.filter(item => item != parseInt(e.target.value))]
-                                                                setSelectSoci(aux);
-                                                                console.log(selectSoci);
-                                                            }
-                                                        }} name="sociavel" />
-                                                        {sociavel.descricao}
-                                                    </label>
-                                                </div>
-                                            )
-                                        }
-                                    </div>
-                                </div>
-                                <div className={styles.vive}>
-                                    <div className={styles.temp}>
-                                        <p className={styles.p}>Vive bem em</p>
-                                        {
-                                            vivencias.map((vivencia) =>
-                                                <div className={styles.temp}>
-                                                    <label>
-                                                        <input type="checkbox" id="casa" value={vivencia.id_vivencia} onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                const aux = [...selectVive]
-                                                                aux.push(parseInt(e.target.value))
-                                                                setSelectVive(aux);
-                                                                console.log(selectVive);
-                                                            } else {
-                                                                const aux = [...selectVive.filter(item => item != parseInt(e.target.value))]
-                                                                setSelectVive(aux);
-                                                                console.log(selectVive);
-                                                            }
-                                                        }} name="vivencia" />
-                                                        {vivencia.descricao}
-                                                    </label>
-                                                </div>
-                                            )
-                                        }
-                                    </div>
-                                </div>
+        <>
+            <VerifyAuth />
+            <div><Navbar />
+                <body>
+                    <form className={styles.form} name="form">
+                        <div className={styles.container}>
+                            <h3 className={styles.titulo}>Cadastro de Animal</h3>
+                            <div>
+                                <label>
+                                    <input type="text" name="name" className={styles.nome} placeholder="Nome" onChange={(e) => setNome(e.currentTarget.value)} />
+                                </label>
+                                <label>
+                                    <input type="text" className={styles.idade} placeholder="Idade" onChange={(e) => setIdade(e.currentTarget.value)}></input>
+                                </label>
                             </div>
                             <div>
-                                <div className={styles.imagesContainer}>
-                                    {previwImages.map(image => {
-                                        return (
-                                            <img key={image} src={image} />
-                                        );
-                                    })}
+                                <label>
+                                    <select name="genero" id="genero" className={styles.genero} onChange={(e) => setSexo(e.currentTarget.value)}>
+                                        <option value="" selected>Selecione o sexo</option>
+                                        <option value="1">Fêmea</option>
+                                        <option value="2">Macho</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    <input type="date" name="datanasc" className={styles.data} placeholder="Data de nascimento" onChange={(e) => setData(e.currentTarget.value)} />
+                                </label>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <select name="especie" id="especie" className={styles.especie} onChange={(e) => setEspecie(e.currentTarget.value)}>
+                                        <option value="" selected>Selecione a espécie</option>
+                                        <option value="1">Gato</option>
+                                        <option value="2">Cachorro</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    <select name="porte" id="porte" className={styles.porte} onChange={(e) => setPorte(e.currentTarget.value)}>
+                                        <option value="" selected>Selecione o porte</option>
+                                        <option value="1">Pequeno</option>
+                                        <option value="2">Médio</option>
+                                        <option value="3">Grande</option>
+                                    </select>
+                                </label>
+
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input type="text" className={styles.cor} placeholder="Cor" name="confirsenha" id="confirsenha" onChange={(e) => setCor(e.currentTarget.value)} />
+                                </label>
+                                <label>
+                                    <select name="desaparecido" id="desaparecido" className={styles.desapa} onChange={(e) => setDesaparecido(e.currentTarget.value)}>
+                                        <option value="" selected>Este animal está desaparecido?</option>
+                                        <option value="N" selected>Não</option>
+                                        <option value="S">Sim</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <div>
+
+                                <div className={styles.mae}>
+                                    <label className={styles.carac}>
+                                        <textarea name="caracteristica" className={styles.caracteristica} placeholder="Característica animal" onChange={(e) => setCaracteristica(e.currentTarget.value)}></textarea>
+                                    </label>
+
+                                    <div className={styles.containertemp}>
+                                        <div className={styles.temperamento}>
+                                            <div className={styles.temp}>
+                                                <p className={styles.p}>Temperamento</p>
+                                                {
+                                                    temperamentos.map((temperamento) =>
+                                                        <div className={styles.temp}>
+                                                            <label>
+                                                                <input type="checkbox" id="docil" value={temperamento.id_temperamento} onChange={(e) => {
+                                                                    if (e.target.checked) {
+                                                                        const aux = [...selectTemp]
+                                                                        aux.push(parseInt(e.target.value))
+                                                                        setSelectTemp(aux);
+                                                                        console.log(selectTemp);
+                                                                    } else {
+                                                                        const aux = [...selectTemp.filter(item => item != parseInt(e.target.value))]
+                                                                        setSelectTemp(aux);
+                                                                        console.log(selectTemp);
+                                                                    }
+                                                                }} name="docil" />
+                                                                {temperamento.descricao}
+                                                            </label>
+                                                        </div>
+                                                    )
+                                                }
+                                            </div>
+                                        </div>
+                                        <div className={styles.sociavel}>
+                                            <div className={styles.temp}>
+                                                <p className={styles.p}>Sociável com</p>
+                                                {
+                                                    sociaveis.map((sociavel) =>
+                                                        <div className={styles.temp}>
+                                                            <label>
+                                                                <input type="checkbox" id="docil" value={sociavel.id_sociavel} onChange={(e) => {
+                                                                    if (e.target.checked) {
+                                                                        const aux = [...selectSoci]
+                                                                        aux.push(parseInt(e.target.value))
+                                                                        setSelectSoci(aux);
+                                                                        console.log(selectSoci);
+                                                                    } else {
+                                                                        const aux = [...selectSoci.filter(item => item != parseInt(e.target.value))]
+                                                                        setSelectSoci(aux);
+                                                                        console.log(selectSoci);
+                                                                    }
+                                                                }} name="sociavel" />
+                                                                {sociavel.descricao}
+                                                            </label>
+                                                        </div>
+                                                    )
+                                                }
+                                            </div>
+                                        </div>
+                                        <div className={styles.vive}>
+                                            <div className={styles.temp}>
+                                                <p className={styles.p}>Vive bem em</p>
+                                                {
+                                                    vivencias.map((vivencia) =>
+                                                        <div className={styles.temp}>
+                                                            <label>
+                                                                <input type="checkbox" id="casa" value={vivencia.id_vivencia} onChange={(e) => {
+                                                                    if (e.target.checked) {
+                                                                        const aux = [...selectVive]
+                                                                        aux.push(parseInt(e.target.value))
+                                                                        setSelectVive(aux);
+                                                                        console.log(selectVive);
+                                                                    } else {
+                                                                        const aux = [...selectVive.filter(item => item != parseInt(e.target.value))]
+                                                                        setSelectVive(aux);
+                                                                        console.log(selectVive);
+                                                                    }
+                                                                }} name="vivencia" />
+                                                                {vivencia.descricao}
+                                                            </label>
+                                                        </div>
+                                                    )
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div className={styles.arquivos}>
+
+
+                                <div>
+                                    <div className={styles.imagesContainer}>
+                                        {previewImages.map((image, index) => {
+                                            return (
+                                                <>
+                                                    <div className={styles.divfoto}>
+                                                        <div>
+                                                            <div>
+                                                                <img key={image} src={image} />
+                                                            </div>
+
+                                                            <button className={styles.remover} onClick={(e) => {
+                                                                (e).preventDefault();
+                                                                removerImagem(index);
+                                                            }}>Remover</button>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            );
+                                        })}
+                                    </div>
+                                    <div className={styles.arquivos}>
+                                        <label>
+                                            {/*} <input multiple type="file" name="fotos" className={styles.fotos} placeholder="Referência:" />*/}
+                                            <input multiple onChange={handleSelectImages} type="file" id="image[]" />
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div className={styles.chec}>
                                     <label>
-                                        {/*} <input multiple type="file" name="fotos" className={styles.fotos} placeholder="Referência:" />*/}
-                                        <input multiple onChange={handleSelectImages} type="file" id="image[]" />
+                                        <input type="checkbox" id="termos" name="termos" />
+                                        Li e aceito os termos
                                     </label>
                                 </div>
-                            </div>
 
-                            <div className={styles.chec}>
-                                <label>
-                                    <input type="checkbox" id="termos" name="termos" />
-                                    Li e aceito os termos
-                                </label>
-                            </div>
-
-                            <div className={styles.chec2}>
-                                <label>
-                                    <input type="checkbox" id="vendas" name="vendas" />
-                                    Não permitimos a venda de animais através do site.
-                                </label>
-                            </div>
+                                <div className={styles.chec2}>
+                                    <label>
+                                        <input type="checkbox" id="vendas" name="vendas" />
+                                        Não permitimos a venda de animais através do site.
+                                    </label>
+                                </div>
 
 
-                            <div className={styles.botoes}>
-                                <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
-                                    e.preventDefault()
-                                }} />
-                                <input type="submit" className={styles.botaoenviar} value="Enviar" onClick={(e) => {
-                                    e.preventDefault()
-                                    eventoCriarAnimal()
-                                }} />
+                                <div className={styles.botoes}>
+                                    <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
+                                        e.preventDefault()
+                                    }} />
+                                    <input type="submit" className={styles.botaoenviar} value="Enviar" onClick={(e) => {
+                                        e.preventDefault()
+                                        eventoCriarAnimal()
+                                    }} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </body>
+                    </form>
+                </body>
 
-            <div>
-                <Footer />
+                <div>
+                    <Footer />
+                </div>
             </div>
-        </div>
-    </>
+        </>
     )
 
 }

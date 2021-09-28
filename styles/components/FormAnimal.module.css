@@ -22,7 +22,7 @@
 }
 
 .idade{ 
-  width: 33.6%;
+  width: 34.4%;
   height: 45px;
   /*margin-left: 2%;*/
   margin-top: 1%;
@@ -44,7 +44,7 @@
 }
 
 .data{
-  width: 44%;
+  width: 44.7%;
   height: 45px;
   margin-top: 1%;
   background: #EDEDED 0% 0% no-repeat padding-box;
@@ -86,8 +86,19 @@
 
 }
 
+.desapa{
+  width: 44.7%;
+  height: 45px;
+  margin-left: 1%;
+  margin-top: 1%;
+  background: #EDEDED 0% 0% no-repeat padding-box;
+  border: 2px solid #3E3E3E;
+  font: normal normal 600 15px/22px Raleway;
+
+}
+
 .cor{
-  width: 90.4%;
+  width: 44.7%;
   height: 45px;
   margin-left: 5%;
   margin-top: 1%;
@@ -98,11 +109,10 @@
 }
 
 .caracteristica{
-  width: 44%;
+  width: 89.3%;
   height: 150px;
-  margin-left: 5%;
-  margin-right: 5%;
   margin-top: 1%;
+  
   background: #EDEDED 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
   font: normal normal 600 15px/22px Raleway;
@@ -113,10 +123,20 @@
 }
 .containertemp{
   display: grid;
-  margin-left: 50%;
+  margin-left: -4%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
-  margin-top: -10%;
+  
+}
+
+.mae{
+  display: flex;
+  width: 100%;
+  margin-left: 5%;
+}
+
+.carac{
+  width: 50%;
 }
 
 .temperamento{
@@ -285,4 +305,64 @@
   margin-right: 6px;
   margin-bottom: 5%;
   margin-left: 5%;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switchinput { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

@@ -91,7 +91,7 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
     const [vivencias, setVivencia] = useState(Array<Vive>());
     const [selectVive, setSelectVive] = useState(Array<number>());
     const [images, setImages] = useState<File[]>([]);
-    const [preveiwImages, setPreviewImages] = useState<string[]>([]);
+    const [previewImages, setPreviewImages] = useState<string[]>([]);
     const [animais, setAnimais] = useState({} as Animal);
     const [anitemps, setAniTemps] = useState(Array<Temp>());
     const [anisocis, setAniSoci] = useState(Array<Soci>());
@@ -182,13 +182,11 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
 
     function removerImagem(index: number) {
         const imagesTemp = [...images.slice(0,index), ...images.slice(index+1, images.length)]
-        const imagesPreviewTemp = [...preveiwImages.slice(0,index), ...preveiwImages.slice(index+1, preveiwImages.length)]
+        const imagesPreviewTemp = [...previewImages.slice(0,index), ...previewImages.slice(index+1, previewImages.length)]
         
         setImages(imagesTemp);
         setPreviewImages(imagesPreviewTemp);
         
-        console.log([...preveiwImages.slice(0,index)], [...preveiwImages.slice(index+1, preveiwImages.length)], 'imagem')
-        console.log(imagesPreviewTemp, 'PreviewTemp')
     }
 
     function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
@@ -200,7 +198,7 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
         const imagesTemp = [...images, ...selectedImages];
 
         setImages(imagesTemp);
-        const selectedImagesPreview = [...preveiwImages];
+        const selectedImagesPreview = [...previewImages];
         for (const image of selectedImages) {
             selectedImagesPreview.push(URL.createObjectURL(image))
         }
@@ -391,7 +389,7 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                             </div>
                             <div>
                             <div className={styles.imagesContainer}>
-                                    {preveiwImages.map((image, index) => {
+                                    {previewImages.map((image, index) => {
                                         return (
                                             <>
                                                 <div className={styles.divfoto}>
