@@ -10,32 +10,39 @@ export default function Navbar() {
     isAuthenticated ? (
       <div>
         <nav>
-          <ul className={styles.navBarContainer}>
-            <li>
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-            </li>
-            <li>Blog</li>
-            <Link href="/desaparecidos">
-              <li>Desaparecidos</li>
-            </Link>
+          <div>
 
-            <li>
-              <div className={styles.dropdown}>
-                <button>Minha Conta</button>
-                <div className={styles.dropdowncontent}>
-                  <Link href="/homemeuperfil">Meu Perfil</Link>
-                  <Link href="/cadastroanimal"><p>Cadastrar animal</p></Link>
-                  <Link href="/meusanimais"><p>Meus animais</p></Link>
-                  <Link href="/desaparecidos"><p>Meus animais desaparecidos</p></Link>
-                  <Link href="/cadastronoticia"><p>Cadastrar notícia</p></Link>
-                  <Link href="/alterarlogin"><p>Alterar Senha</p></Link>
-                  <Link href="/logout"><p>Sair</p></Link>
+            <ul className={styles.navBarContainer}>
+              <img src="/img/logo2.png" className={styles.img} />
+              <li>
+              </li>
+
+              <li>
+                <Link href="/">
+                  <a>Home</a>
+                </Link>
+              </li>
+              <li>Blog</li>
+              <Link href="/desaparecidos">
+                <li>Desaparecidos</li>
+              </Link>
+
+              <li>
+                <div className={styles.dropdown}>
+                  <button className={styles.conta}>Minha Conta</button>
+                  <div className={styles.dropdowncontent}>
+                    <Link href="/homemeuperfil">Meu Perfil</Link>
+                    <Link href="/cadastroanimal"><p>Cadastrar animal</p></Link>
+                    <Link href="/meusanimais"><p>Meus animais</p></Link>
+                    <Link href="/desaparecidos"><p>Meus animais desaparecidos</p></Link>
+                    <Link href="/cadastronoticia"><p>Cadastrar notícia</p></Link>
+                    <Link href="/alterarlogin"><p>Alterar Senha</p></Link>
+                    <Link href="/logout"><p>Sair</p></Link>
+                  </div>
                 </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
         </nav>
       </div>
 
