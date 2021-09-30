@@ -6,7 +6,7 @@
 
 .container{
   background-color: white;
-  margin-left: 39%;
+  margin-left: 33%;
   margin-right: 30%;
   margin-top: 5%;
   width: 454px;
@@ -35,11 +35,11 @@
   width: 80%;
   height: 48px;
   margin-left: 10%;
-  background: #EDEDED 0% 0% no-repeat padding-box;
+  background: #f0efef 0% 0% no-repeat padding-box;
   font: normal normal 600 15px/22px Raleway;
   opacity: 1;
   border-radius: 7px;
-
+  text-align: center;
 }
 
 .link{
@@ -52,38 +52,54 @@
 
 .novouser{
   margin-left: 1%;
-  font: normal normal 600 15px/22px Raleway;
+  font: normal normal 600 15px/10px Raleway;
   letter-spacing: 0.32px;
   color: #890620;
   opacity: 1;
   cursor: pointer;
 }
 
-.new{
+:hover.novouser{
+  text-decoration: underline;
+}
 
+.new{
   text-align: center;
-  font: normal normal 600 15px/22px Raleway;
+  font: normal normal 600 15px/5px Raleway;
+  letter-spacing: 0.32px;
+  color: #000000;
+  opacity: 1;
+}
+
+.voltar{
+  text-align: center;
+  font: normal normal 600 15px/30px Raleway;
   letter-spacing: 0.32px;
   color: #000000;
   opacity: 1;
   padding-bottom: 5%;
 }
 
+:hover.voltar{
+  color: #006494;
+  text-decoration: underline;
+}
+
 .senha{
   width: 99.4%;
   height: 45px;
   margin-top: 1%;
-  background: #EDEDED 0% 0% no-repeat padding-box;
+  background: #f0efef 0% 0% no-repeat padding-box;
   border: 2px solid #3E3E3E;
   border-radius: 7px;
 
 }
 
 .botaoenviar{
-  margin-top: 5%;
-  width: 50%;
+  margin-top: 2.5%;
+  width: 39%;
   height: 48px;
-  margin-left: 25%;
+  margin-left: 30%;
   margin-bottom: 3%;
   background: var(--unnamed-color-b7e394) 0% 0% no-repeat padding-box;
   font: normal normal 600 15px/22px Raleway;
@@ -95,32 +111,5 @@
 .botoes{
   display: -ms-inline-grid;
 
-}
-
-.checkbox{
-  display: -moz-grid-line;
-}
-
-.chec{
-  margin-top: 2%;
-  width: 30%;
-  height: 50%;
-  text-align: left;
-  margin-left: 45%;
-  font: normal normal 600 15px/23px Noto Sans;
-  letter-spacing: 0px;
-  color: #000000;
-  opacity: 1;
-}
-
-.chec2{
-  width: 30%;
-  height: 50%;
-  text-align: left;
-  margin-left: 45%;
-  font: normal normal 600 15px/23px Noto Sans;
-  letter-spacing: 0px;
-  color: #000000;
-  opacity: 1;
 }
 

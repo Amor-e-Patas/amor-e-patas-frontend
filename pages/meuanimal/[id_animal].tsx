@@ -1,12 +1,8 @@
 import Navbar from "../../components/Navbar"
 import Footer from "../../components/Footer";
-import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
 import api from "../../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { criarAnimal, getAnimais } from "../../services/animal";
 import styles from "../../styles/components/FormMeuAnimal.module.css";
-import Button from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from "next/router";
 import { getTemperamento } from "../../services/temperamento";

@@ -1,16 +1,10 @@
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer";
-import { InputLabel, FormLabel } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
-import api from "../services/services";
 import React, { useState, useEffect, useContext } from "react";
-import { criarUsuario } from "../services/user";
 import styles from "../styles/components/FormLogin.module.css";
 import Cookies from 'js-cookie';
 import { login } from '../services/login';
-import { AuthContext } from "../contexts/auth";   
+import { AuthContext } from "../contexts/auth";
 import Link from 'next/link';
-    
+
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -31,13 +25,13 @@ export default function Login() {
             alert("Usuário ou senha incorretos.")
         }
     }
-    
-   /* useEffect(() => {
-        if (isAuthenticated) {
-            window.location.href = "/";
-    
-        }
-    }, [isAuthenticated]);*/
+
+    /* useEffect(() => {
+         if (isAuthenticated) {
+             window.location.href = "/";
+     
+         }
+     }, [isAuthenticated]);*/
 
     return (
 
@@ -47,22 +41,24 @@ export default function Login() {
             </div>
             <form>
                 <label>
-                    <input type="email" className={styles.email} name="email" placeholder="E-mail"  onChange={(e) => setEmail(e.currentTarget.value)}/>
+                    <input type="email" className={styles.email} name="email" placeholder="E-mail" onChange={(e) => setEmail(e.currentTarget.value)} />
                 </label>
             </form>
             <form>
-                <div>
-                    <a href="" className={styles.link}>Esqueci minha senha</a>
-                </div>
+
                 <label>
-                    <input type="password" className={styles.email} name="password" placeholder="Senha" onChange={(e) => setPassword(e.currentTarget.value)}/>
+                    <input type="password" className={styles.email} name="password" placeholder="Senha" onChange={(e) => setPassword(e.currentTarget.value)} />
                 </label>
-                <button className={styles.botaoenviar} value="Enviar" onClick={ (e) => {
+                <button className={styles.botaoenviar} value="Enviar" onClick={(e) => {
                     (e).preventDefault();
-                    handleLogin();}}>Enviar</button>
+                    handleLogin();
+                }}>Enviar</button>
 
             </form>
             <p className={styles.new}>Novo Usuário?<Link href="/cadastrousuario" ><p className={styles.novouser}>Cadastre-se</p></Link></p>
+            <div>
+                <p className={styles.voltar}><Link href="/">Voltar</Link></p>
+            </div>
         </div>
 
     )
