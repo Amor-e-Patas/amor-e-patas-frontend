@@ -1,6 +1,5 @@
 import styles from "../styles/components/Navbar.module.css";
 import Link from 'next/link';
-import { Button } from '@material-ui/core';
 import { useContext } from "react";
 import { AuthContext } from "../contexts/auth";
 
@@ -49,6 +48,7 @@ export default function Navbar() {
     ) : <div>
       <nav>
         <ul className={styles.navBarContainer}>
+        <img src="/img/logo2.png" className={styles.img} />
           <li>
             <Link href="/">
               <a>Home</a>
