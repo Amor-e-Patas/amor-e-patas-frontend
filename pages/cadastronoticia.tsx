@@ -190,7 +190,7 @@ export default function Usuario() {
                                     <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
                                         e.preventDefault()
                                     }} />
-                                    <input type="submit" className={styles.botaoenviar} value="Enviar" onClick={(e) => {
+                                    <input type="submit" className={styles.botaoenviar} value="Postar" onClick={(e) => {
                                         e.preventDefault()
                                         eventoCriarPost()
                                     }} />
