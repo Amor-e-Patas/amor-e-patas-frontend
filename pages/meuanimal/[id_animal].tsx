@@ -90,7 +90,7 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
     const [filepath, setImages] = useState<File[]>([]);
     const [previwImages, setPreviewImages] = useState<string[]>([]);
     const [animais, setAnimais] = useState<Animal>();
-
+    const [mostrarModal, setMostrarModal] = useState(false)
     useEffect(() => {
         async function fetchAPI() {
             try {
@@ -104,6 +104,7 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
                 setSexo(animais.tipo_sexo);
                 setCaracteristica(animais.caracteristica_animal);
 
+
                 setTemperamentos(animais.temperamentos);
 
             } catch (err) {
@@ -113,6 +114,7 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
 
         fetchAPI();
     }, []);
+
 
 
     function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
@@ -131,7 +133,7 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
 
         setPreviewImages(selectedImagesPreview);
     }
-  
+
     return (
         <>
             <div >
@@ -162,10 +164,22 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
                             </div>
                             <Link href={`/alteraranimal/${id_animal}`}><button className={styles.botaoenviar} value="editar">Editar</button></Link>
 
-                            <button className={styles.botaoexcluir} value="editar" onClick={(e) => {
+                            <div className={styles.modal} style={{ display: mostrarModal ? "block" : "none" }}>
+                                <p>deseja realmente deletar?
+                                    <button onClick={(e) => {
+                                        e.preventDefault()
+                                        deleteAnimal(id_animal)
+                                        router.push("/meusanimais");
+                                    }}> Sim</button>
+                                    <button onClick={(e) => {
+                                        e.preventDefault()
+                                        setMostrarModal(false);
+                                    }}> Não</button>
+                                </p>
+                            </div>
+                            <button className={styles.botaoexcluir} value="excluir" onClick={(e) => {
                                 e.preventDefault()
-                                deleteAnimal(id_animal)
-                                router.push("/meusanimais");
+                                setMostrarModal(true);
                             }}>Excluir</button>
 
                             <p className={styles.amor}>Caracteristicas</p>

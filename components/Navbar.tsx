@@ -17,11 +17,13 @@ export default function Navbar() {
               </li>
 
               <li>
-                <Link href="/">
+              <Link href="/">
                   <a>Home</a>
-                </Link>
+               </Link>
               </li>
-              <li>Blog</li>
+              <Link href="/noticias">
+                <li>Blog</li>
+              </Link>
               <Link href="/desaparecidos">
                 <li>Desaparecidos</li>
               </Link>
@@ -48,7 +50,7 @@ export default function Navbar() {
     ) : <div>
       <nav>
         <ul className={styles.navBarContainer}>
-        <img src="/img/logo2.png" className={styles.img} />
+          <img src="/img/logo2.png" className={styles.img} />
           <li>
             <Link href="/">
               <a>Home</a>

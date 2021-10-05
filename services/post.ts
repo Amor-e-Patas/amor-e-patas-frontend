@@ -14,9 +14,9 @@ export async function criarPost(titulo: string,
             assuntos
         })
         return res.data.id_post;
-} catch (error) {
-    throw error;
-}
+    } catch (error) {
+        throw error;
+    }
 }
 
 
@@ -29,8 +29,7 @@ export async function getPosts() {
     }
 }
 
-
-export async function getPost(id_post:number) {
+export async function getPost(id_post: number) {
     try {
         const response = await authenticatedAPI.get(`/post/${id_post}`);
         return response.data;
@@ -39,7 +38,7 @@ export async function getPost(id_post:number) {
     }
 }
 
-export async function deletePost(id_post:number) {
+export async function deletePost(id_post: number) {
     try {
         const response = await authenticatedAPI.delete(`/post/${id_post}`);
         return response.data;
@@ -85,9 +84,9 @@ export async function criarImgPost(
         data.append('id_post', id_post);
         imagens.forEach(image => {
             data.append('image', image);
-          });
+        });
         await authenticatedAPI.post("/imagempost", data);
-} catch (error) {
-    throw error;
-}
+    } catch (error) {
+        throw error;
+    }
 }

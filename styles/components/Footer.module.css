@@ -21,7 +21,7 @@
   color: #FFB800 ;
   font-family: Raleway;
   text-align: left; 
-  margin-top: 10%;
+  margin-top: 7%;
    
 }
 
@@ -38,28 +38,26 @@
   text-align: left; 
   width: 95px;
 
-  
 }
 
 .blog{
   text-align: left; 
   width: 70%;
 
-
 }
 
 .quem{
   text-align: left; 
   width: 70%; 
- 
 
 }
 
 .copy{
   text-align: left;
   font-family: Raleway;
-  padding: 0;
+  padding: 0px;
   font-size: 10pt;
+  margin: 0;
 }
 
 .img{

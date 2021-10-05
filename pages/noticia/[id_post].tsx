@@ -1,12 +1,12 @@
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer";
+import Navbar from "../../components/Navbar"
+import Footer from "../../components/Footer";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import styles from "../styles/components/FormNoticias.module.css";
+import styles from "../../styles/components/FormAnimal.module.css";
 import { useRouter } from "next/router";
-import VerifyAuth from "../components/verifyAuth";
-import { criarImgPost, criarPost, getAssuntos, getPosts } from "../services/post";
+import VerifyAuth from "../../components/verifyAuth";
+import { criarImgPost, criarPost, getAssuntos, getPost } from "../../services/post";
 import moment from 'moment';
-import Link from "next/link";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 
 interface Assunto {
     id_assunto: number,
@@ -27,10 +27,26 @@ interface Post {
         filepath: string;
     }>,
 }
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 
+    return {
+        paths: [],
+        fallback: 'blocking'
+    }
+}
 
+export const getStaticProps: GetStaticProps = async (
+    context: GetStaticPropsContext
+) => {
 
-export default function Usuario() {
+    return {
+        props: {
+            id_post: context.params?.id_post
+        },
+    }
+}
+
+export default function Usuario({ id_post }: InferGetStaticPropsType<typeof getStaticProps>) {
     const [titulo, setTitulo] = useState("");
     const [corpo, setCorpo] = useState("");
     const [autor, setAutor] = useState("");
@@ -40,16 +56,20 @@ export default function Usuario() {
     const [selectAssunto, setSelectAssunto] = useState(Array<Number>());
     const [images, setImages] = useState<File[]>([]);
     const [previewImages, setPreviewImages] = useState<string[]>([]);
-    const [posts, setPosts] = useState(Array<Post>());
+    const [post, setPosts] = useState<Post>();
 
     useEffect(() => {
         async function fetchAPI() {
             try {
-                const assunto = await getAssuntos();
-                setAssuntos(assunto);
-                const post = await getPosts();
+               // const assunto = await getAssuntos();
+                //setAssuntos(assunto);
+                const post = await getPost(id_post);
                 setPosts(post);
-                console.log(post);
+                setAutor(post.autor);
+                setTitulo(post.titulo);
+                setCorpo(post.corpo);
+                setData(post.data);
+                console.log(post,'noticiaaa');
 
             } catch (err) {
                 console.log(err);
@@ -76,21 +96,12 @@ export default function Usuario() {
                                         <div className={styles.temperamento}>
                                             <div className={styles.temp}>
                                                 <div>
-                                                    {
-                                                        posts.map((post) =>
-                                                            <div className={styles.noticias}>
-                                                                <div className={styles.imagesContainer}>
-                                                                    <img src={`http://localhost:3333/${post.images[0].filepath}`} className={styles.imagem} alt="" />
-                                                                </div>
-                                                                <div>
-                                                                    <p>Titulo: <Link href={`/noticia/${post.id_post}`} >{post.titulo}</Link>  </p>
-                                                                    <p>Autor: {post.autor}</p>
-                                                                    <p>Data: {post.data}</p>
-                                                                    <hr />
-                                                                </div>
-                                                            </div>
-                                                        )
-                                                    }
+                                                    <p> Titulo: {titulo}</p>
+                                                    <p> Autor: {autor}</p>
+                                                    <p> Data: {data}</p>
+                                                    
+                                                    <div dangerouslySetInnerHTML={ { __html: corpo}} >
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -99,6 +110,13 @@ export default function Usuario() {
                                 </div>
 
 
+                                <div>
+                                    
+
+                                    <div className={styles.imagesContainer}>
+                                <img src={`http://localhost:3333/${post?.images[0].filepath}`} className={styles.imagem} alt="" />
+                            </div>
+                                </div>
 
 
                                 <div className={styles.botoes}>

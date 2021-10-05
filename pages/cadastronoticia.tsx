@@ -1,11 +1,24 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import styles from "../styles/components/FormAnimal.module.css";
+import styles from "../styles/components/FormNoticia.module.css";
 import { useRouter } from "next/router";
 import VerifyAuth from "../components/verifyAuth";
 import { criarImgPost, criarPost, getAssuntos } from "../services/post";
 import moment from 'moment';
+//import { Editor, EditorState } from 'draft-js';
+//import 'draft-js/dist/Draft.css';
+import { EditorState } from "draft-js";
+import createToolbarPlugin from '@draft-js-plugins/static-toolbar';
+import { EditorProps } from 'react-draft-wysiwyg';
+import {stateToHTML} from 'draft-js-export-html';
+//import Editor, { createEditorStateWithText } from '@draft-js-plugins/editor';
+const Editor = dynamic<EditorProps>(
+    () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
+    { ssr: false }
+  )
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import dynamic from 'next/dynamic'; // (if using Next.js or use own dynamic loader)
 
 interface Assunto {
     id_assunto: number,
@@ -22,6 +35,11 @@ export default function Usuario() {
     const [selectAssunto, setSelectAssunto] = useState(Array<Number>());
     const [images, setImages] = useState<File[]>([]);
     const [previewImages, setPreviewImages] = useState<string[]>([]);
+    const [editorState, setEditorState] = React.useState(
+        EditorState.createEmpty()
+    );
+    const staticToolbarPlugin = createToolbarPlugin();
+    const { Toolbar } = staticToolbarPlugin;
 
     useEffect(() => {
         async function fetchAPI() {
@@ -61,9 +79,13 @@ export default function Usuario() {
         for (const image of selectedImages) {
             selectedImagesPreview.push(URL.createObjectURL(image))
         }
-    
+
         setPreviewImages(selectedImagesPreview);
         setPreviewImages(selectedImagesPreview);
+    }
+
+    function uploadImageCallBack() {
+        () => { }
     }
 
     async function eventoCriarPost() {
@@ -83,7 +105,7 @@ export default function Usuario() {
         try {
             const id_post = await
                 criarPost(titulo,
-                    corpo,
+                    stateToHTML(editorState.getCurrentContent()),
                     autor,
                     data,
                     selectAssunto)
@@ -101,6 +123,7 @@ export default function Usuario() {
 
     }
 
+
     return (
         <>
             <VerifyAuth />
@@ -111,19 +134,12 @@ export default function Usuario() {
                             <h3 className={styles.titulo}>Cadastro de Notícia</h3>
                             <div>
                                 <label>
-                                    <input type="text" name="name" className={styles.nome} placeholder="Titulo" onChange={(e) => setTitulo(e.currentTarget.value)} />
+                                    <input type="text" name="name" className={styles.tituloNot} placeholder="Titulo" onChange={(e) => setTitulo(e.currentTarget.value)} />
                                 </label>
                             </div>
                             <div>
 
-                                <div className={styles.mae}>
-                                    <label className={styles.carac}>
-                                        <textarea name="caracteristica" className={styles.caracteristica} placeholder="Corpo" onChange={(e) => setCorpo(e.currentTarget.value)}></textarea>
-                                    </label>
-                                    <label>
-                                    <input type="text" name="autor" className={styles.nome} placeholder="Autor" onChange={(e) => setAutor(e.currentTarget.value)} />
-                                </label>
-
+                                <div>
                                     <div className={styles.containertemp}>
                                         <div className={styles.temperamento}>
                                             <div className={styles.temp}>
@@ -152,8 +168,23 @@ export default function Usuario() {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
+                                <label className={styles.carac} >
+                                    <Editor editorState={editorState}
+                                        toolbarClassName="toolbarClassName"
+                                        wrapperClassName={styles.caracteristica}
+                                        editorClassName={styles.teste}
+                                        onEditorStateChange={setEditorState} />
+
+                                {/*<textarea name="caracteristica" className={styles.caracteristica} placeholder="Corpo" onChange={(e) => setCorpo(e.currentTarget.value)}></textarea>*/}
+                                </label>
+
+                                <div>
+                                    <label>
+                                        <input type="text" name="autor" className={styles.nome} placeholder="Autor" onChange={(e) => setAutor(e.currentTarget.value)} />
+                                    </label>
+                                </div>
+
 
 
                                 <div>
@@ -206,5 +237,7 @@ export default function Usuario() {
             </div>
         </>
     )
+
+
 
 }
