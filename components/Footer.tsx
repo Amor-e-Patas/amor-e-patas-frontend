@@ -34,7 +34,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className={styles.copy}>
-                    <p>© 2021 Amor&Patas. Todos os direitos reservados</p>
+                    <p className={styles.pcopy}>© 2021 Amor&Patas. Todos os direitos reservados</p>
                 </div>
 
             </footer>

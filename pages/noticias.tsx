@@ -64,61 +64,55 @@ export default function Usuario() {
     return (
         <>
             <VerifyAuth />
-            <div><Navbar />
-                <body>
-                    <form className={styles.form} name="form">
-                        <div className={styles.container}>
-                            <h3 className={styles.titulo}>Notícia</h3>
-                            <div>
+            <div><Navbar /></div>
+            <body>
+                <form className={styles.form} name="form">
+                    <div className={styles.container}>
+                        <h3 className={styles.titulo}>Blog</h3>
+                        <div>
 
-                                <div className={styles.mae}>
-                                    <div className={styles.containertemp}>
-                                        <div className={styles.temperamento}>
-                                            <div className={styles.temp}>
-                                                <div>
-                                                    {
-                                                        posts.map((post) =>
-                                                            <div className={styles.noticias}>
-                                                                <div className={styles.imagesContainer}>
-                                                                    <img src={`http://localhost:3333/${post.images[0].filepath}`} className={styles.imagem} alt="" />
-                                                                </div>
-                                                                <div>
-                                                                    <p>Titulo: <Link href={`/noticia/${post.id_post}`} >{post.titulo}</Link>  </p>
-                                                                    <p>Autor: {post.autor}</p>
-                                                                    <p>Data: {post.data}</p>
-                                                                    <hr />
-                                                                </div>
+                            <div className={styles.mae}>
+                                <div className={styles.containertemp}>
+                                    <div className={styles.temperamento}>
+                                        <div className={styles.temp}>
+                                            <div>
+                                                {
+                                                    posts.map((post) =>
+                                                        <div className={styles.noticias}>
+                                                            <div className={styles.imagesContainer}>
+                                                                <img src={`http://localhost:3333/${post.images[0].filepath}`} className={styles.imagem} alt="" />
+                                                                <hr />
                                                             </div>
-                                                        )
-                                                    }
-                                                </div>
+                                                            <div>
+                                                                <p><Link href={`/noticia/${post.id_post}`} >{post.titulo}</Link>  </p>
+                                                                <p>Autor: {post.autor}</p>
+                                                                <p>Data: {post.data}</p>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
 
+                            </div>
 
-
-
-                                <div className={styles.botoes}>
-                                    <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
-                                        e.preventDefault()
-                                    }} />
-                                    <input type="submit" className={styles.botaoenviar} value="Postar" onClick={(e) => {
-                                        e.preventDefault()
-                                        eventoCriarPost()
-                                    }} />
-                                </div>
+                            <div className={styles.botoes}>
+                                <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
+                                    e.preventDefault()
+                                }} />
+                                
                             </div>
                         </div>
-                    </form>
-                </body>
+                    </div>
+                </form>
+            </body>
 
-                <div>
-                    <Footer />
-                </div>
+            <div>
+                <Footer />
             </div>
+
         </>
     )
 

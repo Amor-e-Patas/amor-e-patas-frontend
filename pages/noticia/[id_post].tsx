@@ -1,7 +1,7 @@
 import Navbar from "../../components/Navbar"
 import Footer from "../../components/Footer";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import styles from "../../styles/components/FormAnimal.module.css";
+import styles from "../../styles/components/FormNoticia.module.css";
 import { useRouter } from "next/router";
 import VerifyAuth from "../../components/verifyAuth";
 import { criarImgPost, criarPost, getAssuntos, getPost } from "../../services/post";
@@ -61,7 +61,7 @@ export default function Usuario({ id_post }: InferGetStaticPropsType<typeof getS
     useEffect(() => {
         async function fetchAPI() {
             try {
-               // const assunto = await getAssuntos();
+                // const assunto = await getAssuntos();
                 //setAssuntos(assunto);
                 const post = await getPost(id_post);
                 setPosts(post);
@@ -69,7 +69,6 @@ export default function Usuario({ id_post }: InferGetStaticPropsType<typeof getS
                 setTitulo(post.titulo);
                 setCorpo(post.corpo);
                 setData(post.data);
-                console.log(post,'noticiaaa');
 
             } catch (err) {
                 console.log(err);
@@ -84,59 +83,38 @@ export default function Usuario({ id_post }: InferGetStaticPropsType<typeof getS
     return (
         <>
             <VerifyAuth />
-            <div><Navbar />
-                <body>
-                    <form className={styles.form} name="form">
-                        <div className={styles.container}>
-                            <h3 className={styles.titulo}>Notícia</h3>
-                            <div>
-
-                                <div className={styles.mae}>
-                                    <div className={styles.containertemp}>
-                                        <div className={styles.temperamento}>
-                                            <div className={styles.temp}>
-                                                <div>
-                                                    <p> Titulo: {titulo}</p>
-                                                    <p> Autor: {autor}</p>
-                                                    <p> Data: {data}</p>
-                                                    
-                                                    <div dangerouslySetInnerHTML={ { __html: corpo}} >
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                <div>
-                                    
-
-                                    <div className={styles.imagesContainer}>
-                                <img src={`http://localhost:3333/${post?.images[0].filepath}`} className={styles.imagem} alt="" />
-                            </div>
-                                </div>
-
-
-                                <div className={styles.botoes}>
-                                    <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
-                                        e.preventDefault()
-                                    }} />
-                                    <input type="submit" className={styles.botaoenviar} value="Postar" onClick={(e) => {
-                                        e.preventDefault()
-                                        eventoCriarPost()
-                                    }} />
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </body>
-
-                <div>
-                    <Footer />
+            <div><Navbar /></div>
+            <div>
+                <div className={styles.imagesContainer}>
+                    <img src={`http://localhost:3333/${post?.images[0].filepath}`} className={styles.imagem} alt="" />
                 </div>
             </div>
+            <body className={styles.body}>
+                <div className={styles.container}>
+                    <div className={styles.temperamento}>
+                        <div className={styles.temp}>
+                            <div>
+                                <p className={styles.autor}> ASSUNTO | {data}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h2 className={styles.titulo}>{titulo}</h2>
+                            <div>
+                                <p className={styles.autor}>Escrito por {autor} </p>
+                            </div>
+                            <div dangerouslySetInnerHTML={{ __html: corpo }} >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+            <div></div>
+            <div>
+                <Footer />
+            </div>
+
         </>
     )
 
