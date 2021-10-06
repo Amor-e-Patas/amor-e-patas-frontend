@@ -76,6 +76,15 @@ export async function getAssuntos() {
     }
 }
 
+export async function getAssunto( id_post: number) {
+    try {
+        const response = await authenticatedAPI.get(`/assuntos/${id_post}`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
 export async function criarImgPost(
     imagens: Array<File>,
     id_post: string) {

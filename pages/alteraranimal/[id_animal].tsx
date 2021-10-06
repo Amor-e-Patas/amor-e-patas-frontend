@@ -1,6 +1,5 @@
 import Navbar from "../../components/Navbar"
 import Footer from "../../components/Footer";
-import FormControl from '@material-ui/core/FormControl';
 import api from "../../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { alterarAnimal, getAnimal } from "../../services/animal";
@@ -173,17 +172,17 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
         })
         //return URL.createObjectURL(objectURL);
         return new Promise((resolve, reject) => {
-            resolve((objectBlob) as File) ;
+            resolve((objectBlob) as File);
         });
     }
 
     function removerImagem(index: number) {
-        const imagesTemp = [...images.slice(0,index), ...images.slice(index+1, images.length)]
-        const imagesPreviewTemp = [...previewImages.slice(0,index), ...previewImages.slice(index+1, previewImages.length)]
-        
+        const imagesTemp = [...images.slice(0, index), ...images.slice(index + 1, images.length)]
+        const imagesPreviewTemp = [...previewImages.slice(0, index), ...previewImages.slice(index + 1, previewImages.length)]
+
         setImages(imagesTemp);
         setPreviewImages(imagesPreviewTemp);
-        
+
     }
 
     function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
@@ -245,6 +244,7 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
     return (
         <div><Navbar />
             <body>
+
                 <form className={styles.form} name="form">
                     <div className={styles.container}>
                         <h3 className={styles.titulo}>Atualizar Cadastro de Animal</h3>
@@ -285,133 +285,138 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                                     <option value="3">Grande</option>
                                 </select>
                             </label>
+                        </div>
+
+                        <div>
                             <label>
-                                <select name="desaparecido" id="desaparecido" className={styles.especie} onChange={(e) => setDesaparecido(e.currentTarget.value)}>
-                                    <option value="" selected>Animal desaparecido</option>
-                                    <option value="N">Não</option>
+                                <input type="text" className={styles.cor} placeholder="Cor" name="confirsenha" id="confirsenha" onChange={(e) => setCor(e.currentTarget.value)} />
+                            </label>
+                            <label>
+                                <select name="desaparecido" id="desaparecido" className={styles.desapa} onChange={(e) => setDesaparecido(e.currentTarget.value)}>
+                                    <option value="" selected>Este animal está desaparecido?</option>
+                                    <option value="N" >Não</option>
                                     <option value="S">Sim</option>
                                 </select>
                             </label>
                         </div>
-
-                        <div >
-                            <label>
-                                <input type="text" className={styles.cor} placeholder="Cor" value={cor} name="confirsenha" id="confirsenha" onChange={(e) => setCor(e.currentTarget.value)} />
-                            </label>
-                        </div>
                         <div>
-                            <label>
-                                <textarea name="caracteristica" className={styles.caracteristica} value={caracteristica_animal} placeholder="Característica animal" onChange={(e) => setCaracteristica(e.currentTarget.value)}></textarea>
-                            </label>
-                            <div className={styles.containertemp}>
-                                <div className={styles.temperamento}>
-                                    <div className={styles.temp}>
-                                        <p className={styles.p}>Temperamento</p>
-                                        {
-                                            temperamentos.map((temperamento) =>
-                                                <div className={styles.temp}>
-                                                    <label>
-                                                        <input type="checkbox" id="docil" value={temperamento.id_temperamento} onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                const aux = [...selectTemp]
-                                                                aux.push(parseInt(e.target.value))
-                                                                setSelectTemp(aux);
-                                                                console.log(selectTemp);
-                                                            } else {
-                                                                const aux = [...selectTemp.filter(item => item != parseInt(e.target.value))]
-                                                                setSelectTemp(aux);
-                                                                console.log(selectTemp);
-                                                            }
-                                                        }} name="docil" checked={selectTemp.some(temps => temps == temperamento.id_temperamento)} />
+                            <div className={styles.mae}>
+                                <label className={styles.carac}>
+                                    <textarea name="caracteristica" className={styles.caracteristica} value={caracteristica_animal} placeholder="Característica animal" onChange={(e) => setCaracteristica(e.currentTarget.value)}></textarea>
+                                </label>
 
-                                                        {temperamento.descricao}
-                                                    </label>
-                                                </div>
-                                            )
-                                        }
+                                <div className={styles.containertemp}>
+                                    <div className={styles.temperamento}>
+                                        <div className={styles.temp}>
+                                            <p className={styles.p}>Temperamento</p>
+                                            {
+                                                temperamentos.map((temperamento) =>
+                                                    <div className={styles.temp}>
+                                                        <label>
+                                                            <input type="checkbox" id="docil" value={temperamento.id_temperamento} onChange={(e) => {
+                                                                if (e.target.checked) {
+                                                                    const aux = [...selectTemp]
+                                                                    aux.push(parseInt(e.target.value))
+                                                                    setSelectTemp(aux);
+                                                                    console.log(selectTemp);
+                                                                } else {
+                                                                    const aux = [...selectTemp.filter(item => item != parseInt(e.target.value))]
+                                                                    setSelectTemp(aux);
+                                                                    console.log(selectTemp);
+                                                                }
+                                                            }} name="docil" checked={selectTemp.some(temps => temps == temperamento.id_temperamento)} />
+
+                                                            {temperamento.descricao}
+                                                        </label>
+                                                    </div>
+                                                )
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                                <div className={styles.sociavel}>
-                                    <div className={styles.temp}>
-                                        <p className={styles.p}>Sociável com</p>
-                                        {
-                                            sociaveis.map((sociavel) =>
-                                                <div className={styles.temp}>
-                                                    <label>
-                                                        <input type="checkbox" id="docil" value={sociavel.id_sociavel} onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                const aux = [...selectSocis]
-                                                                aux.push(parseInt(e.target.value))
-                                                                setSelectSocis(aux);
-                                                                console.log(selectSocis);
-                                                            } else {
-                                                                const aux = [...selectSocis.filter(item => item != parseInt(e.target.value))]
-                                                                setSelectSocis(aux);
-                                                                console.log(selectSocis);
-                                                            }
-                                                        }} name="sociavel" checked={selectSocis.some(socis => socis == sociavel.id_sociavel)} />
-                                                        {sociavel.descricao}
-                                                    </label>
-                                                </div>
-                                            )
-                                        }
+                                    <div className={styles.sociavel}>
+                                        <div className={styles.temp}>
+                                            <p className={styles.p}>Sociável com</p>
+                                            {
+                                                sociaveis.map((sociavel) =>
+                                                    <div className={styles.temp}>
+                                                        <label>
+                                                            <input type="checkbox" id="docil" value={sociavel.id_sociavel} onChange={(e) => {
+                                                                if (e.target.checked) {
+                                                                    const aux = [...selectSocis]
+                                                                    aux.push(parseInt(e.target.value))
+                                                                    setSelectSocis(aux);
+                                                                    console.log(selectSocis);
+                                                                } else {
+                                                                    const aux = [...selectSocis.filter(item => item != parseInt(e.target.value))]
+                                                                    setSelectSocis(aux);
+                                                                    console.log(selectSocis);
+                                                                }
+                                                            }} name="sociavel" checked={selectSocis.some(socis => socis == sociavel.id_sociavel)} />
+                                                            {sociavel.descricao}
+                                                        </label>
+                                                    </div>
+                                                )
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                                <div className={styles.vive}>
-                                    <div className={styles.temp}>
-                                        <p className={styles.p}>Vive bem em</p>
-                                        {
-                                            vivencias.map((vivencia) =>
-                                                <div className={styles.temp}>
-                                                    <label>
-                                                        <input type="checkbox" id="casa" value={vivencia.id_vivencia} onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                const aux = [...selectVives]
-                                                                aux.push(parseInt(e.target.value))
-                                                                setSelectVive(aux);
-                                                                console.log(selectVives);
-                                                            } else {
-                                                                const aux = [...selectVives.filter(item => item != parseInt(e.target.value))]
-                                                                setSelectVive(aux);
-                                                                console.log(selectVives);
-                                                            }
-                                                        }} name="sociavel" checked={selectVives.some(vives => vives == vivencia.id_vivencia)} />
-                                                        {vivencia.descricao}
-                                                    </label>
-                                                </div>
-                                            )
-                                        }
+                                    <div className={styles.vive}>
+                                        <div className={styles.temp}>
+                                            <p className={styles.p}>Vive bem em</p>
+                                            {
+                                                vivencias.map((vivencia) =>
+                                                    <div className={styles.temp}>
+                                                        <label>
+                                                            <input type="checkbox" id="casa" value={vivencia.id_vivencia} onChange={(e) => {
+                                                                if (e.target.checked) {
+                                                                    const aux = [...selectVives]
+                                                                    aux.push(parseInt(e.target.value))
+                                                                    setSelectVive(aux);
+                                                                    console.log(selectVives);
+                                                                } else {
+                                                                    const aux = [...selectVives.filter(item => item != parseInt(e.target.value))]
+                                                                    setSelectVive(aux);
+                                                                    console.log(selectVives);
+                                                                }
+                                                            }} name="sociavel" checked={selectVives.some(vives => vives == vivencia.id_vivencia)} />
+                                                            {vivencia.descricao}
+                                                        </label>
+                                                    </div>
+                                                )
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div>
-                            <div className={styles.imagesContainer}>
-                                    {previewImages.map((image, index) => {
-                                        return (
-                                            <>
-                                                <div className={styles.divfoto}>
-                                                    <div>
-                                                        <div>
-                                                            <img key={image} src={image} />
-                                                        </div>
-
-                                                        <button className={styles.remover} onClick={(e) => {
-                                                            (e).preventDefault();
-                                                            removerImagem(index);
-                                                        }}>Remover</button>
-                                                    </div>
-                                                </div>
-                                            </>
-                                        );
-                                    })}
-                                </div>
-                                <div className={styles.arquivos}>
-                                    <label>
-                                        {/*} <input multiple type="file" name="fotos" className={styles.fotos} placeholder="Referência:" />*/}
-                                        <input multiple onChange={handleSelectImages} type="file" id="image[]" />
-                                    </label>
-                                </div>
                             </div>
+                            <div className={styles.imagesContainer}>
+                                {previewImages.map((image, index) => {
+                                    return (
+                                        <>
+                                            <div className={styles.divfoto}>
+                                                <div>
+                                                    <div>
+                                                        <img key={image} src={image} />
+                                                    </div>
+
+                                                    <button className={styles.remover} onClick={(e) => {
+                                                        (e).preventDefault();
+                                                        removerImagem(index);
+                                                    }}>Remover</button>
+                                                </div>
+                                            </div>
+                                        </>
+                                    );
+                                })}
+                            </div>
+
+                            <div className={styles.arquivos}>
+                                <label>
+                                    {/*} <input multiple type="file" name="fotos" className={styles.fotos} placeholder="Referência:" />*/}
+                                    <input multiple onChange={handleSelectImages} type="file" id="image[]" />
+                                </label>
+                            </div>
+
 
 
 

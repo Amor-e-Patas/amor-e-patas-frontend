@@ -5,6 +5,7 @@ import styles from "../../styles/components/FormNoticia.module.css";
 import { useRouter } from "next/router";
 import VerifyAuth from "../../components/verifyAuth";
 import { criarImgPost, criarPost, getAssuntos, getPost } from "../../services/post";
+import { getAssunto } from "../../services/post";
 import moment from 'moment';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 
@@ -19,10 +20,7 @@ interface Post {
     corpo: string;
     autor: string,
     data: string,
-    assuntos: Array<{
-        id_assunto: string;
-        nome_ass: string;
-    }>,
+    assuntos: Array<Assunto>,
     images: Array<{
         filepath: string;
     }>,
@@ -57,18 +55,28 @@ export default function Usuario({ id_post }: InferGetStaticPropsType<typeof getS
     const [images, setImages] = useState<File[]>([]);
     const [previewImages, setPreviewImages] = useState<string[]>([]);
     const [post, setPosts] = useState<Post>();
+    const [assuntoT, setAssuns] = useState(Array<Assunto>());
 
     useEffect(() => {
         async function fetchAPI() {
             try {
-                // const assunto = await getAssuntos();
-                //setAssuntos(assunto);
-                const post = await getPost(id_post);
+
+                const post = await getPost(id_post) as Post;
+
                 setPosts(post);
                 setAutor(post.autor);
                 setTitulo(post.titulo);
                 setCorpo(post.corpo);
                 setData(post.data);
+
+                //const assunto = await getAssunto() as Assunto;
+                setAssuntos(post.assuntos);
+                //setAssuns(post.assuntos);
+
+                const assun = post.assuntos.map(assun => assun.id_assunto)
+
+                console.log(post, 'caract')
+                setSelectAssunto(assun);
 
             } catch (err) {
                 console.log(err);
@@ -95,7 +103,16 @@ export default function Usuario({ id_post }: InferGetStaticPropsType<typeof getS
                         <div className={styles.temp}>
                             <div>
                                 <p className={styles.autor}> ASSUNTO | {data}</p>
+                                
                             </div>
+                            <p className={styles.amor}>Mais Detalhes</p>
+                                <ul>
+                                    {
+                                        assuntos.map((assunto) =>
+                                            <li>{assunto.nome_ass}</li>
+                                        )
+                                    }
+                                </ul>
                         </div>
                     </div>
                     <div>

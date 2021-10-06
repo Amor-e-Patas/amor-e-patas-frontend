@@ -217,7 +217,7 @@ export default function Usuario() {
                                 <label>
                                     <select name="desaparecido" id="desaparecido" className={styles.desapa} onChange={(e) => setDesaparecido(e.currentTarget.value)}>
                                         <option value="" selected>Este animal está desaparecido?</option>
-                                        <option value="N" selected>Não</option>
+                                        <option value="N" >Não</option>
                                         <option value="S">Sim</option>
                                     </select>
                                 </label>
@@ -310,7 +310,6 @@ export default function Usuario() {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
 
 
