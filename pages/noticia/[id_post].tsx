@@ -8,6 +8,7 @@ import { criarImgPost, criarPost, getAssuntos, getPost } from "../../services/po
 import { getAssunto } from "../../services/post";
 import moment from 'moment';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import { criarComentario, deleteComentario, getComentarios } from "../../services/comentario";
 
 interface Assunto {
     id_assunto: number,
@@ -25,6 +26,15 @@ interface Post {
         filepath: string;
     }>,
 }
+
+interface Comentario {
+    texto: string,
+    data: string,
+    id_comentario: number,
+    nome_usu: string,
+    id_post: number
+}
+
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 
     return {
@@ -56,6 +66,11 @@ export default function Usuario({ id_post }: InferGetStaticPropsType<typeof getS
     const [previewImages, setPreviewImages] = useState<string[]>([]);
     const [post, setPosts] = useState<Post>();
     const [assuntoT, setAssuns] = useState(Array<Assunto>());
+    const [comentarios, setComentarios] = useState(Array<Comentario>());
+    const [texto, setTexto] = useState("");
+    const [id_usuario, setUsuario] = useState("");
+    const [dataComent, setDataComent] = useState(moment().format("YYYY-MM-DD"));
+    const [mostrarModal, setMostrarModal] = useState(false);
 
     useEffect(() => {
         async function fetchAPI() {
@@ -78,6 +93,10 @@ export default function Usuario({ id_post }: InferGetStaticPropsType<typeof getS
                 console.log(post, 'caract')
                 setSelectAssunto(assun);
 
+                const comentario = await getComentarios(id_post);
+                setComentarios(comentario);
+                console.log(comentario);
+
             } catch (err) {
                 console.log(err);
             }
@@ -87,6 +106,35 @@ export default function Usuario({ id_post }: InferGetStaticPropsType<typeof getS
     }, []);
 
     async function eventoCriarPost() {
+
+        if (texto == "") {
+            alert("Comentário vazio");
+            return;
+        }
+
+        try {
+            await
+                criarComentario(texto,
+                    dataComent,
+                    parseInt(id_usuario),
+                    id_post);
+            const comentario = await getComentarios(id_post);
+            setComentarios(comentario);
+            setTexto("");
+        } catch (error) {
+            alert("Erro ao criar comentário.")
+        }
+    }
+
+    async function eventoGetComentario() {
+
+        try {
+            const comentario = await getComentarios(id_post);
+            setComentarios(comentario);
+        } catch (error) {
+            alert("Erro ao retornar comentário.")
+        }
+
     }
     return (
         <>
@@ -103,16 +151,16 @@ export default function Usuario({ id_post }: InferGetStaticPropsType<typeof getS
                         <div className={styles.temp}>
                             <div>
                                 <p className={styles.autor}> ASSUNTO | {data}</p>
-                                
+
                             </div>
                             <p className={styles.amor}>Mais Detalhes</p>
-                                <ul>
-                                    {
-                                        assuntos.map((assunto) =>
-                                            <li>{assunto.nome_ass}</li>
-                                        )
-                                    }
-                                </ul>
+                            <ul>
+                                {
+                                    assuntos.map((assunto) =>
+                                        <li>{assunto.nome_ass}</li>
+                                    )
+                                }
+                            </ul>
                         </div>
                     </div>
                     <div>
@@ -124,6 +172,47 @@ export default function Usuario({ id_post }: InferGetStaticPropsType<typeof getS
                             <div dangerouslySetInnerHTML={{ __html: corpo }} >
                             </div>
                         </div>
+                    </div>
+
+                    <div>
+                        <textarea name="comentario" placeholder="Adicionar um comentário..." value={texto} onChange={(e) => setTexto(e.currentTarget.value)} ></textarea>
+                    </div>
+
+                    <input type="submit" className={styles.botaoenviar} value="Comentar" onClick={(e) => {
+                        e.preventDefault()
+                        eventoCriarPost()
+                    }} />
+
+                    <div>
+                        {
+                            comentarios.map((comentario) =>
+                                <div >
+                                    <div>
+                                        <p>Autor: {comentario.nome_usu}</p>
+                                        <p>Comentário: {comentario.texto}</p>
+                                        <p>Data: {comentario.data}</p>
+                                        <hr />
+                                        <div className={styles.modal} style={{ display: mostrarModal ? "block" : "none" }}>
+                                            <p>deseja realmente deletar?
+                                                <button onClick={(e) => {
+                                                    e.preventDefault();
+                                                    deleteComentario(comentario.id_comentario);
+                                                    eventoGetComentario();
+                                                }}> Sim</button>
+                                                <button onClick={(e) => {
+                                                    e.preventDefault()
+                                                    setMostrarModal(false);
+                                                }}> Não</button>
+                                            </p>
+                                        </div>
+                                        <button className={styles.botaoexcluir} value="excluir" onClick={(e) => {
+                                            e.preventDefault()
+                                            setMostrarModal(true);
+                                        }}>Excluir</button>
+                                    </div>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </body>
