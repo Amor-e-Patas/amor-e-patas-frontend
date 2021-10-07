@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import styles from "../styles/components/FormNoticia.module.css";
+import styles from "../styles/components/FormCadastrarNoticia.module.css";
 import { useRouter } from "next/router";
 import VerifyAuth from "../components/verifyAuth";
 import VerifyAdm from "../components/VerifyAdm";
@@ -115,7 +115,7 @@ export default function Usuario() {
                     id_post
                 )
             alert("Post criado ;)");
-            router.push("/meusanimais");
+            router.push("/noticia");
         } catch (error) {
             console.log(error);
             alert("Erro ao criar post.")
