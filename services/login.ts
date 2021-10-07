@@ -19,6 +19,14 @@ export async function verifyToken(){
     } 
   }
 
+  export async function verifyAdm(){
+    try{
+      await authenticatedAPI.post("/auth/verifyadm");
+    } catch (err) {
+      throw err;
+    } 
+  }
+  
   export async function alterarLogin(email: string, senha: string){
     try{
       const response = await authenticatedAPI.put("/login", {

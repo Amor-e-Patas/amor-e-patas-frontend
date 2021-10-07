@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
-import { verifyToken } from "../services/login";
+import { verifyAdm, verifyToken } from "../services/login";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -7,6 +7,7 @@ interface AuthProviderProps {
 
 interface AuthContextData {
   isAuthenticated: boolean;
+  isAdm: boolean;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
 }
 
@@ -14,7 +15,8 @@ export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  
+  const [isAdm, setIsAdm] = useState(true);
+
   useEffect(() => {
     async function fetchAPI(){
       try{
@@ -22,6 +24,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setIsAuthenticated(true);
       } catch (err){
         setIsAuthenticated(false);
+      }
+    }
+    fetchAPI();
+  }, []);
+
+  useEffect(() => {
+    async function fetchAPI(){
+      try{
+        await verifyAdm();
+        setIsAdm(true);
+      } catch (err){
+        setIsAdm(false);
       }
     }
 
@@ -32,6 +46,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     <AuthContext.Provider
       value={
         {
+          isAdm,
           isAuthenticated,
           setIsAuthenticated
         }

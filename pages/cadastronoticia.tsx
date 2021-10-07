@@ -4,6 +4,7 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import styles from "../styles/components/FormNoticia.module.css";
 import { useRouter } from "next/router";
 import VerifyAuth from "../components/verifyAuth";
+import VerifyAdm from "../components/VerifyAdm";
 import { criarImgPost, criarPost, getAssuntos } from "../services/post";
 import moment from 'moment';
 //import { Editor, EditorState } from 'draft-js';
@@ -55,7 +56,6 @@ export default function Usuario() {
 
         fetchAPI();
     }, []);
-
 
     function removerImagem(index: number) {
         const imagesTemp = [...images.slice(0, index), ...images.slice(index + 1, images.length)]
@@ -126,7 +126,7 @@ export default function Usuario() {
 
     return (
         <>
-            <VerifyAuth />
+            <VerifyAdm />
             <div><Navbar />
                 <body>
                     <form className={styles.form} name="form">
