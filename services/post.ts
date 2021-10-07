@@ -47,7 +47,7 @@ export async function deletePost(id_post: number) {
     }
 }
 
-export async function alterarAnimal(id_post: number,
+export async function alterarPost(id_post: number,
     titulo: string,
     corpo: string,
     autor: string,

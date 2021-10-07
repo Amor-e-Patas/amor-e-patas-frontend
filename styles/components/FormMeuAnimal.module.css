@@ -7,13 +7,28 @@
 
 .modal{
   display: none;
-  height: 200px;
-  width: 200px;
+  height: 90px;
+  width: 300px;
   position: absolute;
-  left: 50%;
+  left: 40%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  /*transform: translate(-50%, -50%);*/
+  -webkit-box-shadow:0 0 10px rgb(0,0,0);
+  -moz-box-shadow:0 0 10px rgb(0,0,0); 
+  box-shadow:0 0 10px rgb(0,0,0);
+  text-align: center;
+  background-color: white;
+ 
 }
+
+.botoes{
+  display: grid;
+  margin-left: 34%;
+  margin-top: 10px;
+  margin-right: 5px;
+  grid-template-columns: 0.1fr 0.1fr;
+}
+
 
 .quadros{
   display: grid;

@@ -91,6 +91,7 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
     const [previwImages, setPreviewImages] = useState<string[]>([]);
     const [animais, setAnimais] = useState<Animal>();
     const [mostrarModal, setMostrarModal] = useState(false)
+
     useEffect(() => {
         async function fetchAPI() {
             try {
@@ -102,6 +103,7 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
                 setNome(animais.nome_ani);
                 setEspecie(animais.nome_esp);
                 setSexo(animais.tipo_sexo);
+                setIdade(animais.idade);
                 setCaracteristica(animais.caracteristica_animal);
 
 
@@ -153,28 +155,34 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
                                 <ul>
                                     <li>{nome_esp}</li>
                                     <li>{tipo_sexo}</li>
-                                    <li>Adulta</li>
+                                    <li>{idade}</li>
                                 </ul>
                             </div>
                             <div className={styles.infos}>
                                 <div className={styles.item}>
                                     <img src="/img/endereco.png" className={styles.endereco} alt="" /> Localizado em
                                 </div>
-
+                                <br />
                             </div>
                             <Link href={`/alteraranimal/${id_animal}`}><button className={styles.botaoenviar} value="editar">Editar</button></Link>
 
                             <div className={styles.modal} style={{ display: mostrarModal ? "block" : "none" }}>
-                                <p>deseja realmente deletar?
-                                    <button onClick={(e) => {
-                                        e.preventDefault()
-                                        deleteAnimal(id_animal)
-                                        router.push("/meusanimais");
-                                    }}> Sim</button>
-                                    <button onClick={(e) => {
-                                        e.preventDefault()
-                                        setMostrarModal(false);
-                                    }}> Não</button>
+                                <p>Deseja realmente excluir o animal?
+                                    <div className={styles.botoes}>
+                                        <div>
+                                            <button onClick={(e) => {
+                                                e.preventDefault()
+                                                deleteAnimal(id_animal)
+                                                router.push("/meusanimais");
+                                            }}> Sim</button>
+                                        </div>
+                                        <div>
+                                            <button onClick={(e) => {
+                                                e.preventDefault()
+                                                setMostrarModal(false);
+                                            }}> Não</button>
+                                        </div>
+                                    </div>
                                 </p>
                             </div>
                             <button className={styles.botaoexcluir} value="excluir" onClick={(e) => {
