@@ -4,7 +4,11 @@
   text-align: center;
   padding-top: 1.5%; 
 }
-
+.icon{
+  width: 35px;
+  cursor: pointer;
+  margin-right: 10px;
+}
 .container{
   display: block;
   background-color: white;
@@ -77,8 +81,6 @@
   border-radius: 15px;
   /*background-color: white;*/
   padding-bottom: 3.5%;
-  border-radius: 9px;
-  
 
 }
 
@@ -170,11 +172,12 @@
 
 .imagesContainer img{
   width: 350px;
-  height: 100px;
+  height: 110px;
   object-fit: cover;
   margin-right: 6px;
   margin-bottom: 7px;
   margin-left: 5%;
+  margin-top: 2%;
 
 }
 
@@ -265,3 +268,27 @@ input:checked + .slider:before {
   color: purple;
   text-decoration: underline;
 }
+
+.modal{
+  display: none;
+  height: 90px;
+  width: 300px;
+  position: absolute;
+  left: 40%;
+  top: 50%;
+  /*transform: translate(-50%, -50%);*/
+  -webkit-box-shadow:0 0 10px rgb(0,0,0);
+  -moz-box-shadow:0 0 10px rgb(0,0,0); 
+  box-shadow:0 0 10px rgb(0,0,0);
+  text-align: center;
+  background-color: white;
+ 
+}
+.botoesmold{
+  display: grid;
+  grid-column-gap: 10px;
+  margin-left: 34%;
+  margin-top: 23px;
+  grid-template-columns: 0.1fr 0.1fr;
+}
+
