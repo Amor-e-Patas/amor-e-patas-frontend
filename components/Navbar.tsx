@@ -22,7 +22,7 @@ export default function Navbar() {
                 <a>Home</a>
               </Link>
             </li>
-            <Link href="/noticias">
+            <Link href="/noticiasauth">
               <li>Blog</li>
             </Link>
             <Link href="/desaparecidos">

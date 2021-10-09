@@ -90,7 +90,7 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
     const [filepath, setImages] = useState<File[]>([]);
     const [previwImages, setPreviewImages] = useState<string[]>([]);
     const [animais, setAnimais] = useState<Animal>();
-    const [mostrarModal, setMostrarModal] = useState(false)
+    const [mostrarModal, setMostrarModal] = useState(false);
 
     useEffect(() => {
         async function fetchAPI() {

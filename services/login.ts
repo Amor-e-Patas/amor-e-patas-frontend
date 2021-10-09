@@ -13,7 +13,9 @@ export async function login(email: string, password: string){
 
 export async function verifyToken(){
     try{
-      await authenticatedAPI.post("/auth/verifytoken");
+      const res = await authenticatedAPI.post("/auth/verifytoken");
+      return res.data;
+
     } catch (err) {
       throw err;
     } 
