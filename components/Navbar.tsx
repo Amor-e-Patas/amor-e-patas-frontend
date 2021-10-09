@@ -5,8 +5,50 @@ import { AuthContext } from "../contexts/auth";
 
 export default function Navbar() {
   const { isAuthenticated } = useContext(AuthContext);
+  const { isAdm } = useContext(AuthContext);
   return (
-    isAuthenticated ? (
+
+    isAdm ? (<div>
+      <nav>
+        <div>
+
+          <ul className={styles.navBarContainer}>
+            <img src="/img/logo2.png" className={styles.img} />
+            <li>
+            </li>
+
+            <li>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            <Link href="/noticias">
+              <li>Blog</li>
+            </Link>
+            <Link href="/desaparecidos">
+              <li>Desaparecidos</li>
+            </Link>
+
+            <li>
+              <div className={styles.dropdown}>
+                <button className={styles.conta}>Minha Conta</button>
+                <div className={styles.dropdowncontent}>
+                  <Link href="/homemeuperfil">Meu Perfil</Link>
+                  <Link href="/cadastroanimal"><p>Cadastrar animal</p></Link>
+                  <Link href="/meusanimais"><p>Meus animais</p></Link>
+                  <Link href="/desaparecidos"><p>Meus animais desaparecidos</p></Link>
+                  <Link href="/cadastronoticia"><p>Cadastrar notícia</p></Link>
+                  <Link href="/alterarlogin"><p>Alterar Senha</p></Link>
+                  <Link href="/logout"><p>Sair</p></Link>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>)
+    
+   : isAuthenticated ? (
       <div>
         <nav>
           <div>
@@ -17,9 +59,9 @@ export default function Navbar() {
               </li>
 
               <li>
-              <Link href="/">
+                <Link href="/">
                   <a>Home</a>
-               </Link>
+                </Link>
               </li>
               <Link href="/noticias">
                 <li>Blog</li>
@@ -36,7 +78,6 @@ export default function Navbar() {
                     <Link href="/cadastroanimal"><p>Cadastrar animal</p></Link>
                     <Link href="/meusanimais"><p>Meus animais</p></Link>
                     <Link href="/desaparecidos"><p>Meus animais desaparecidos</p></Link>
-                    <Link href="/cadastronoticia"><p>Cadastrar notícia</p></Link>
                     <Link href="/alterarlogin"><p>Alterar Senha</p></Link>
                     <Link href="/logout"><p>Sair</p></Link>
                   </div>
@@ -56,8 +97,12 @@ export default function Navbar() {
               <a>Home</a>
             </Link>
           </li>
-          <li>Blog</li>
-          <li>Desaparecidos</li>
+          <Link href="/noticias">
+            <li>Blog</li>
+          </Link>
+          <Link href="/desaparecidos">
+            <li>Desaparecidos</li>
+          </Link>
 
           <li>
             <Link href="/login" passHref>
@@ -72,6 +117,9 @@ export default function Navbar() {
         </ul>
       </nav>
     </div>
+
+
+
   )
 
 }

@@ -115,7 +115,7 @@ export default function Usuario() {
                     id_post
                 )
             alert("Post criado ;)");
-            router.push("/noticia");
+            router.push("/noticia/"+id_post);
         } catch (error) {
             console.log(error);
             alert("Erro ao criar post.")

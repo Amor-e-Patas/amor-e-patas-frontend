@@ -63,7 +63,6 @@ export default function Usuario() {
     }
     return (
         <>
-            <VerifyAuth />
             <div><Navbar /></div>
             <body>
                 <form className={styles.form} name="form">
@@ -86,7 +85,7 @@ export default function Usuario() {
                                                             <div>
                                                                 <p><Link href={`/noticia/${post.id_post}`} >{post.titulo}</Link>  </p>
                                                                 <p>Autor: {post.autor}</p>
-                                                                <p>Data: {post.data}</p>
+                                                                <p>Data: {moment(post.data).format('DD/MM/YYYY')}</p>
                                                             </div>
                                                         </div>
                                                     )
