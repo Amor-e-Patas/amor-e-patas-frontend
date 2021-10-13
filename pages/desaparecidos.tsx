@@ -137,7 +137,7 @@ export default function Usuario() {
                 <div>
                     <div className={styles.titulos}>
                         <div className={styles.amor}>
-                            <h2>Meus Animais desaparecidos</h2>
+                            <h2>Meus animais desaparecidos</h2>
                         </div>
                         <div>
                         <Link href="/cadastroanimal"><img src="/img/cadastraranimal.png" className={styles.imagemcadastrar} alt="Cadastrar"/></Link>

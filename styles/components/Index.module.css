@@ -1,0 +1,54 @@
+.body {
+  background-color: white;
+  padding: 0;
+  margin: 0;
+}
+.img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.hr {
+  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+  opacity: 0.2;
+  margin: 0 5% 5% 5%;
+}
+
+.adote {
+  font: normal normal 51px/63px Raleway;
+  text-align: center;
+}
+
+.frase {
+  text-align: center;
+  font: normal normal normal 16px/5px Source Serif Pro;
+  letter-spacing: 0.48px;
+  color: #737373;
+  opacity: 1;
+}
+
+.animais {
+  margin-top: 5%;
+  display: grid;
+  position: none;
+  padding: 10px;
+  grid-column-gap: 20px;
+  grid-template-columns: auto auto auto auto;
+  border-radius: 15px;
+  /*background-color: white;*/
+  padding-bottom: 3.5%;
+  border-radius: 9px;
+}
+
+.item {
+  background-color: white;
+  text-align: center;
+  border-radius: 9px;
+}
+
+.imagem {
+  width: 100%;
+  height: 290px;
+}
