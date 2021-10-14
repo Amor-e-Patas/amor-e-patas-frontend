@@ -11,7 +11,7 @@ export default function Footer() {
             <footer className={styles.footer}>
                 <div className={styles.container}>
                     <div className={styles.amor}>
-                        <h2 className={styles.h2}>Amor&Patas</h2>
+                        <h2 className={styles.h2}>Amor & Patas</h2>
                         <div className={styles.imgs}>
                             <img src="/img/facebook.png" className={styles.img} />
                             <img src="/img/twitter.png" className={styles.img} />
@@ -34,7 +34,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className={styles.copy}>
-                    <p className={styles.pcopy}>© 2021 Amor&Patas. Todos os direitos reservados</p>
+                    <p className={styles.pcopy}>© 2021 Amor & Patas. Todos os direitos reservados</p>
                 </div>
 
             </footer>

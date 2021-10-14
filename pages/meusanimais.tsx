@@ -47,6 +47,7 @@ export default function Usuario() {
     const [id_usuario, setUsuario] = useState("");
     const [id_especie, setEspecie] = useState("");
     const [id_sexo, setSexo] = useState("");
+    const [id_status, setStatus] = useState("3");
     const router = useRouter();
     const [temperamentos, setTemperamentos] = useState(Array<Temp>());
     const [selectTemp, setSelectTemp] = useState(Array<Number>());
@@ -113,6 +114,7 @@ export default function Usuario() {
                     parseInt(id_porte),
                     parseInt(id_especie),
                     parseInt(id_sexo),
+                    parseInt(id_status),
                     selectTemp,
                     selectSoci,
                     selectVive)

@@ -47,6 +47,24 @@ export async function getAnimais() {
     }
 }
 
+export async function getAnimaisApro() {
+    try {
+        const response = await authenticatedAPI.get(`/aniaprovnormais`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function getAnimaisEmAnalise() {
+    try {
+        const response = await authenticatedAPI.get(`/anisanalisenormais`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
 export async function getAnimaisDesaparecidos() {
     try {
         const response = await authenticatedAPI.get(`/animaisdesaparecidos`);
@@ -68,6 +86,15 @@ export async function getAnimal(id_animal:number) {
 export async function deleteAnimal(id_animal:number) {
     try {
         const response = await authenticatedAPI.delete(`/animal/${id_animal}`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function alterarStatus(id_animal:number, id_status:number) {
+    try {
+        const response = await authenticatedAPI.put(`/animal/status/${id_animal}`, {id_status});
         return response.data;
     } catch (err) {
         throw err;

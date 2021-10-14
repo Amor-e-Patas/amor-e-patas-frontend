@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import styles from "../styles/components/Index.module.css";
 import Head from "next/head";
 import { getAnimal } from "../services/animal";
+import { criarAnimal, getAnimaisApro } from "../services/animal";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import Link from "next/link";
@@ -10,6 +11,7 @@ import Link from "next/link";
 interface Animal {
   nome_ani: string;
   id_animal: number;
+  id_status: number;
   images: Array<{
     filepath: string;
   }>;
@@ -18,7 +20,25 @@ interface Animal {
 export default function Home() {
   const router = useRouter();
   const [images, setImages] = useState<File[]>([]);
+  const [id_status, setStatus] = useState("1");
   const [animais, setAnimais] = useState(Array<Animal>());
+
+  useEffect(() => {
+    async function fetchAPI() {
+        try {
+            const animais = await getAnimaisApro();
+            console.log(animais,'teste');
+
+            setAnimais(animais);
+            console.log(animais);
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    fetchAPI();
+}, []);
 
   return (
     <div className={styles.body}>
@@ -45,77 +65,15 @@ export default function Home() {
         </div>
 
         <div className={styles.animais}>
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/img/sol.jpg" className={styles.imagem} alt="" />
-            <hr className={styles.hr2} />
-            <p className={styles.pnome}> Sol</p>
-          </div>
+          {
+             animais.map((animal) =>
+                  <div className={styles.item}>
+                    <img src={`http://localhost:3333/${animal.images[0].filepath}`} className={styles.imagem} alt="" />
+                    <hr className={styles.hr2} />
+                    <p className={styles.pnome}>{animal.nome_ani}</p>
+                  </div>
+             )
+        }
         </div>
       </div>
       </div>
