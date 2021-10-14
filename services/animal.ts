@@ -10,6 +10,7 @@ export async function criarAnimal(nome_ani: string,
     id_porte: number,
     id_especie: number,
     id_sexo: number,
+    id_status: number,
     temperamentos: Array<Number>,
     sociaveis: Array<Number>,
     vivencias: Array<Number>,) {
@@ -25,6 +26,7 @@ export async function criarAnimal(nome_ani: string,
             id_porte,
             id_especie,
             id_sexo,
+            id_status,
             temperamentos,
             sociaveis,
             vivencias
@@ -38,7 +40,7 @@ export async function criarAnimal(nome_ani: string,
 
 export async function getAnimais() {
     try {
-        const response = await authenticatedAPI.get(`/animais`);
+        const response = await authenticatedAPI.get(`/animaisaprovados`);
         return response.data;
     } catch (err) {
         throw err;
