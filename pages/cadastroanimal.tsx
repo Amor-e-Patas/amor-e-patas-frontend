@@ -155,7 +155,7 @@ export default function Usuario() {
                     images,
                     id_animal
                 )
-            alert("Animal criado ;)");
+            alert("Animal cadastrado com sucesso e aguardando análise.");
             router.push("/meusanimais");
         } catch (error) {
             console.log(error);

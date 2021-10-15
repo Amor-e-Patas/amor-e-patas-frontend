@@ -36,3 +36,7 @@ button {
   cursor: pointer;
 }
 
+.pointer:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}

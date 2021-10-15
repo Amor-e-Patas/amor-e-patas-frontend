@@ -245,6 +245,7 @@ export default function Usuario() {
                   value="Voltar"
                   onClick={(e) => {
                     e.preventDefault();
+                    router.back();
                   }}
                 />
               </div>

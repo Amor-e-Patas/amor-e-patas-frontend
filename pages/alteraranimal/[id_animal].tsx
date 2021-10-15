@@ -289,7 +289,7 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
 
                         <div>
                             <label>
-                                <input type="text" className={styles.cor} placeholder="Cor" name="confirsenha" id="confirsenha" onChange={(e) => setCor(e.currentTarget.value)} />
+                                <input type="text" className={styles.cor} value={cor} placeholder="Cor" name="confirsenha" id="confirsenha" onChange={(e) => setCor(e.currentTarget.value)} />
                             </label>
                             <label>
                                 <select name="desaparecido" id="desaparecido" className={styles.desapa} onChange={(e) => setDesaparecido(e.currentTarget.value)}>
@@ -423,8 +423,8 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
 
                             <div className={styles.botoes}>
                                 <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
-                                    e.preventDefault()
-                                    router.push(`/meuanimal/${id_animal}`);
+                                    e.preventDefault();
+                                    router.back();
                                 }} />
 
                                 <button className={styles.botaoenviar} value="Enviar" onClick={(e) => {

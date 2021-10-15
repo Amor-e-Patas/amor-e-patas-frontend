@@ -1,11 +1,11 @@
-.titulo{
+.titulo {
   font: normal normal;
   font-family: Raleway;
   text-align: center;
-  padding-top: 1.5%; 
+  padding-top: 1.5%;
 }
 
-.modal{
+.modal {
   display: none;
   height: 90px;
   width: 300px;
@@ -13,15 +13,45 @@
   left: 40%;
   top: 50%;
   /*transform: translate(-50%, -50%);*/
-  -webkit-box-shadow:0 0 10px rgb(0,0,0);
-  -moz-box-shadow:0 0 10px rgb(0,0,0); 
-  box-shadow:0 0 10px rgb(0,0,0);
+  -webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
+  -moz-box-shadow: 0 0 10px rgb(0, 0, 0);
+  box-shadow: 0 0 10px rgb(0, 0, 0);
   text-align: center;
   background-color: white;
- 
 }
 
-.botoes{
+.modalFoto {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  margin-left: 32%;
+  /*top: 50%;*/
+ /* transform: translate(-50%, -50%);*/
+  -webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
+  -moz-box-shadow: 0 0 10px rgb(0, 0, 0);
+  box-shadow: 0 0 10px rgb(0, 0, 0);
+  text-align: center;
+}
+
+.imagemodal{
+  min-width: 300px;
+  min-height: 400px;
+  max-width: 500px;
+  max-height: 600px;
+}
+
+.divgrid {
+  display: inline;
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-right: 6px;
+  margin-bottom: 5%;
+  margin-left: 5%;
+}
+
+.botoes {
   display: grid;
   margin-left: 34%;
   margin-top: 10px;
@@ -29,31 +59,25 @@
   grid-template-columns: 0.1fr 0.1fr;
 }
 
-
-.quadros{
+.quadros {
   display: grid;
   margin-top: 3%;
   grid-template-columns: 0.5fr 1fr;
   border-radius: 15px;
   padding-bottom: 2%;
   border-radius: 9px;
-  
 }
 
-
-.item{
-  font: normal normal 600 15px Raleway;  
-  
+.item {
+  font: normal normal 600 15px Raleway;
 }
 
-.endereco{
+.endereco {
   height: 20px;
   width: 20px;
-  
 }
 
-
-.containertemp{
+.containertemp {
   display: grid;
   margin-left: 50%;
   grid-template-columns: 1fr 1fr 1fr;
@@ -61,90 +85,79 @@
   margin-top: -10%;
 }
 
-
-.p{
+.p {
   font: normal normal 600 25px/25px Raleway;
   padding-top: 15%;
 }
 
-.pnome{
-  
-  color: #67127c ;
+.pnome {
+  color: #67127c;
   font: normal normal 600 25px/25px Raleway;
   font-weight: bolder;
-
 }
 
-.botaovoltar{
+.botaovoltar {
   margin-top: 5%;
   width: 30%;
   height: 48px;
   margin-right: 15%;
   margin-left: 13%;
   background: var(--unnamed-color-b7e394) 0% 0% no-repeat padding-box;
-  background: #B7E394 0% 0% no-repeat padding-box;
+  background: #b7e394 0% 0% no-repeat padding-box;
   font: normal normal 600 15px/22px Raleway;
   opacity: 1;
 }
 
-.botaoenviar{
+.botaoenviar {
   width: 10%;
   height: 48px;
-  background: #B7E394 0% 0% no-repeat padding-box;
+  background: #b7e394 0% 0% no-repeat padding-box;
   font: normal normal 600 15px/22px Raleway;
   border-radius: 5px;
   opacity: 1;
 }
 
-.botaoexcluir{
+.botaoexcluir {
   width: 10%;
   height: 48px;
   margin-left: 15px;
-  background:#ff6374 0% 0% no-repeat padding-box;
+  background: #ff6374 0% 0% no-repeat padding-box;
   font: normal normal 600 15px/22px Raleway;
   border-radius: 5px;
   opacity: 1;
 }
 
-.botoes{
+.botoes {
   display: -ms-inline-grid;
-
 }
 
-.checkbox{
+.checkbox {
   display: -moz-grid-line;
 }
 
-
-.imagesContainer{
+.imagesContainer {
   display: flex;
   /*grid-template-columns: repeat(1, 1fr);*/
- /* grid-gap: 16px;*/
- flex-wrap: wrap ;
-
-
+  /* grid-gap: 16px;*/
+  flex-wrap: wrap;
 }
 
-
-.titulo{
+.titulo {
   font: normal normal;
   font-family: Raleway;
   text-align: center;
 }
 
-
-.amor{
-  color: #FFB800 ;
+.amor {
+  color: #ffb800;
   margin-top: 2%;
   font: normal normal 600 17px/22px Raleway;
   text-align: left;
 
   /*padding-top: 2%; */
-  
-   
 }
 
-.link{
+.link {
   margin-left: 55%;
   font: normal normal 600 15px/22px Raleway;
   letter-spacing: 0.32px;
@@ -152,20 +165,23 @@
   opacity: 1;
 }
 
-
-.imagem{
-    /*max-width:50%;
+.imagem {
+  /*max-width:50%;
     max-height:50%;*/
-    width: 90%;
-    margin-left: 5%;
-    height: 10%;
-    border-radius: 10px;
-
-      /*idth: 437px;
+  width: 90%;
+  margin-left: 5%;
+  height: 10%;
+  border-radius: 10px;
+  /*idth: 437px;
     height: 320px;*/
-
-
 }
 
 
+.imagem2 {
+  width: 100px;
+  height: 100px;
+  margin-left: 25%;
+  border-radius: 10px;
+  margin-top: 5%;
+}
 

@@ -91,6 +91,8 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
     const [previwImages, setPreviewImages] = useState<string[]>([]);
     const [animais, setAnimais] = useState<Animal>();
     const [mostrarModal, setMostrarModal] = useState(false);
+    const [mostrarModalFoto, setMostrarModalFoto] = useState(false);
+    const [image, setImage] = useState("")
 
     useEffect(() => {
         async function fetchAPI() {
@@ -141,12 +143,41 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
             <div >
                 <Navbar />
                 <div>
+                    <p onClick={() => router.back()} className="pointer"> Voltar</p>
                     <div className={styles.quadros}>
                         <div className={styles.item}>
                             <div className={styles.item}>
                                 <img src={`http://localhost:3333/${animais?.images[0].filepath}`} className={styles.imagem} alt="" />
                             </div>
+
+                            <div>
+                                <tr>
+                            {
+                                    animais?.images.map((image) =>
+                                    <td>
+                                    <img src={`http://localhost:3333/${image.filepath}`} className={styles.imagem2} 
+                                    onClick={(e) => {e.preventDefault()
+                                                    setImage(`http://localhost:3333/${image.filepath}`)
+                                                    setMostrarModalFoto(true)}}/>             
+                                    </td>
+                                    )
+                                } 
+                            </tr>
+                            </div>
                         </div>
+
+                        <div className={styles.modalFoto} style={{ display: mostrarModalFoto ? "block" : "none" }}>
+                                
+                                    <div>
+                                            <button onClick={(e) => {
+                                                e.preventDefault()
+                                                setMostrarModalFoto(false);
+                                            }}> X</button>
+                                            </div>
+                                            <img src={image} className={styles.imagemodal} />
+                                        
+                                
+                            </div>
 
                         <div className={styles.item}>
                             <p className={styles.pnome}> {nome_ani}</p>

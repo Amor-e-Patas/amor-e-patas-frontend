@@ -1,218 +1,155 @@
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import api from "../services/services";
-import React, { useState, useEffect, ChangeEvent } from "react";
-import styles from "../styles/components/FormMeuAnimal.module.css";
-import Link from 'next/link';
+import styles from "../styles/components/Index.module.css";
+import Head from "next/head";
+import { getAnimal } from "../services/animal";
+import { criarAnimal, getAnimaisApro } from "../services/animal";
 import { useRouter } from "next/router";
-import { getTemperamento } from "../services/temperamento";
-import { getSociavel } from "../services/sociavel";
-import { getVivencia } from "../services/vivencia";
-import { getAnimal, deleteAnimal } from "../services/animal";
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from "next";
-
-interface Temp {
-    id_temperamento: number,
-    descricao: string
-}
-
-interface Soci {
-    id_sociavel: number,
-    descricao: string
-}
-
-interface Vive {
-    id_vivencia: number,
-    descricao: string
-}
+import React, { useState, useEffect, ChangeEvent } from "react";
+import Link from "next/link";
 
 interface Animal {
-    nome_ani: string,
-    idade: string,
-    cor: string,
-    caracteristica_animal: string,
-    data_nasc: string,
-    desaparecido: string,
-    id_usuario: number,
-    id_porte: number,
-    id_especie: number,
-    id_sexo: number,
-    nome_usu: string,
-    tipo_porte: string,
-    nome_esp: string,
-    tipo_sexo: string,
-    images: Array<{
-        filepath: string;
-    }>,
-    temperamentos: Array<{
-        id_temperamento: number,
-        descricao: string;
-    }>;
+  nome_ani: string;
+  id_animal: number;
+  id_status: number;
+  tipo_sexo: string;
+  id_sexo: number;
+  id_especie: number;
+  nome_esp: string;
+  id_porte: number;
+  tipo_porte: string;
+  images: Array<{
+    filepath: string;
+  }>;
 }
 
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+export default function Home() {
+  const router = useRouter();
+  const [images, setImages] = useState<File[]>([]);
+  const [id_porte, setPorte] = useState<Number>();
+  const [id_especie, setEspecie] = useState<Number>();
+  const [id_sexo, setSexo] = useState<Number>();
+  const [animais, setAnimais] = useState(Array<Animal>());
+  const [animaisFiltrados, setAnimaisFiltrados] = useState(Array<Animal>());
 
-    return {
-        paths: [],
-        fallback: 'blocking'
-    }
-}
-
-export const getStaticProps: GetStaticProps = async (
-    context: GetStaticPropsContext
-) => {
-
-    return {
-        props: {
-            id_animal: context.params?.id_animal
-        },
-    }
-}
-
-export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof getStaticProps>) {
-    const [nome_ani, setNome] = useState("");
-    const [idade, setIdade] = useState("");
-    const [cor, setCor] = useState("");
-    const [caracteristica_animal, setCaracteristica] = useState("");
-    const [data_nasc, setData] = useState("");
-    const [desaparecido, setDesaparecido] = useState("");
-    const [id_porte, setPorte] = useState("");
-    const [id_usuario, setUsuario] = useState("");
-    const [nome_esp, setEspecie] = useState("");
-    const [tipo_sexo, setSexo] = useState("");
-    const router = useRouter();
-    const [temperamentos, setTemperamentos] = useState(Array<Temp>());
-    const [selectTemp, setSelectTemp] = useState(Array<Number>());
-    const [sociaveis, setSociavel] = useState(Array<Soci>());
-    const [selectSoci, setSelectSoci] = useState(Array<Number>());
-    const [vivencias, setVivencia] = useState(Array<Vive>());
-    const [selectVive, setSelectVive] = useState(Array<Number>());
-    const [filepath, setImages] = useState<File[]>([]);
-    const [previwImages, setPreviewImages] = useState<string[]>([]);
-    const [animais, setAnimais] = useState<Animal>();
-    const [mostrarModal, setMostrarModal] = useState(false);
-
-    useEffect(() => {
-        async function fetchAPI() {
-            try {
-                const temperamento = await getTemperamento();
-                const sociavel = await getSociavel();
-                const vivencia = await getVivencia();
-                const animais = await getAnimal(id_animal);
-                setAnimais(animais);
-                setNome(animais.nome_ani);
-                setEspecie(animais.nome_esp);
-                setSexo(animais.tipo_sexo);
-                setIdade(animais.idade);
-                setCaracteristica(animais.caracteristica_animal);
-
-
-                setTemperamentos(animais.temperamentos);
-
-            } catch (err) {
-                console.log(err);
-            }
-        }
-
-        fetchAPI();
-    }, []);
-
-
-
-    function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
-        if (!event.target.files) {
-            return;
-        };
-
-        const selectedImages = Array.from(event.target.files);
-
-
-        setImages(selectedImages);
-
-        const selectedImagesPreview = selectedImages.map(image => {
-            return URL.createObjectURL(image);
-        });
-
-        setPreviewImages(selectedImagesPreview);
+  useEffect(() => {
+    async function fetchAPI() {
+      try {
+        const animais = await getAnimaisApro();
+        setAnimaisFiltrados(animais);
+        setAnimais(animais);
+        console.log(animais);
+      } catch (err) {
+        console.log(err);
+      }
     }
 
-    return (
-        <>
-            <div >
-                <Navbar />
-                <div>
-                    <div className={styles.quadros}>
-                        <div className={styles.item}>
-                            <div className={styles.item}>
-                                <img src={`http://localhost:3333/${animais?.images[0].filepath}`} className={styles.imagem} alt="" />
-                            </div>
-                        </div>
+    fetchAPI();
+  }, []);
 
-                        <div className={styles.item}>
-                            <p className={styles.pnome}> {nome_ani}</p>
+  useEffect(() => {
+    let animaisTemp = [...animais];
 
-                            <div className={styles.infos}>
-                                <ul>
-                                    <li>{nome_esp}</li>
-                                    <li>{tipo_sexo}</li>
-                                    <li>{idade}</li>
-                                </ul>
-                            </div>
-                            <div className={styles.infos}>
-                                <div className={styles.item}>
-                                    <img src="/img/endereco.png" className={styles.endereco} alt="" /> Localizado em
-                                </div>
-                                <br />
-                            </div>
-                            
-                            <div className={styles.modal} style={{ display: mostrarModal ? "block" : "none" }}>
-                                <p>botar dados de contato do anunciante
-                                    <div className={styles.botoes}>
-                                        <div>
-                                            <button onClick={(e) => {
-                                                e.preventDefault()
-                                                deleteAnimal(id_animal)
-                                                router.push("/meusanimais");
-                                            }}> Sim</button>
-                                        </div>
-                                        <div>
-                                            <button onClick={(e) => {
-                                                e.preventDefault()
-                                                setMostrarModal(false);
-                                            }}> Não</button>
-                                        </div>
-                                    </div>
-                                </p>
-                            </div>
-                            <button className={styles.botaoenviar} value="excluir" onClick={(e) => {
-                                e.preventDefault()
-                                setMostrarModal(true);
-                            }}>Adotar</button>
+    if (id_porte != undefined) {
+      animaisTemp = animaisTemp.filter((animal) => animal.id_porte == id_porte);
+    }
 
-                            <p className={styles.amor}>Caracteristicas</p>
-                            <ul>
-                                <li>{caracteristica_animal}</li>
-                            </ul>
+    if (id_sexo != undefined) {
+      animaisTemp = animaisTemp.filter((animal) => animal.id_sexo == id_sexo);
+    }
 
-                            <p className={styles.amor}>Mais Detalhes</p>
-                            <ul>
-                                {
-                                    temperamentos.map((temperamento) =>
-                                        <li>{temperamento.descricao}</li>
-                                    )
-                                }
-                            </ul>
-                        </div>
+    if (id_especie != undefined) {
+      animaisTemp = animaisTemp.filter(
+        (animal) => animal.id_especie == id_especie
+      );
+    }
+    console.log(animaisTemp, "animal_temp22");
 
-                    </div>
+    setAnimaisFiltrados(animaisTemp);
 
-                    <div className={styles.quadros}>
+    console.log(id_porte, id_especie, id_sexo, "id_porte, id_especie, id_sexo");
 
-                    </div>
+    console.log(animaisFiltrados, "animal_temp333");
+  }, [id_porte, id_especie, id_sexo]);
 
-                </div>
-                <Footer />
-            </div>
-        </>
-    )
+  return (
+    <div className={styles.body}>
+      <div>
+        <Head>
+          <title>Amor & Patas</title>
+        </Head>
+        <Navbar />
+        <div>
+          <div>
+            <tr>
+              <td>
+                <select
+                  className={styles.select}
+                  onChange={(e) =>
+                    setPorte(parseInt(e.target.value) || undefined)
+                  }
+                >
+                  <option value={undefined} selected>
+                    Selecione o porte
+                  </option>
+                  <option value="2">Pequeno</option>
+                  <option value="3">Médio</option>
+                  <option value="1">Grande</option>
+                </select>
+              </td>
+              <td>
+                <select
+                  className={styles.select}
+                  onChange={(e) =>
+                    setSexo(parseInt(e.target.value) || undefined)
+                  }
+                >
+                  <option value={undefined} selected>
+                    Selecione o sexo
+                  </option>
+                  <option value="1">Fêmea</option>
+                  <option value="2">Macho</option>
+                </select>
+              </td>
+              <td>
+                <select
+                  className={styles.select}
+                  onChange={(e) =>
+                    setEspecie(parseInt(e.target.value) || undefined)
+                  }
+                >
+                  <option value={undefined} selected>
+                    Selecione a espécie
+                  </option>
+                  <option value="1">Gato</option>
+                  <option value="2">Cachorro</option>
+                </select>
+              </td>
+            </tr>
+          </div>
+          
+          <div>
+            <h1 className={styles.adote}>Não compre, adote</h1>
+          </div>
+
+          <div className={styles.animais}>
+            {animaisFiltrados.map((animal) => (
+              <div className={styles.item}>
+                <img
+                  src={`http://localhost:3333/${animal.images[0].filepath}`}
+                  className={styles.imagem}
+                  alt=""
+                />
+                <hr className={styles.hr2} />
+                <p className={styles.pnome}>{animal.nome_ani}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div>
+        <Footer />
+      </div>
+    </div>
+  );
 }
