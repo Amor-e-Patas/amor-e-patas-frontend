@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import styles from "../styles/components/Index.module.css";
 import Head from "next/head";
 import { getAnimal } from "../services/animal";
-import { criarAnimal, getAnimaisApro } from "../services/animal";
+import { criarAnimal, getAnimaisApro} from "../services/animal";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import Link from "next/link";
@@ -70,7 +70,7 @@ export default function Home() {
                   <div className={styles.item}>
                     <img src={`http://localhost:3333/${animal.images[0].filepath}`} className={styles.imagem} alt="" />
                     <hr className={styles.hr2} />
-                    <p className={styles.pnome}>{animal.nome_ani}</p>
+                    <p className={styles.pnome}><Link href={`/animalindex/${animal.id_animal}`} >{animal.nome_ani}</Link></p>
                   </div>
              )
         }

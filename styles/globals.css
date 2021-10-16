@@ -36,7 +36,14 @@ button {
   cursor: pointer;
 }
 
+.pointer{
+  margin-left: 2%;
+  font: normal 11pt/15px  Helvetica,sans-serif;
+  
+}
+
 .pointer:hover{
   cursor: pointer;
   text-decoration: underline;
+  
 }

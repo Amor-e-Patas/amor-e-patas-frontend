@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/auth";
 import moment from 'moment';
+import { LogoNodejs } from 'react-ionicons'
 import { alterarPhone, getPhone } from "../services/telefone";
 import Cookies from "js-cookie";
 import styles from "../styles/components/FormAlterarUsuario.module.css";
@@ -52,12 +53,15 @@ export default function AlterarTelefone() {
           <title>Telefone</title>
         </Head>
         <Navbar />
+        
         <form className={styles.form} name="form">
-          <div className={styles.container}>
+        <p onClick={() => router.back()} className="pointer"></p>
+        
+          <div className={styles.containerTel}>
             <h3 className={styles.titulo}>Atualizar Telefone</h3>
             <div>
               <div>
-                <input type="text" name="endereco" className={styles.endereco} value={telefone} placeholder="Telefone" onChange={(e) => setTelefone(e.currentTarget.value)} />
+                <input type="text" name="endereco" className={styles.nome2} value={telefone} placeholder="Telefone" onChange={(e) => setTelefone(e.currentTarget.value)} />
 
               </div>
 
