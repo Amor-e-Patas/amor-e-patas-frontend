@@ -41,6 +41,9 @@ interface Animal {
     tipo_porte: string,
     nome_esp: string,
     tipo_sexo: string,
+    cidade: string,
+    estado: string,
+    num_telefone: string,
     images: Array<{
         filepath: string;
     }>,
@@ -92,6 +95,9 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
     const [animais, setAnimais] = useState<Animal>();
     const [mostrarModal, setMostrarModal] = useState(false);
     const [mostrarModalFoto, setMostrarModalFoto] = useState(false);
+    const [telefone, setTelefone] = useState("");
+    const [cidade, setCidade] = useState("");
+    const [estado, setEstado] = useState("");
     const [image, setImage] = useState("")
 
     useEffect(() => {
@@ -101,12 +107,16 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
                 const sociavel = await getSociavel();
                 const vivencia = await getVivencia();
                 const animais = await getAnimal(id_animal);
+                console.log(animais);
                 setAnimais(animais);
                 setNome(animais.nome_ani);
                 setEspecie(animais.nome_esp);
                 setSexo(animais.tipo_sexo);
                 setIdade(animais.idade);
                 setCaracteristica(animais.caracteristica_animal);
+                setCidade(animais.cidade);
+                setEstado(animais.estado);
+                setTelefone(animais.num_telefone);
 
 
                 setTemperamentos(animais.temperamentos);
@@ -191,7 +201,7 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
                             </div>
                             <div className={styles.infos}>
                                 <div className={styles.item}>
-                                    <img src="/img/endereco.png" className={styles.endereco} alt="" /> Localizado em
+                                    <img src="/img/endereco.png" className={styles.endereco} alt="" /> Localizado em {cidade + ", " + estado}
                                 </div>
                                 <br />
                             </div>
