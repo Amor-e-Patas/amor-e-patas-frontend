@@ -25,9 +25,13 @@ export default function Navbar() {
             <Link href="/noticiasauth">
               <li>Blog</li>
             </Link>
+            <Link href="/adotar">
+              <li>Adotar</li>
+            </Link>
             <Link href="/desaparecidos">
               <li>Desaparecidos</li>
             </Link>
+            
             
 
             <li>
@@ -68,9 +72,13 @@ export default function Navbar() {
               <Link href="/noticias">
                 <li>Blog</li>
               </Link>
+              <Link href="/adotar">
+              <li>Adotar</li>
+            </Link>
               <Link href="/desaparecidos">
                 <li>Desaparecidos</li>
               </Link>
+              
 
               <li>
                 <div className={styles.dropdown}>
@@ -104,10 +112,16 @@ export default function Navbar() {
           <Link href="/noticias">
             <li>Blog</li>
           </Link>
+
+          <Link href="/adotar">
+              <li>Adotar</li>
+            </Link>
+
           <Link href="/desaparecidos">
             <li>Desaparecidos</li>
           </Link>
 
+          
           <li>
             <Link href="/login" passHref>
               <button >Entrar</button>

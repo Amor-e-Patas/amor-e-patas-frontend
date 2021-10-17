@@ -189,7 +189,7 @@ export default function Usuario({
               <div>
                 <p className={styles.autor}>Escrito por {autor} </p>
               </div>
-              <div dangerouslySetInnerHTML={{ __html: corpo }}></div>
+              <div dangerouslySetInnerHTML={{ __html: corpo }} className={styles.noticia}></div>
             </div>
           </div>
           <br />

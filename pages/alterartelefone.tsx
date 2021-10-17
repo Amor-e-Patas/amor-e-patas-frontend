@@ -55,7 +55,7 @@ export default function AlterarTelefone() {
         <Navbar />
         
         <form className={styles.form} name="form">
-        <p onClick={() => router.back()} className="pointer"></p>
+        <p onClick={() => router.back()} className="pointer"> Voltar</p>
         
           <div className={styles.containerTel}>
             <h3 className={styles.titulo}>Atualizar Telefone</h3>

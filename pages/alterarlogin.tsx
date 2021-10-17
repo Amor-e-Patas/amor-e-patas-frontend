@@ -62,6 +62,7 @@ export default function Login() {
             <VerifyAuth />
             <div >
                 <Navbar />
+                <p onClick={() => router.back()} className="pointer"> Voltar</p>
                 <div className={styles.container} >
                     <div className={styles.amor}>
                         <h2 className={styles.h2}>Atualizar Login</h2>

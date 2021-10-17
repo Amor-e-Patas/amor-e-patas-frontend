@@ -219,7 +219,8 @@ export default function Usuario() {
 
                                 <div className={styles.botoes}>
                                     <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
-                                        e.preventDefault()
+                                        e.preventDefault();
+                                        router.back();
                                     }} />
                                     <input type="submit" className={styles.botaoenviar} value="Postar" onClick={(e) => {
                                         e.preventDefault()

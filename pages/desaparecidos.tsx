@@ -44,6 +44,7 @@ export default function Usuario() {
     const [data_nasc, setData] = useState("");
     const [desaparecido, setDesaparecido] = useState("");
     const [id_porte, setPorte] = useState("");
+    const [id_status, setStatus] = useState("3");
     const [id_usuario, setUsuario] = useState("");
     const [id_especie, setEspecie] = useState("");
     const [id_sexo, setSexo] = useState("");
@@ -113,6 +114,7 @@ export default function Usuario() {
                     parseInt(id_porte),
                     parseInt(id_especie),
                     parseInt(id_sexo),
+                    parseInt(id_status),
                     selectTemp,
                     selectSoci,
                     selectVive)

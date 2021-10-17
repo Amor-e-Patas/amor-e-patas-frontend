@@ -104,6 +104,7 @@ export default function Alterarendereco() {
         </Head>
         <Navbar />
         <form className={styles.form} name="form">
+        <p onClick={() => router.back()} className="pointer"> Voltar</p>
           <div className={styles.container}>
             <h3 className={styles.titulo}>Atualizar Endereço</h3>
             <div>

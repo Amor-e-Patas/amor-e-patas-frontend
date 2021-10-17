@@ -68,6 +68,7 @@ export default function MeuPerfil() {
       </Head>
       <Navbar />
       <form className={styles.form} name="form">
+      <p onClick={() => router.back()} className="pointer"> Voltar</p>
         <div className={styles.container}>
           <h2 className={styles.titulo}>Atualizar Cadastro de Usuário</h2>
           <div>

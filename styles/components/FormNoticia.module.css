@@ -65,6 +65,11 @@
   
 }
 
+.noticia{
+  font: 11pt/22px Verdana;
+  text-align: justify;
+}
+
 .comen{
   font: 11pt/15px  Helvetica,sans-serif;
   font-weight: bold;
