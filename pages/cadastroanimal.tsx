@@ -156,7 +156,12 @@ export default function Usuario() {
                     id_animal
                 )
             alert("Animal cadastrado com sucesso e aguardando análise.");
-            router.push("/animaisanalise");
+
+            if (desaparecido == "S") {
+                router.push("/desaparecidosanalise");
+            } else{
+                router.push("/animaisanalise");
+            }
         } catch (error) {
             console.log(error);
             alert("Erro ao criar animal.")
