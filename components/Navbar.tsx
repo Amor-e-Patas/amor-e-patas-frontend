@@ -28,7 +28,7 @@ export default function Navbar() {
             <Link href="/adotar">
               <li>Adotar</li>
             </Link>
-            <Link href="/desaparecidos">
+            <Link href="/animaisdesaparecidos">
               <li>Desaparecidos</li>
             </Link>
             
@@ -75,7 +75,7 @@ export default function Navbar() {
               <Link href="/adotar">
               <li>Adotar</li>
             </Link>
-              <Link href="/desaparecidos">
+              <Link href="/animaisdesaparecidos">
                 <li>Desaparecidos</li>
               </Link>
               
@@ -90,6 +90,8 @@ export default function Navbar() {
                     <Link href="/desaparecidos"><p>Meus animais desaparecidos</p></Link>
                     <Link href="/animaisnegados"><p>Animais não aprovados</p></Link>
                     <Link href="/animaisanalise"><p>Animais em análise</p></Link>
+                    <Link href="/desaparecidosanalise"><p>Animais desaparecidos em análise</p></Link>
+                    <Link href="/reprovadosdesaparecidos"><p>Animais desaparecidos não aprovados</p></Link>
                     <Link href="/alterarlogin"><p>Alterar Senha</p></Link>
                     <Link href="/logout"><p>Sair</p></Link>
                   </div>
@@ -117,7 +119,7 @@ export default function Navbar() {
               <li>Adotar</li>
             </Link>
 
-          <Link href="/desaparecidos">
+          <Link href="/animaisdesaparecidos">
             <li>Desaparecidos</li>
           </Link>
 
