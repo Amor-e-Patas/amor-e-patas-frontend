@@ -58,7 +58,7 @@ export async function getAnimaisApro() {
 
 export async function getAnimaisEmAnalise() {
     try {
-        const response = await authenticatedAPI.get(`/anisanalisenormais`);
+        const response = await authenticatedAPI.get(`/animaisanalise`);
         return response.data;
     } catch (err) {
         throw err;
@@ -68,6 +68,33 @@ export async function getAnimaisEmAnalise() {
 export async function getAnimaisDesaparecidos() {
     try {
         const response = await authenticatedAPI.get(`/animaisdesaparecidos`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function getAnimaisDesaparecidosAnalise() {
+    try {
+        const response = await authenticatedAPI.get(`/anianalisedesaparecidos`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function getAnimaisDesaparecidosReprovados() {
+    try {
+        const response = await authenticatedAPI.get(`/animalreprovdesa`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function getAnimaisDesaparecidosAll() {
+    try {
+        const response = await authenticatedAPI.get(`/anisaprovdesaparecidos`);
         return response.data;
     } catch (err) {
         throw err;
