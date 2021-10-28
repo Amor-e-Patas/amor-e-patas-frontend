@@ -4,7 +4,7 @@ import { InputLabel, FormLabel, Container, StylesProvider } from '@material-ui/c
 import FormControl from '@material-ui/core/FormControl';
 import api from "../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { criarAnimal, getAnimaisEmAnalise } from "../services/animal";
+import { criarAnimal, getAnimaisEmAnalise, getAnimaisEmAnalise2 } from "../services/animal";
 import styles from "../styles/components/FormMeusAnimais.module.css";
 import Link from 'next/link';
 import { useRouter } from "next/router";
@@ -65,7 +65,7 @@ export default function Usuario() {
                 const temperamento = await getTemperamento();
                 const sociavel = await getSociavel();
                 const vivencia = await getVivencia();
-                const animais = await getAnimaisEmAnalise();
+                const animais = await getAnimaisEmAnalise2();
                 console.log(animais,'teste');
 
                 //setTemperamentos(temperamento);

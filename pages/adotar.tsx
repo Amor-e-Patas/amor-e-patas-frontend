@@ -141,7 +141,7 @@ export default function Home() {
                   alt=""
                 />
                 <hr className={styles.hr2} />
-                <p className={styles.pnome}>{animal.nome_ani}</p>
+                <p className={styles.pnome}>{animal.nome_ani}<Link href={`/animalindex/${animal.id_animal}`} >{animal.nome_ani}</Link></p>
               </div>
             ))}
           </div>

@@ -65,6 +65,15 @@ export async function getAnimaisEmAnalise() {
     }
 }
 
+export async function getAnimaisEmAnalise2() {
+    try {
+        const response = await authenticatedAPI.get(`/animaisanalise2`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
 export async function getAnimaisDesaparecidos() {
     try {
         const response = await authenticatedAPI.get(`/animaisdesaparecidos`);
