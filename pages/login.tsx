@@ -12,26 +12,26 @@ export default function Login() {
     const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
     async function handleLogin() {
-        if (email == "" || password == "") {
-            alert("Preencha todos os campos.");
+        if (email == "" ) {
+            alert("Por favor, insira seu e-mail.");
             return;
         }
+
+        if( password == ""){
+            alert("Por favor, insira sua senha.");
+            return;
+        }
+
         try {
             const token = await login(email, password);
             Cookies.set('user-token', token);
             console.log(token);
             window.location.href = "/";
         } catch (err) {
-            alert("Usuário ou senha incorretos.")
+            alert("E-mail e/ou senha incorretos.")
         }
     }
 
-    /* useEffect(() => {
-         if (isAuthenticated) {
-             window.location.href = "/";
-     
-         }
-     }, [isAuthenticated]);*/
 
     return (
 
