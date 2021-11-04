@@ -7,7 +7,7 @@ import styles from "../styles/components/FormUsuario.module.css";
 import Link from 'next/link';
 import { formata_CPF, valida_CPF, valida_email, formata_telefone } from '../utils/format_cpf_email';
 import axios from "axios";
-
+import { useRouter } from "next/router";
 
 
 export default function Usuario() {
@@ -22,6 +22,7 @@ export default function Usuario() {
     const [numero, setNumero] = useState("");
     const [bairro, setBairro] = useState("");
     const [cep, setCep] = useState("");
+    const router = useRouter();
     const [cidade, setCidade] = useState("");
     const [estado, setEstado] = useState("");
     const [referencia, setReferencia] = useState("");
@@ -89,7 +90,7 @@ export default function Usuario() {
         }
 
         if (senha.length < 6 || senha.length > 10) {
-            alert("Senha não atende os requisitos mínimos.");
+            alert("A senha deve conter mais de 6 caracteres.");
             return;
         }
 
@@ -301,8 +302,9 @@ export default function Usuario() {
                         <div className={styles.botoes}>
                             <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
                                 e.preventDefault()
+                                router.back();
                             }} />
-                            <input type="submit" className={styles.botaoenviar} value="Enviar" onClick={(e) => {
+                            <input type="submit" className={styles.botaoenviar} value="Cadastrar" onClick={(e) => {
                                 e.preventDefault()
                                 eventoCriarUsuario()
                             }} />
