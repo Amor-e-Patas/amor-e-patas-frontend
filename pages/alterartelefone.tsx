@@ -2,9 +2,6 @@ import Navbar from "../components/Navbar"
 import Footer from "../components/Footer";
 import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../contexts/auth";
-import moment from 'moment';
-import { LogoNodejs } from 'react-ionicons'
 import { alterarPhone, getPhone } from "../services/telefone";
 import Cookies from "js-cookie";
 import styles from "../styles/components/FormAlterarUsuario.module.css";

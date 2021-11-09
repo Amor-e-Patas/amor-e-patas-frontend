@@ -54,7 +54,8 @@ export default function Usuario() {
                 const sociavel = await getSociavel();
                 const vivencia = await getVivencia();
                 console.log(temperamento);
-
+                console.log(sociavel);
+                console.log(vivencia);
                 setTemperamentos(temperamento);
                 setSociavel(sociavel);
                 setVivencia(vivencia);
