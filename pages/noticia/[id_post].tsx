@@ -174,9 +174,8 @@ export default function Usuario({
                     <td>{assunto.nome_ass} </td>
                   ))}
                   <td>
-                    <p className={styles.autor}>
-                      {" "}
-                      | {moment(data).format("DD/MM/YYYY")}{" "}
+                    <p className={styles.autor}>                   
+                      | {moment(data).format("DD/MM/YYYY")}
                     </p>
                   </td>
                 </tr>
