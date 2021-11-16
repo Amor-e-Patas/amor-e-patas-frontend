@@ -40,6 +40,7 @@ export default function Navbar() {
                 <div className={styles.dropdowncontent}>
                   <Link href="/homemeuperfil">Meu Perfil</Link>
                   <Link href="/analiseanimal"><p>Analise de animal</p></Link>
+                  <Link href="/analiseanimaisdesa"><p>Analise de animal desaparecido</p></Link>
                   <Link href="/cadastroanimal"><p>Cadastrar animal</p></Link>
                   <Link href="/cadastronoticia"><p>Cadastrar notícia</p></Link>
                   <Link href="/meusanimais"><p>Meus animais</p></Link>
