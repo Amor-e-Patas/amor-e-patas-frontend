@@ -84,9 +84,6 @@ export default function Usuario() {
         setPreviewImages(selectedImagesPreview);
     }
 
-    function uploadImageCallBack() {
-        () => { }
-    }
 
     async function eventoCriarPost() {
         if (titulo == "") {
@@ -94,10 +91,13 @@ export default function Usuario() {
             return;
         }
 
-        let imagens = (document.getElementById("image") as HTMLInputElement).value;
+        if (autor == "") {
+            alert("Preencha o autor.");
+            return;
+        }
 
-        if (imagens == "") {
-            alert("Selecione uma imagem.");
+        if (images.length != 1) {
+            alert("Selecione uma imagem");
             return;
         }
 
@@ -211,7 +211,7 @@ export default function Usuario() {
                                     <div className={styles.arquivos}>
                                         <label>
                                             {/*} <input multiple type="file" name="fotos" className={styles.fotos} placeholder="Referência:" />*/}
-                                            <input onChange={handleSelectImages} type="file" id="image" />
+                                            { images.length < 1 ? <input onChange={handleSelectImages} type="file" id="image" /> : <></> }
                                         </label>
                                     </div>
                                 </div>

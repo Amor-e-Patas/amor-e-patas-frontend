@@ -127,13 +127,15 @@ export default function Usuario() {
             return;
         }
 
-        let imagens = (document.getElementById("image[]") as HTMLInputElement).value;
-
-        if (imagens == "") {
+        if (images.length === 0) {
             alert("Selecione uma ou mais imagens.");
             return;
         }
 
+        if (images.length >= 5){
+            alert("Selecione no máximo 5 imagens.");
+            return;
+        }
 
         try {
             const id_animal = await
@@ -160,7 +162,7 @@ export default function Usuario() {
 
             if (desaparecido == "S") {
                 router.push("/desaparecidosanalise");
-            } else{
+            } else {
                 router.push("/animaisanalise");
             }
         } catch (error) {
@@ -345,7 +347,11 @@ export default function Usuario() {
                                     <div className={styles.arquivos}>
                                         <label>
                                             {/*} <input multiple type="file" name="fotos" className={styles.fotos} placeholder="Referência:" />*/}
-                                            <input multiple onChange={handleSelectImages} type="file" id="image[]" />
+                                            {!(images.length >= 5) ? (
+                                                <input multiple onChange={handleSelectImages} type="file" id="image[]" />
+                                            ) : (
+                                                <></>
+                                            )}                                            
                                         </label>
                                     </div>
                                 </div>

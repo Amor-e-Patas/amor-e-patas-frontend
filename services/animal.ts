@@ -83,6 +83,15 @@ export async function getAnimaisDesaparecidos() {
     }
 }
 
+export async function getAnimaisDesaparecidosAnalise2() {
+    try {
+        const response = await authenticatedAPI.get(`/anianalisedesaparecidos2`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
 export async function getAnimaisDesaparecidosAnalise() {
     try {
         const response = await authenticatedAPI.get(`/anianalisedesaparecidos`);

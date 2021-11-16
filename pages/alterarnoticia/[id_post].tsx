@@ -181,7 +181,20 @@ export default function AlterarPost({ id_post }: InferGetStaticPropsType<typeof 
 
 
     async function eventoAlterarPost() {
+        if (titulo == "") {
+            alert("Preencha o título.");
+            return;
+        }
 
+        if (autor == "") {
+            alert("Preencha o autor.");
+            return;
+        }
+
+        if (images.length != 1) {
+            alert("Selecione uma imagem");
+            return;
+        }
         try {
             await
                 alterarPost(id_post,
@@ -289,7 +302,7 @@ export default function AlterarPost({ id_post }: InferGetStaticPropsType<typeof 
                                     <div className={styles.arquivos}>
                                         <label>
                                             {/*} <input multiple type="file" name="fotos" className={styles.fotos} placeholder="Referência:" />*/}
-                                            <input onChange={handleSelectImages} type="file" id="image" />
+                                            { images.length < 1 ? <input onChange={handleSelectImages} type="file" id="image" /> : <></> }
                                         </label>
                                     </div>
                                 </div>

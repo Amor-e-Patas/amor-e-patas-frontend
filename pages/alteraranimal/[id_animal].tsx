@@ -209,6 +209,40 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
     }
 
     async function eventoAlterarAnimal() {
+        if (nome_ani == "") {
+            alert("Preencha o nome do animal.");
+            return;
+        }
+
+        if (id_sexo == 0) {
+            alert("Selecione o sexo.");
+            return;
+        }
+
+        if (id_especie == 0) {
+            alert("Selecione a espécie.");
+            return;
+        }
+
+        if (id_porte == 0) {
+            alert("Selecione o porte.");
+            return;
+        }
+
+        if (desaparecido == "") {
+            alert("Informe se o animal está desaparecido.");
+            return;
+        }
+
+        if (images.length === 0) {
+            alert("Selecione uma ou mais imagens.");
+            return;
+        }
+
+        if (images.length >= 5){
+            alert("Selecione no máximo 5 imagens.");
+            return;
+        }
 
         try {
             await
@@ -413,14 +447,9 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                             <div className={styles.arquivos}>
                                 <label>
                                     {/*} <input multiple type="file" name="fotos" className={styles.fotos} placeholder="Referência:" />*/}
-                                    <input multiple onChange={handleSelectImages} type="file" id="image[]" />
+                                    {!(images.length >= 5) ? <input multiple onChange={handleSelectImages} type="file" id="image[]" /> : <></>}
                                 </label>
                             </div>
-
-
-
-
-
                             <div className={styles.botoes}>
                                 <input type="submit" className={styles.botaovoltar} value="Voltar" onClick={(e) => {
                                     e.preventDefault();
