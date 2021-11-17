@@ -163,12 +163,12 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
                             <div>
                                 <tr>
                             {
-                                    animais?.images.map((image) =>
-                                    <td>
-                                    <img src={`http://localhost:3333/${image.filepath}`} className={styles.imagem2} 
-                                    onClick={(e) => {e.preventDefault()
-                                                    setImage(`http://localhost:3333/${image.filepath}`)
-                                                    setMostrarModalFoto(true)}}/>             
+                                    animais?.images.map((image, index) =>
+                                    <td key={index}>
+                                        <img src={`http://localhost:3333/${image.filepath}`} className={styles.imagem2} 
+                                        onClick={(e) => {e.preventDefault()
+                                                        setImage(`http://localhost:3333/${image.filepath}`)
+                                                        setMostrarModalFoto(true)}}/>             
                                     </td>
                                     )
                                 } 
@@ -239,8 +239,8 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
                             <p className={styles.amor}>Mais Detalhes</p>
                             <ul>
                                 {
-                                    temperamentos.map((temperamento) =>
-                                        <li>{temperamento.descricao}</li>
+                                    temperamentos.map((temperamento, index) =>
+                                        <li key={index}>{temperamento.descricao}</li>
                                     )
                                 }
                             </ul>

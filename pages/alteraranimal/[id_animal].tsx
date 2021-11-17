@@ -344,8 +344,8 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                                         <div className={styles.temp}>
                                             <p className={styles.p}>Temperamento</p>
                                             {
-                                                temperamentos.map((temperamento) =>
-                                                    <div className={styles.temp}>
+                                                temperamentos.map((temperamento, index) =>
+                                                    <div className={styles.temp} key={index}>
                                                         <label>
                                                             <input type="checkbox" id="docil" value={temperamento.id_temperamento} onChange={(e) => {
                                                                 if (e.target.checked) {
@@ -371,8 +371,8 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                                         <div className={styles.temp}>
                                             <p className={styles.p}>Sociável com</p>
                                             {
-                                                sociaveis.map((sociavel) =>
-                                                    <div className={styles.temp}>
+                                                sociaveis.map((sociavel, index) =>
+                                                    <div className={styles.temp} key={index}>
                                                         <label>
                                                             <input type="checkbox" id="docil" value={sociavel.id_sociavel} onChange={(e) => {
                                                                 if (e.target.checked) {
@@ -397,8 +397,8 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                                         <div className={styles.temp}>
                                             <p className={styles.p}>Vive bem em</p>
                                             {
-                                                vivencias.map((vivencia) =>
-                                                    <div className={styles.temp}>
+                                                vivencias.map((vivencia, index) =>
+                                                    <div className={styles.temp} key={index}>
                                                         <label>
                                                             <input type="checkbox" id="casa" value={vivencia.id_vivencia} onChange={(e) => {
                                                                 if (e.target.checked) {

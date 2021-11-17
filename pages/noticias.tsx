@@ -76,8 +76,8 @@ export default function Usuario() {
                                         <div className={styles.temp}>
                                             <div>
                                                 {
-                                                    posts.map((post) =>
-                                                        <div className={styles.noticias}>
+                                                    posts.map((post, index) =>
+                                                        <div className={styles.noticias} key={index}>
                                                             <div className={styles.imagesContainer}>
                                                                 <img src={`http://localhost:3333/${post.images[0].filepath}`} className={styles.imagem} alt="" />
                                                                 <hr />

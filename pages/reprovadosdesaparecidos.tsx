@@ -117,8 +117,8 @@ export default function Usuario() {
                     <body className={styles.body}>
                         <div className={styles.quadros}>
                             {
-                                animais.map((animal) =>
-                                    <div className={styles.item}>
+                                animais.map((animal, index) =>
+                                    <div className={styles.item} key={index}>
                                         <p></p>
                                         <img src={`http://localhost:3333/${animal.images[0].filepath}`} className={styles.imagem} alt="" />
                                         <hr className={styles.hr} />

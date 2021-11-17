@@ -121,8 +121,8 @@ export default function Usuario() {
                   <div className={styles.temperamento}>
                     <div className={styles.temp}>
                       <div>
-                        {animais.map((animal) => (
-                          <div className={styles.noticias}>
+                        {animais.map((animal, index) => (
+                          <div className={styles.noticias} key={index}>
                             <div className={styles.imagesContainer}>
                               <img
                                 src={`http://localhost:3333/${animal.images[0].filepath}`}

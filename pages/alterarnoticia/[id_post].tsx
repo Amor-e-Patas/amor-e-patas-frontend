@@ -237,8 +237,8 @@ export default function AlterarPost({ id_post }: InferGetStaticPropsType<typeof 
                                             <div className={styles.temp}>
                                                 <p className={styles.p}>Assunto</p>
                                                 {
-                                                    assuntos.map((assunto) =>
-                                                        <div className={styles.temp}>
+                                                    assuntos.map((assunto, index) =>
+                                                        <div className={styles.temp} key={index}>
                                                             <label>
                                                                 <input type="checkbox" id="docil" value={assunto.id_assunto} onChange={(e) => {
                                                                     if (e.target.checked) {

@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react"
 import { AuthContext } from "../contexts/auth";
 
-export default function verifyAuth(){
+export default function VerifyAuth(){
   const {isAuthenticated} = useContext(AuthContext);
 
   useEffect(() => {

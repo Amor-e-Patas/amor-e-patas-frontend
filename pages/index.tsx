@@ -66,8 +66,8 @@ export default function Home() {
 
         <div className={styles.animais}>
           {
-             animais.map((animal) =>
-                  <div className={styles.item}>
+             animais.map((animal, index) =>
+                  <div className={styles.item} key={index}>
                     <img src={`http://localhost:3333/${animal.images[0].filepath}`} className={styles.imagem} alt="" />
                     <hr className={styles.hr2} />
                     <p className={styles.pnome}><Link href={`/animalindex/${animal.id_animal}`} >{animal.nome_ani}</Link></p>

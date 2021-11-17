@@ -170,8 +170,8 @@ export default function Usuario({
             <div className={styles.temp}>
               <table>
                 <tr>
-                  {assuntos.map((assunto) => (
-                    <td>{assunto.nome_ass} </td>
+                  {assuntos.map((assunto, index) => (
+                    <td key={index}>{assunto.nome_ass} </td>
                   ))}
                   <td>
                     <p className={styles.autor}>                   
@@ -221,8 +221,8 @@ export default function Usuario({
           <br />
 
           <div>
-            {comentarios.map((comentario) => (
-              <div>
+            {comentarios.map((comentario, index) => (
+              <div key={index}>
                 <div className={styles.comentariopost}>
                   <p className={styles.autorcom}>{comentario.nome_usu}</p>
                   <p className={styles.date}>

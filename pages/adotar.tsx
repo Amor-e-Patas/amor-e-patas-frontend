@@ -133,8 +133,8 @@ export default function Home() {
           </div>
 
           <div className={styles.animais}>
-            {animaisFiltrados.map((animal) => (
-              <div className={styles.item}>
+            {animaisFiltrados.map((animal, index) => (
+              <div className={styles.item} key={index}>
                 <img
                   src={`http://localhost:3333/${animal.images[0].filepath}`}
                   className={styles.imagem}
