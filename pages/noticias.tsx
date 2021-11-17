@@ -82,7 +82,7 @@ export default function Usuario() {
                                                                 <img src={`http://localhost:3333/${post.images[0].filepath}`} className={styles.imagem} alt="" />
                                                                 <hr />
                                                             </div>
-                                                            <div>
+                                                            <div className={styles.dados2}>
                                                                 <p><Link href={`/noticia/${post.id_post}`} >{post.titulo}</Link>  </p>
                                                                 <p>Autor: {post.autor}</p>
                                                                 <p>Data: {moment(post.data).format('DD/MM/YYYY')}</p>

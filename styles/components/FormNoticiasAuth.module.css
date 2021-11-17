@@ -14,6 +14,16 @@
   background-color: white;
   width: 70%;
   margin: 2% 15%;
+  min-height: 800px;
+}
+
+.dados2{
+  width: 350px;
+  height: 100px;
+  margin-bottom: 7px;
+  margin-left: -20%;
+  max-width:350px;
+
 }
 
 .nome{
@@ -61,7 +71,7 @@
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
-  margin-left: 5%;
+ 
 }
 
 .temp{
@@ -71,12 +81,12 @@
 
 .noticias{
   margin-top: 2%;
-  margin-left: 20%;
+  margin-left: 10%;
   display: grid;
   position: none;
   padding: 10px; 
   width: 120%;
-  grid-column-gap: 10px;
+  grid-column-gap: 1;
   grid-template-columns: auto auto ;
   border-radius: 15px;
   /*background-color: white;*/
@@ -167,7 +177,8 @@
   /*grid-template-columns: repeat(1, 1fr);*/
  /* grid-gap: 16px;*/
  flex-wrap: wrap ;
- 
+ max-width: 400px;
+ min-width: 450px;
 }
 
 .imagesContainer img{
@@ -176,8 +187,7 @@
   object-fit: cover;
   margin-right: 6px;
   margin-bottom: 7px;
-  margin-left: 5%;
-  margin-top: 2%;
+  max-width:350px;
 
 }
 

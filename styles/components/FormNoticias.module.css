@@ -10,6 +10,7 @@
   background-color: white;
   width: 70%;
   margin: 2% 15%;
+  min-height: 800px;
 }
 
 .nome{
