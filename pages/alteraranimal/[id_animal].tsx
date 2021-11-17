@@ -85,7 +85,6 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
     const [selectVives, setSelectVives] = useState(Array<number>());
     const [sociaveis, setSociavel] = useState(Array<Soci>());
     const [vivencias, setVivencia] = useState(Array<Vive>());
-    const [selectVive, setSelectVive] = useState(Array<number>());
     const [images, setImages] = useState<File[]>([]);
     const [previewImages, setPreviewImages] = useState<string[]>([]);
     const [animais, setAnimais] = useState({} as Animal);
@@ -326,7 +325,7 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                                 <input type="text" className={styles.cor} value={cor} placeholder="Cor" name="confirsenha" id="confirsenha" onChange={(e) => setCor(e.currentTarget.value)} />
                             </label>
                             <label>
-                                <select name="desaparecido" id="desaparecido" className={styles.desapa} onChange={(e) => setDesaparecido(e.currentTarget.value)}>
+                                <select name="desaparecido" id="desaparecido" value={desaparecido} className={styles.desapa} onChange={(e) => setDesaparecido(e.currentTarget.value)}>
                                     <option value="" selected>Este animal está desaparecido?</option>
                                     <option value="N" >Não</option>
                                     <option value="S">Sim</option>
@@ -404,11 +403,11 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                                                                 if (e.target.checked) {
                                                                     const aux = [...selectVives]
                                                                     aux.push(parseInt(e.target.value))
-                                                                    setSelectVive(aux);
+                                                                    setSelectVives(aux);
                                                                     console.log(selectVives);
                                                                 } else {
                                                                     const aux = [...selectVives.filter(item => item != parseInt(e.target.value))]
-                                                                    setSelectVive(aux);
+                                                                    setSelectVives(aux);
                                                                     console.log(selectVives);
                                                                 }
                                                             }} name="sociavel" checked={selectVives.some(vives => vives == vivencia.id_vivencia)} />

@@ -35,7 +35,7 @@ export default function AlterarTelefone() {
     try {
       const token = await alterarPhone(telefone);
       alert("Telefone atualizado");
-      router.push("/alterartelefone");
+      router.push("/homemeuperfil");
       //window.location.href = "/alterartelefone";
     } catch (err) {
       alert("Erro ao atualizar telefone.")
@@ -58,7 +58,7 @@ export default function AlterarTelefone() {
             <h3 className={styles.titulo}>Atualizar Telefone</h3>
             <div>
               <div>
-                <input type="text" name="endereco" className={styles.nome2} value={telefone} placeholder="Telefone" onChange={(e) => setTelefone(e.currentTarget.value)} />
+                <input type="text" maxLength={15} name="endereco" className={styles.nome2} value={telefone} placeholder="Telefone" onChange={(e) => setTelefone(e.currentTarget.value)} />
 
               </div>
 

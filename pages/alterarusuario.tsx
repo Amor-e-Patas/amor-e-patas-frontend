@@ -55,7 +55,7 @@ export default function MeuPerfil() {
     try {
       const token = await alterarUser(nome, cpf, datanasc, genero);
       alert("Usuario atualizado");
-      router.push("/meuperfil");
+      router.push("/homemeuperfil");
     } catch (err) {
       alert("Erro ao atualizar usuario.")
     }

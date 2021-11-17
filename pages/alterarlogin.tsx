@@ -50,7 +50,7 @@ export default function Login() {
         try {
             const token = await alterarLogin(email, password);
             alert("Login atualizado");
-            router.push("/alterarlogin");
+            router.push("/homemeuperfil");
             //window.location.href = "/alterarlogin";
         } catch (err) {
             alert("Erro ao atualizar login.")
