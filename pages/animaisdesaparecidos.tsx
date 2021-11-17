@@ -5,14 +5,15 @@ import FormControl from '@material-ui/core/FormControl';
 import api from "../services/services";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { criarAnimal, getAnimaisDesaparecidosAll } from "../services/animal";
-import styles from "../styles/components/FormMeusAnimais.module.css";
+//import styles from "../styles/components/FormMeusAnimais.module.css";
+import styles from "../styles/components/Index.module.css";
 import Link from 'next/link';
 import { useRouter } from "next/router";
 import { getTemperamento } from "../services/temperamento";
 import { getSociavel } from "../services/sociavel";
 import { getVivencia } from "../services/vivencia";
 import { criarImgAnimal } from "../services/img_animal";
-
+import Head from "next/head";
 interface Temp {
     id_temperamento: number,
     descricao: string
@@ -102,37 +103,41 @@ export default function Usuario() {
 
     return (
         <>
-            <div >
-                <Navbar />
-                <div>
-                    <div className={styles.titulos}>
-                        <div className={styles.amor}>
-                            <h2>Animais desaparecidos</h2>
-                        </div>
-                        <div>
-                        <Link href="/cadastroanimal"><img src="/img/cadastraranimal.png" className={styles.imagemcadastrar} alt="Cadastrar"/></Link>
-                        </div>
-                    </div>
+        <div className={styles.body}>
+      <div>
+      <Head>
+        <title>Amor & Patas</title>
+      </Head>
+      <Navbar />
+      <div>
+       
+        <div>
+          <h1 className={styles.adote}>Desaparecidos</h1>
+          <p className={styles.frase}>
+          Você me viu?
+          </p>
+          <p className={styles.frase}>
+            Ajude a encontrar esses peludos que estão sumidos. Entre em contato com os responsáveis. 
+          </p>
+        </div>
 
-                    <body className={styles.body}>
-                        <div className={styles.quadros}>
-                            {
-                                animais.map((animal, index) =>
-                                    <div className={styles.item} key={index}>
-                                        <p></p>
-                                        <img src={`http://localhost:3333/${animal.images[0].filepath}`} className={styles.imagem} alt="" />
-                                        <hr className={styles.hr} />
-                                        <p className={styles.pnome}><Link href={`/meuanimal/${animal.id_animal}`} >{animal.nome_ani}</Link></p>
-                                    </div>
-
-                                )
-                            }
-
-                        </div>
-                    </body>
-                </div>
-                <Footer />
-            </div>
+        <div className={styles.animais}>
+          {
+             animais.map((animal, index) =>
+                  <div className={styles.item} key={index}>
+                    <img src={`http://localhost:3333/${animal.images[0].filepath}`} className={styles.imagem} alt="" />
+                    <hr className={styles.hr2} />
+                    <p className={styles.pnome}><Link href={`/animalindex/${animal.id_animal}`} >{animal.nome_ani}</Link></p>
+                  </div>
+             )
+        }
+        </div>
+      </div>
+      </div>
+      <div>
+        <Footer />
+      </div>
+    </div>
         </>
     )
 }

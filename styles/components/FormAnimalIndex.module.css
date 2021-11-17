@@ -178,6 +178,18 @@
   opacity: 1;
 }
 
+.listas{
+  display: flex;
+}
+
+.listas >div{
+  margin-left: 5%;
+}
+
+.listas >div:first-child{
+  margin-left: 0;
+}
+
 .imagem {
   /*max-width:50%;
     max-height:50%;*/
