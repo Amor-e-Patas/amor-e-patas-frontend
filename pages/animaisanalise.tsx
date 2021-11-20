@@ -123,7 +123,6 @@ export default function Usuario() {
                     images,
                     id_animal
                 )
-            alert("Animal criado ;)");
             router.push("/cadastroanimal");
         } catch (error) {
             console.log(error);

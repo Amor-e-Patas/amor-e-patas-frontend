@@ -214,7 +214,7 @@ export default function Usuario({ id_animal }: InferGetStaticPropsType<typeof ge
                                             <button onClick={(e) => {
                                                 e.preventDefault()
                                                 deleteAnimal(id_animal)
-                                                router.push(desaparecido=="S"?`/meusanimais`:`/desaparecidos`);
+                                                router.push(desaparecido=="S"?`/desaparecidos`:`/meusanimais`);
                                             }}> Sim</button>
                                         </div>
                                         <div>

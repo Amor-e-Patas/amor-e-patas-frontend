@@ -265,7 +265,7 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                     id_animal
                 )
             console.log(images, 'imagisss')
-            alert("Animal atualizado ;)");
+            alert("Animal atualizado com sucesso!");
             router.push(`/meuanimal/${id_animal}`);
         } catch (error) {
             console.log(error);
@@ -313,9 +313,9 @@ export default function AlterarAnimal({ id_animal }: InferGetStaticPropsType<typ
                             <label>
                                 <select name="porte" id="porte" className={styles.porte} value={id_porte} onChange={(e) => setPorte(parseInt(e.currentTarget.value))}>
                                     <option value="" selected>Selecione o porte</option>
-                                    <option value="1">Pequeno</option>
-                                    <option value="2">Médio</option>
-                                    <option value="3">Grande</option>
+                                    <option value="2">Pequeno</option>
+                                    <option value="3">Médio</option>
+                                    <option value="1">Grande</option>
                                 </select>
                             </label>
                         </div>

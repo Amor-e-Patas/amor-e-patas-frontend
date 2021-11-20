@@ -114,7 +114,7 @@ export default function Usuario() {
                     images,
                     id_post
                 )
-            alert("Post criado ;)");
+            alert("Notícia cadastrada com sucesso!");
             router.push("/noticia/"+id_post);
         } catch (error) {
             console.log(error);
